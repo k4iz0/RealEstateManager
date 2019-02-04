@@ -9,7 +9,7 @@ import ltd.kaizo.realestatemanager.utils.DATABASE_NAME
 
 @Database(entities = [Estate::class], version = 1, exportSchema = false)
 abstract class EstateDatabase : RoomDatabase() {
-    abstract val estateDao: EstateDao
+    abstract fun estateDao(): EstateDao
 
         companion object {
             private var instance: EstateDatabase? = null
