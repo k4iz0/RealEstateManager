@@ -12,7 +12,7 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.list_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ListFragment.newInstance())
+                .replace(R.id.activity_list_coordinator_layout, ListFragment.newInstance())
                 .commitNow()
         }
     }
