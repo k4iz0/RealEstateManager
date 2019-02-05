@@ -2,11 +2,17 @@ package ltd.kaizo.realestatemanager.injection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ltd.kaizo.realestatemanager.controller.ui.list.ListViewModel
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
 
-class ViewModelFactory(val estateDataSource : EstateRepository, val executor: Executor): ViewModelProvider.Factory {
+class ViewModelFactory(private val estateDataSource : EstateRepository, private val executor: Executor): ViewModelProvider.Factory {
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
+            return ListViewModel(estateDataSource, executor) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+
     }
 }

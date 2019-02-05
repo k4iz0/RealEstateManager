@@ -17,7 +17,7 @@ data class Estate(
 //    val photo:MutableList<String>,
     val address :String,
 //    val poi: MutableList<String>,
-    val status:String,
+    val isAvailable:Boolean,
     val dateIn:String,
     val dateOut:String,
     val estateManager:String )
