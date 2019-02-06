@@ -9,8 +9,8 @@
     </style>
 
     <!--TOOLBAR-->
-    <style name="ToolBarStyle" parent="Theme.AppCompat.NoActionBar">
-        <item name="background">@color/colorPrimary</item>
+    <style name="ToolBarStyle">
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
