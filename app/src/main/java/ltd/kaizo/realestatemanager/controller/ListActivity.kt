@@ -3,7 +3,6 @@ package ltd.kaizo.realestatemanager.controller
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.ListAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.list_activity.*
@@ -12,10 +11,8 @@ import ltd.kaizo.realestatemanager.controller.ui.list.ListFragment
 import ltd.kaizo.realestatemanager.model.Estate
 import timber.log.Timber
 
-class ListActivity : AppCompatActivity(), ltd.kaizo.realestatemanager.adapter.ListAdapter.estateListListener {
-    override fun onEstateSelected(estate: Estate) {
-        Toast.makeText(this, "you click on a ${estate.type}", Toast.LENGTH_SHORT).show()
-    }
+class ListActivity : AppCompatActivity(){
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

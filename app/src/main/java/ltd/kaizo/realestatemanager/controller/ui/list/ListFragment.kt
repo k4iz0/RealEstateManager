@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,8 +14,9 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.Estate
+import timber.log.Timber
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), ListAdapter.EstateListListener {
 
     companion object {
         fun newInstance() = ListFragment()
@@ -44,10 +46,13 @@ class ListFragment : Fragment() {
 
     private fun configureRecycleView() {
         estateList = mutableListOf()
-        adapter = ListAdapter(estateList)
+        adapter = ListAdapter(estateList, this@ListFragment)
         list_fragment_recycle_view.layoutManager = LinearLayoutManager(context)
         list_fragment_recycle_view.adapter = adapter
-
+    }
+    override fun onEstateSelected(estate: Estate) {
+        Timber.i("click")
+        Toast.makeText(context, "you click on a ${estate.type}", Toast.LENGTH_SHORT).show()
     }
 
 

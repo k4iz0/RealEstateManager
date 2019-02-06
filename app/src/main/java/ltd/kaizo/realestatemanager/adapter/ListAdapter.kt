@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
 
 class ListAdapter(
     private val estateList: List<Estate>,
-    private val listener: estateListListener) :
+    private val listener: EstateListListener?) :
     RecyclerView.Adapter<ListAdapter.ListViewHolder>(), View.OnClickListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -27,6 +28,7 @@ class ListAdapter(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val estate = estateList[position]
         with(holder) {
+            cardView.setOnClickListener(this@ListAdapter)
             type.text = estate.type
             location.text = estate.address
             price.text = estate.price.toString()
@@ -34,19 +36,18 @@ class ListAdapter(
     }
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-
-        val picture = itemView.findViewById<ImageView>(R.id.item_profile_picture)
-        val type = itemView.findViewById<TextView>(R.id.item_type_textview)
-        val location = itemView.findViewById<TextView>(R.id.item_location_textview)
-        val price = itemView.findViewById<TextView>(R.id.item_price_textview)
+        val cardView = itemView.findViewById<CardView>(R.id.list_cardview)!!
+        val picture = itemView.findViewById<ImageView>(R.id.item_profile_picture)!!
+        val type = itemView.findViewById<TextView>(R.id.item_type_textview)!!
+        val location = itemView.findViewById<TextView>(R.id.item_location_textview)!!
+        val price = itemView.findViewById<TextView>(R.id.item_price_textview)!!
     }
-    interface estateListListener {
+    interface EstateListListener {
         fun onEstateSelected(estate: Estate)
     }
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.list_cardview -> listener.onEstateSelected(view.tag as Estate)
+            R.id.list_cardview -> listener?.onEstateSelected(view.tag as Estate)
         }
     }
 }
