@@ -23,6 +23,7 @@ class ListFragment : Fragment() {
     private lateinit var listViewModel: ListViewModel
     private lateinit var adapter: ListAdapter
     private lateinit var estateList: MutableList<Estate>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +35,7 @@ class ListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val viewModelFactory = Injection.provideViewModelFactory(context!!)
-        listViewModel = ViewModelProviders.of(this,viewModelFactory).get(ListViewModel::class.java)
+        listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
         this.configureRecycleView()
         listViewModel.estateList.observe(viewLifecycleOwner, Observer { list ->
             updateList(list)
