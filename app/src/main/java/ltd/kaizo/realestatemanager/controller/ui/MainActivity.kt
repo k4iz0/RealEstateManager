@@ -1,4 +1,4 @@
-package ltd.kaizo.realestatemanager.controller
+package ltd.kaizo.realestatemanager.controller.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,10 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.list.ListFragment
-import ltd.kaizo.realestatemanager.model.Estate
 import timber.log.Timber
 
-class ListActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +21,7 @@ class ListActivity : AppCompatActivity(){
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ListFragment.newInstance())
-                .commitNow()
+                .commit()
         }
     }
 
@@ -48,5 +47,14 @@ class ListActivity : AppCompatActivity(){
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    override fun onBackPressed() {
+        val sfm = supportFragmentManager
+        if (sfm.backStackEntryCount > 0) {
+            sfm.popBackStack()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

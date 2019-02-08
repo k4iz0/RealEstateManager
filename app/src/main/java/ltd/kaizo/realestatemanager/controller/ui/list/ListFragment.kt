@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.list_fragment.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
+import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.Estate
 import timber.log.Timber
 
-class ListFragment : Fragment(), ListAdapter.EstateListListener {
+class ListFragment : Fragment() {
 
     companion object {
         fun newInstance() = ListFragment()
@@ -30,7 +31,6 @@ class ListFragment : Fragment(), ListAdapter.EstateListListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return inflater.inflate(R.layout.list_fragment, container, false)
     }
 
@@ -46,13 +46,16 @@ class ListFragment : Fragment(), ListAdapter.EstateListListener {
 
     private fun configureRecycleView() {
         estateList = mutableListOf()
-        adapter = ListAdapter(estateList, this@ListFragment)
+        adapter = ListAdapter(estateList) { estateItem -> onEstateItemClicked(estateItem)}
         list_fragment_recycle_view.layoutManager = LinearLayoutManager(context)
         list_fragment_recycle_view.adapter = adapter
     }
-    override fun onEstateSelected(estate: Estate) {
-        Timber.i("click")
+
+     private fun onEstateItemClicked(estate: Estate) {
         Toast.makeText(context, "you click on a ${estate.type}", Toast.LENGTH_SHORT).show()
+         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, DetailFragment.newInstance())
+             ?.addToBackStack(null)
+             ?.commit()
     }
 
 

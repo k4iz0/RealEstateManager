@@ -12,8 +12,8 @@ import ltd.kaizo.realestatemanager.model.Estate
 
 class ListAdapter(
     private val estateList: List<Estate>,
-    private val listener: EstateListListener?) :
-    RecyclerView.Adapter<ListAdapter.ListViewHolder>(), View.OnClickListener {
+    private val clickListener: (Estate) -> Unit) :
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val viewItem = LayoutInflater.from(parent.context)
@@ -27,8 +27,8 @@ class ListAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val estate = estateList[position]
+        holder.cardView.setOnClickListener{clickListener(estate)}
         with(holder) {
-            cardView.setOnClickListener(this@ListAdapter)
             type.text = estate.type
             location.text = estate.address
             price.text = estate.price.toString()
@@ -42,12 +42,12 @@ class ListAdapter(
         val location = itemView.findViewById<TextView>(R.id.item_location_textview)!!
         val price = itemView.findViewById<TextView>(R.id.item_price_textview)!!
     }
-    interface EstateListListener {
-        fun onEstateSelected(estate: Estate)
-    }
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.list_cardview -> listener?.onEstateSelected(view.tag as Estate)
-        }
-    }
+//    interface EstateListListener {
+//        fun onEstateSelected(estate: Estate)
+//    }
+//    override fun onClick(view: View?) {
+//        when (view?.id) {
+//            R.id.list_cardview -> listener?.onEstateSelected(estateList[view.id])
+//        }
+//    }
 }
