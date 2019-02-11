@@ -1,4 +1,4 @@
-package ltd.kaizo.realestatemanager.controller.ui
+package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,7 +10,7 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.list.ListFragment
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
