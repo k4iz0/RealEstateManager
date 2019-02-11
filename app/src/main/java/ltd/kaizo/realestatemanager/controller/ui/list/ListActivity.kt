@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
-import ltd.kaizo.realestatemanager.controller.ui.list.ListFragment
 import timber.log.Timber
 
 class ListActivity : AppCompatActivity() {
@@ -18,12 +18,24 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.list_activity)
         Timber.plant(Timber.DebugTree())
         setSupportActionBar(activity_list_toolbar)
-
+        this.configureNavigationDrawer()
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ListFragment.newInstance())
                 .commit()
         }
+    }
+
+    /****************************
+     ***   NAVIGATION DRAWER   ***
+     *****************************/
+    private fun configureNavigationView() {
+//        activity_list_nav_view.setOnClickListener(this)
+    }
+    private fun configureNavigationDrawer() {
+        val toggle = ActionBarDrawerToggle(this, activity_List_drawer_layout, R.string.open_drawer,R.string.close_drawer)
+        activity_List_drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
