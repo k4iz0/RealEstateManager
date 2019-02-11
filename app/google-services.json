@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "939318416336",
+    "firebase_url": "https://realestatemanager-21ca4.firebaseio.com",
+    "project_id": "realestatemanager-21ca4",
+    "storage_bucket": "realestatemanager-21ca4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939318416336:android:ad15c58197aae154",
+        "android_client_info": {
+          "package_name": "ltd.kaizo.realestatemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939318416336-uuv6l7f7j46nsdrceme152jnujr9mmr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyxW4t3oxBOQIsGw2kCdQfa99aFILagwo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
