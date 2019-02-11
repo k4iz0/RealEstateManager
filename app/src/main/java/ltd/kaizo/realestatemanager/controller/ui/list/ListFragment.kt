@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +14,7 @@ import ltd.kaizo.realestatemanager.adapter.ListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.Estate
+import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import timber.log.Timber
 
 class ListFragment : Fragment() {
@@ -46,16 +46,20 @@ class ListFragment : Fragment() {
 
     private fun configureRecycleView() {
         estateList = mutableListOf()
-        adapter = ListAdapter(estateList) { estateItem -> onEstateItemClicked(estateItem)}
+        adapter = ListAdapter(estateList) { estateItem -> onEstateItemClicked(estateItem) }
         list_fragment_recycle_view.layoutManager = LinearLayoutManager(context)
         list_fragment_recycle_view.adapter = adapter
     }
 
-     private fun onEstateItemClicked(estate: Estate) {
-        Toast.makeText(context, "you click on a ${estate.type}", Toast.LENGTH_SHORT).show()
-         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, DetailFragment.newInstance())
-             ?.addToBackStack(null)
-             ?.commit()
+    private fun onEstateItemClicked(estate: Estate) {
+        Timber.i("you click on a ${estate.type}")
+        val arg = Bundle()
+        arg.putInt(ESTATE_ID, estate.id)
+        val detailFragment = DetailFragment.newInstance()
+        detailFragment.arguments = arg
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, detailFragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 
 

@@ -12,4 +12,8 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getAllEstate()
     }
 
+    fun getEstateById(id:Int): LiveData<Estate> {
+        return estateDao.getEstateById(id)
+    }
+
 }
