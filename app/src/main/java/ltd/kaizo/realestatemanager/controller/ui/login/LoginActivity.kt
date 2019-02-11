@@ -1,7 +1,6 @@
 package ltd.kaizo.realestatemanager.controller.ui.login
 
 import android.app.Activity
-import android.app.ListActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +19,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(ltd.kaizo.realestatemanager.R.layout.activity_login)
         if (FirebaseAuth.getInstance().currentUser != null) {
-          startListActivity()
+            startListActivity()
         } else {
-        this.startSignInActivity()
+            this.startSignInActivity()
         }
     }
 
@@ -32,9 +31,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startListActivity() {
-        val listActivity = Intent(this,ListActivity::class.java)
+        val listActivity = Intent(this, ltd.kaizo.realestatemanager.controller.ui.list.ListActivity::class.java)
         startActivity(listActivity)
     }
+
     private fun handleResponseAfterSignIn(requestCode: Int, resultCode: Int, data: Intent?) {
 
         val response = IdpResponse.fromResultIntent(data)
@@ -75,8 +75,10 @@ class LoginActivity : AppCompatActivity() {
                 .createSignInIntentBuilder()
                 .setTheme(ltd.kaizo.realestatemanager.R.style.LoginTheme)
                 .setAvailableProviders(
-                    Arrays.asList(AuthUI.IdpConfig.EmailBuilder().build(),
-                        AuthUI.IdpConfig.GoogleBuilder().build())
+                    Arrays.asList(
+                        AuthUI.IdpConfig.EmailBuilder().build(),
+                        AuthUI.IdpConfig.GoogleBuilder().build()
+                    )
                 )
                 .setIsSmartLockEnabled(false, true)
                 .build(),

@@ -16,4 +16,6 @@
     <string name="error_no_internet">error check your internet connection</string>
     <string name="error_unknown_error">unknown error</string>
     <string name="error_authentication_canceled">error authentification cancel</string>
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="close_drawer">Close navigationdrawer</string>
 </resources>
