@@ -15,30 +15,31 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             tools:openDrawer="start">
-    <LinearLayout android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent">
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/activity_list_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:theme="@style/ToolBarStyle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-        <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/activity_list_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:theme="@style/ToolBarStyle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </FrameLayout>
-    </LinearLayout>
-        <android.support.design.widget.NavigationView
-                android:id="@+id/activity_list_nav_view"
+            </FrameLayout>
+
+        </LinearLayout>
+        <com.google.android.material.navigation.NavigationView
+                android:id="@+id/activity_list_navigation_view"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:fitsSystemWindows="true"
                 app:headerLayout="@layout/activity_list_nav_header"
-                app:menu="@menu/activity_list_menu_drawer" />
+                app:menu="@menu/activity_list_menu_drawer"/>
     </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

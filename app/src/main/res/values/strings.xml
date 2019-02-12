@@ -18,4 +18,5 @@
     <string name="error_authentication_canceled">error authentification cancel</string>
     <string name="open_drawer">Open navigation drawer</string>
     <string name="close_drawer">Close navigationdrawer</string>
+    <string name="logo">logo</string>
 </resources>
