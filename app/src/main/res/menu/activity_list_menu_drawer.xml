@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+
+    <item android:title="categories">
+        <menu>
+            <group
+                    android:id="@+id/activity_main_drawer_group"
+                    android:checkableBehavior="single">
+
+                <item
+                        android:id="@+id/activity_main_drawer_world"
+                        android:title="item 1"
+                />
+
+                <item
+                        android:id="@+id/activity_main_drawer_Science"
+                        android:title="item 2" />
+
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

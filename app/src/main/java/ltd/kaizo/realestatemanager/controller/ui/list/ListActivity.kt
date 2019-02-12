@@ -5,37 +5,66 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
-import timber.log.Timber
+import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 
-class ListActivity : AppCompatActivity() {
+class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_activity)
-        Timber.plant(Timber.DebugTree())
-        setSupportActionBar(activity_list_toolbar)
-        this.configureNavigationDrawer()
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, ListFragment.newInstance())
-                .commit()
+           this.configureAndShowFragment()
         }
     }
 
     /****************************
-     ***   NAVIGATION DRAWER   ***
-     *****************************/
-    private fun configureNavigationView() {
-//        activity_list_nav_view.setOnClickListener(this)
+    *********   DESIGN   ********
+    *****************************/
+
+    override fun getFragmentLayout(): Int {
+        return R.layout.list_activity
     }
+
+    override fun configureDesign() {
+        this.configureNavigationDrawer()
+    }
+
+    private fun configureAndShowFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, ListFragment.newInstance())
+            .commit()
+    }
+
+    /****************************
+     ***  NAVIGATION DRAWER   ***
+     ****************************/
+
     private fun configureNavigationDrawer() {
-        val toggle = ActionBarDrawerToggle(this, activity_List_drawer_layout, R.string.open_drawer,R.string.close_drawer)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            activity_List_drawer_layout,
+            activity_list_toolbar,
+            R.string.open_drawer,
+            R.string.close_drawer
+        )
         activity_List_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        activity_list_navigation_view.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                activity_List_drawer_layout.openDrawer(GravityCompat.START)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,12 +91,4 @@ class ListActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-        val sfm = supportFragmentManager
-        if (sfm.backStackEntryCount > 0) {
-            sfm.popBackStack()
-        } else {
-            super.onBackPressed()
-        }
-    }
 }
