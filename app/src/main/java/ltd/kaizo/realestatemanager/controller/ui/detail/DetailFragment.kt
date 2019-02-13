@@ -6,14 +6,15 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
+import ltd.kaizo.realestatemanager.controller.ui.list.ListViewModel
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 
 class DetailFragment : BaseFragment() {
-    private var estateId: Int = 0
+    private var estateId: Int = 1
 
-    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var listViewModel: ListViewModel
 
     companion object {
         fun newInstance() = DetailFragment()
@@ -30,8 +31,8 @@ class DetailFragment : BaseFragment() {
 
     override fun updateDesign() {
         val viewModelFactory = Injection.provideViewModelFactory(context!!)
-        detailViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
-        detailViewModel.getEstateById(this.estateId).observe(this, Observer { estate -> updateUi(estate) })
+        listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+        listViewModel.getEstateById(this.estateId).observe(this, Observer { estate -> updateUi(estate) })
     }
 
     private fun updateUi(estate: Estate) {

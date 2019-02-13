@@ -1,42 +1,54 @@
 package ltd.kaizo.realestatemanager.controller.ui.list
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
+import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
+import ltd.kaizo.realestatemanager.injection.Injection
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-           this.configureAndShowFragment()
-        }
-    }
-
+    private lateinit var listViewModel: ListViewModel
     /****************************
-    *********   DESIGN   ********
-    *****************************/
+     *********   DESIGN   ********
+     *****************************/
 
     override fun getFragmentLayout(): Int {
         return R.layout.list_activity
     }
 
     override fun configureDesign() {
+        this.configureViewModel()
+        this.configureAndShowListFragment()
+        this.configureAndShowDetailFragment()
         this.configureNavigationDrawer()
     }
 
-    private fun configureAndShowFragment() {
+    private fun configureViewModel() {
+        val viewModelFactory = Injection.provideViewModelFactory(this)
+        listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+    }
+
+    private fun configureAndShowListFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, ListFragment.newInstance())
             .commit()
+    }
+
+    private fun configureAndShowDetailFragment() {
+        var detailFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_detail)
+        if (detailFragment != null && fragment_container_detail != null) {
+            detailFragment = DetailFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container_detail, detailFragment)
+                .commit()
+        }
     }
 
     /****************************
