@@ -1,9 +1,12 @@
 package ltd.kaizo.realestatemanager.controller.ui.list
 
+import android.content.res.Configuration
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.list_activity.*
 import kotlinx.android.synthetic.main.list_fragment.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
@@ -49,11 +52,23 @@ class ListFragment : BaseFragment() {
         Timber.i("you click on a ${estate.type}")
         val arg = Bundle()
         arg.putInt(ESTATE_ID, estate.id)
+//      var detailFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragment_container_detail)
         val detailFragment = DetailFragment.newInstance()
         detailFragment.arguments = arg
-        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragment_container, detailFragment)
-            ?.addToBackStack(null)
-            ?.commit()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Timber.i("land mode")
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_container_detail, detailFragment)
+                .commit()
+        } else {
+            Timber.i("portrait mode")
+            activity!!.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, detailFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 
 
