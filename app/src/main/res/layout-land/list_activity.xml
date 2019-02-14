@@ -37,15 +37,21 @@
 
                 </FrameLayout>
                 <ScrollView
-                        android:id="@+id/fragment_container_detail"
+                        android:fillViewport="true"
                         android:layout_width="0dp"
                         android:layout_weight="3"
                         android:layout_height="match_parent">
-                    
-            </ScrollView>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/fragment_container_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                    </LinearLayout>
+                </ScrollView>
 
             </LinearLayout>
-            <com.google.android.material.navigation.NavigationView
+        </LinearLayout><com.google.android.material.navigation.NavigationView
                     android:id="@+id/activity_list_navigation_view"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -53,7 +59,7 @@
                     android:fitsSystemWindows="true"
                     app:headerLayout="@layout/activity_list_nav_header"
                     app:menu="@menu/activity_list_menu_drawer"/>
-        </LinearLayout>
+
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -52,14 +52,13 @@ class ListFragment : BaseFragment() {
         Timber.i("you click on a ${estate.type}")
         val arg = Bundle()
         arg.putInt(ESTATE_ID, estate.id)
-//      var detailFragment = activity?.supportFragmentManager?.findFragmentById(R.id.fragment_container_detail)
         val detailFragment = DetailFragment.newInstance()
         detailFragment.arguments = arg
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Timber.i("land mode")
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .add(R.id.fragment_container_detail, detailFragment)
+                .replace(R.id.fragment_container_detail, detailFragment)
                 .commit()
         } else {
             Timber.i("portrait mode")
