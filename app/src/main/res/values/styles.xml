@@ -14,5 +14,5 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
-    <style name="LoginTheme"></style>
+    <style name="LoginTheme"/>
 </resources>

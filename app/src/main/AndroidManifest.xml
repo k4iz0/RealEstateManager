@@ -13,7 +13,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".controller.ui.add.EstateActivity">
+        <activity android:name=".controller.ui.add.EstateActivity" android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>
         <activity android:name=".controller.ui.login.LoginActivity">
             <intent-filter>

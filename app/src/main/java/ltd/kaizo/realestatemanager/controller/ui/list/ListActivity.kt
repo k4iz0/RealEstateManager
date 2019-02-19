@@ -16,7 +16,7 @@ import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.injection.Injection
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var listViewModel: ListViewModel
+     lateinit var listViewModel: ListViewModel
     /****************************
      *********   DESIGN   ********
      *****************************/
@@ -26,6 +26,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun configureDesign() {
+        setSupportActionBar(activity_list_toolbar)
         this.configureViewModel()
         this.configureAndShowListFragment()
         this.configureAndShowDetailFragment()
@@ -34,7 +35,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun configureViewModel() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
-        listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+        this.listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
     }
 
     private fun configureAndShowListFragment() {

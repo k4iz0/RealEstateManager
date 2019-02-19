@@ -16,4 +16,8 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getEstateById(id)
     }
 
+    //INSERT
+    fun insertEstate(estate: Estate) {
+        return estateDao.insertEstate(estate)
+    }
 }

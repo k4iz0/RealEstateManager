@@ -2,6 +2,7 @@ package ltd.kaizo.realestatemanager.injection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ltd.kaizo.realestatemanager.controller.ui.add.EstateViewModel
 import ltd.kaizo.realestatemanager.controller.ui.list.ListViewModel
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
@@ -13,6 +14,10 @@ class ViewModelFactory(private val estateDataSource : EstateRepository, private 
         if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
             return ListViewModel(estateDataSource, executor) as T
         }
+        if (modelClass.isAssignableFrom(EstateViewModel::class.java)) {
+            return EstateViewModel(estateDataSource, executor) as T
+        }
+
         throw IllegalArgumentException("Unknown ViewModel class")
 
     }

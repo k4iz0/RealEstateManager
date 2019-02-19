@@ -2,17 +2,13 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.list_activity.*
 import kotlinx.android.synthetic.main.list_fragment.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
-import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import timber.log.Timber
@@ -32,8 +28,8 @@ class ListFragment : BaseFragment() {
     override fun configureDesign() {}
 
     override fun updateDesign() {
-        val viewModelFactory = Injection.provideViewModelFactory(context!!)
-        listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+        val parent = activity as ListActivity
+        listViewModel = parent.listViewModel
         this.configureRecycleView()
         listViewModel.estateList.observe(viewLifecycleOwner, Observer { list ->
             updateList(list)

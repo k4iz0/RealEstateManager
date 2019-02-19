@@ -19,4 +19,7 @@
     <string name="open_drawer">Open navigation drawer</string>
     <string name="close_drawer">Close navigationdrawer</string>
     <string name="logo">logo</string>
+    <string name="zero">0</string>
+    <string name="address">address</string>
+    <string name="create">create</string>
 </resources>
