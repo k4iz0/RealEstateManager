@@ -17,7 +17,7 @@ object Utils {
      */
     val todayDate: String
         get() {
-            val dateFormat = SimpleDateFormat("yyyy/MM/dd")
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
             return dateFormat.format(Date())
         }
 
@@ -29,6 +29,10 @@ object Utils {
      */
     fun convertDollarToEuro(dollars: Int): Int {
         return Math.round(dollars * 0.812).toInt()
+    }
+
+    fun convertEuroToDollar(euros: Int): Int {
+        return Math.round(euros / 0.812).toInt()
     }
 
     /**
