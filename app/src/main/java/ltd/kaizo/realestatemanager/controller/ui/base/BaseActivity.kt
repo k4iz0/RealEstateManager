@@ -16,7 +16,6 @@ abstract class BaseActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         this.setContentView(this.getFragmentLayout())
         Timber.plant(Timber.DebugTree())
-        setSupportActionBar(activity_list_toolbar)
         this.configureDesign()
     }
 

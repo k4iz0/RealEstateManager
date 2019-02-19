@@ -8,6 +8,7 @@ import java.util.concurrent.Executor
 
 class ListViewModel(val estateDataSource:EstateRepository, val executor: Executor) : ViewModel() {
 val estateList = estateDataSource.getAllEstate()
+
     fun getEstateById(id: Int): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
     }
