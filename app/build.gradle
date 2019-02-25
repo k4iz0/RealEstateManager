@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -52,5 +55,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
     //EASY PERMISSIONS
     implementation 'pub.devrel:easypermissions:2.0.0'
+    //PICASSO
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
