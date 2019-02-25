@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.detail
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
@@ -44,6 +45,7 @@ class DetailFragment : BaseFragment() {
         fragment_detail_nb_bedroom_textview.text = estate.nbBedroom.toString()
         fragment_detail_nb_bathroom_textview.text = estate.nbBathroom.toString()
         fragment_detail_location_textview.text = estate.address
+        Picasso.get().load(listViewModel.getStaticMapUrlFromAdress(estate.address)).into(fragment_detail_map_container)
     }
 
 }
