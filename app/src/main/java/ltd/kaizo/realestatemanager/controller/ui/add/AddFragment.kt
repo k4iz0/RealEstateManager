@@ -9,8 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
@@ -20,15 +20,15 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.utils.PERMS
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_IMAGE_PERMS
+import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import pub.devrel.easypermissions.EasyPermissions
-import timber.log.Timber
 
 
 class AddFragment : BaseFragment() {
 
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var parent: EstateActivity
-    private lateinit var binding :FragmentAddBinding
+    private lateinit var binding: FragmentAddBinding
     private var uriImageSelected: Uri? = null
 
 
@@ -38,8 +38,9 @@ class AddFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
-       return binding.root
+        return binding.root
     }
+
     override val fragmentLayout: Int
         get() = ltd.kaizo.realestatemanager.R.layout.fragment_add
 
@@ -54,6 +55,19 @@ class AddFragment : BaseFragment() {
     override fun updateDesign() {
         this.configureViewModel()
         this.configureAddButton()
+        this.configureObserver()
+    }
+
+    private fun configureObserver() {
+        estateViewModel.message.observe(
+            this,
+            Observer { message ->
+                if (message != "" && message != null) {
+                    showSnackBar(fragment_add_coordinator_layout, message)
+                    estateViewModel.message.value =""
+                }
+
+            })
     }
 
     private fun configureViewModel() {
@@ -89,15 +103,14 @@ class AddFragment : BaseFragment() {
                 "Yann"
             )
             estateViewModel.createEstate(estateToCreate)
-            Snackbar.make(fragment_add_coordinator_layout, "estate successfully created", Snackbar.LENGTH_SHORT).show()
+            estateViewModel.message.value = "estate successfully created"
             Thread.sleep(2000)
             parent.finish()
         } else {
-            Snackbar.make(fragment_add_coordinator_layout, "an error has occurred", Snackbar.LENGTH_SHORT).show()
+            estateViewModel.message.value = "an error has occurred"
         }
 
     }
-
 
 
     /****************************

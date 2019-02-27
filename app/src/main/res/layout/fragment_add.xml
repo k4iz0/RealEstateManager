@@ -3,6 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="ltd.kaizo.realestatemanager.utils.BindingAdapter"/>
+        <import type="ltd.kaizo.realestatemanager.utils.Converter"/>
         <variable name="estateViewModel" type="ltd.kaizo.realestatemanager.controller.ui.add.EstateViewModel"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -84,7 +86,7 @@
                     android:id="@+id/fragment_add_surface_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@={estateViewModel.surface}"
+
                     android:hint="@string/zero"
                     android:inputType="number"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_title_textview"
@@ -106,7 +108,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_room_title_textview"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_edittext"
-                    android:text="@={estateViewModel.nbRoom}"
+
                     android:hint="@string/zero" android:layout_marginTop="8dp"
                     android:inputType="number" app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_edittext"/>
             <TextView
@@ -122,7 +124,6 @@
                     android:id="@+id/fragment_add_nb_bathroom_edittext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@={estateViewModel.nbBathroom}"
                     android:hint="@string/zero"
                     android:inputType="number"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_edittext"
@@ -150,7 +151,6 @@
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_nb_bathroom_edittext"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_bedroom_title_textview"
-                    android:text="@={estateViewModel.nbBedroom}"
                     android:hint="@string/zero"
                     android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_nb_bathroom_edittext"/>
