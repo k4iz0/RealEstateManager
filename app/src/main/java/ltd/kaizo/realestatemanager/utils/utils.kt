@@ -3,6 +3,8 @@ package ltd.kaizo.realestatemanager.utils
 
 import android.content.Context
 import android.net.wifi.WifiManager
+import android.view.View
+import com.google.android.material.snackbar.Snackbar
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -44,5 +46,9 @@ object Utils {
     fun isInternetAvailable(context: Context): Boolean {
         val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         return wifi.isWifiEnabled
+    }
+
+    fun showSnackBar(view : View, message :String) {
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
     }
 }
