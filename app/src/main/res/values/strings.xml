@@ -22,4 +22,5 @@
     <string name="zero">0</string>
     <string name="address">address</string>
     <string name="create">create</string>
+    <string name="no_picture_found">no picture found</string>
 </resources>

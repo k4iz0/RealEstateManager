@@ -57,5 +57,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:2.0.0'
     //PICASSO
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //QUICKPERMISSION
+    implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
 
 }
