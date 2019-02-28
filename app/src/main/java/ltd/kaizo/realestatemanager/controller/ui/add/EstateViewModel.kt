@@ -7,7 +7,7 @@ import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
 
 class EstateViewModel(val estateDataSource: EstateRepository, val executor: Executor) : ViewModel() {
-
+    val filePermission = MutableLiveData<Boolean>()
     val message = MutableLiveData<String>()
     val description = MutableLiveData<String>()
     val location = MutableLiveData<String>()
@@ -18,6 +18,7 @@ class EstateViewModel(val estateDataSource: EstateRepository, val executor: Exec
 
     init {
           this.configureValues()
+        filePermission.value = false
     }
 
     private fun configureValues() {

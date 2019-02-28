@@ -1,7 +1,9 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
+import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -9,19 +11,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.utils.PERMS
+import ltd.kaizo.realestatemanager.utils.WRITE_EXT_PERM
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_IMAGE_PERMS
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
+import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
+import timber.log.Timber
 
 
 class AddFragment : BaseFragment() {
@@ -56,6 +62,13 @@ class AddFragment : BaseFragment() {
         this.configureViewModel()
         this.configureAddButton()
         this.configureObserver()
+        this.configureFab()
+    }
+
+    private fun configureFab() {
+        fragment_add_fab.setOnClickListener {
+            selectPictureFromDevice()
+        }
     }
 
     private fun configureObserver() {
@@ -112,40 +125,22 @@ class AddFragment : BaseFragment() {
 
     }
 
-
-    /****************************
-     ********* PERMISSION ********
-     *****************************/
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    private fun selectPictureFromDevice(){
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, RC_CHOOSE_PHOTO)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        this.handleResponse(requestCode, resultCode, data!!)
-    }
-
-    private fun selectPictureFromDevice() {
-        if (!EasyPermissions.hasPermissions(parent.applicationContext, PERMS)) {
-            EasyPermissions.requestPermissions(this, "permission files access", RC_IMAGE_PERMS, PERMS)
-            return
-        }
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivity(intent)
-
-    }
-
-    private fun handleResponse(requestCode: Int, resultCode: Int, data: Intent) {
-        if (requestCode == RC_CHOOSE_PHOTO) {
-            if (resultCode == RESULT_OK) { //SUCCESS
-                this.uriImageSelected = data.data
-                //SHOWING PREVIEW OF IMAGE
-
-            } else {
-                Toast.makeText(parent.applicationContext, "no image choose", Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            RC_CHOOSE_PHOTO -> {
+                if (resultCode == RESULT_OK) {
+                    uriImageSelected = data?.data
+                } else {
+                    estateViewModel.message.value = getString(R.string.no_picture_found)
+                }
             }
         }
+
     }
 }
