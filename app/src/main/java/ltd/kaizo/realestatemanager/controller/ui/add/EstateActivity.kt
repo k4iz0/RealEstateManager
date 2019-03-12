@@ -37,6 +37,7 @@ class EstateActivity : BaseActivity() {
     private fun configureViewModel() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
         estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+        estateViewModel.managerName.value = getCurrentUser()!!.displayName.toString()
     }
 
 

@@ -57,7 +57,6 @@
                         android:focusable="true"
                         android:src="@drawable/ic_cross_24dp_white"
                 />
-
             </HorizontalScrollView>
             <TextView
                     android:id="@+id/fragment_add_description_title_textview"
@@ -86,16 +85,16 @@
                     android:text="@string/surface"
                     app:layout_constraintStart_toEndOf="@+id/fragment_add_surface_ic" android:layout_marginStart="40dp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/fragment_add_location_title_textview"/>
-            <EditText
-                    android:id="@+id/fragment_add_surface_edittext"
+            <Spinner
+                    android:id="@+id/fragment_add_surface_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:hint="@string/zero"
-                    android:inputType="number"
+                    android:selectedItemPosition="@={estateViewModel.surface}"
                     app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_title_textview"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_title_textview"
-                    app:layout_constraintBottom_toTopOf="@+id/fragment_add_nb_room_title_textview"/>
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_add_nb_room_title_textview"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginBottom="12dp"/>
             <TextView
                     android:id="@+id/fragment_add_nb_room_title_textview"
                     android:layout_width="wrap_content"
@@ -106,15 +105,17 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/fragment_add_house_ic"
                     android:layout_marginStart="8dp"/>
-            <EditText
-                    android:id="@+id/fragment_add_nb_room_edittext"
+            <Spinner
+                    android:id="@+id/fragment_add_nb_room_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:selectedItemPosition="@={estateViewModel.nbRoom}"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_room_title_textview"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_edittext"
-
-                    android:hint="@string/zero" android:layout_marginTop="8dp"
-                    android:inputType="number" app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_edittext"/>
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_spinner"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_spinner"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/fragment_add_nb_bathroom_title_textview"/>
             <TextView
                     android:id="@+id/fragment_add_nb_bathroom_title_textview"
                     android:layout_width="wrap_content"
@@ -124,17 +125,17 @@
                     app:layout_constraintStart_toEndOf="@+id/fragment_add_bathroom_ic"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"/>
-            <EditText
-                    android:id="@+id/fragment_add_nb_bathroom_edittext"
+            <Spinner
+                    android:id="@+id/fragment_add_nb_bathroom_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/zero"
-                    android:inputType="number"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_edittext"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_edittext"
+                    android:selectedItemPosition="@={estateViewModel.nbBathroom}"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_surface_spinner"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_surface_spinner"
                     app:layout_constraintBottom_toTopOf="@+id/fragment_add_nb_bedroom_title_textview"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_bathroom_title_textview"/>
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_bathroom_title_textview"
+                    app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.0"/>
             <TextView
                     android:id="@+id/fragment_add_nb_bedroom_title_textview"
                     android:layout_width="wrap_content"
@@ -147,17 +148,17 @@
                     android:layout_marginStart="8dp"
 
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_nb_bathroom_title_textview"
-                    android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"/>
-            <EditText
-                    android:id="@+id/fragment_add_nb_bedroom_edittext"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"/>
+            <Spinner
+                    android:id="@+id/fragment_add_nb_bedroom_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_add_nb_bathroom_edittext"
+                    android:selectedItemPosition="@={estateViewModel.nbBedroom}"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_nb_bathroom_spinner"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_nb_bedroom_title_textview"
-                    android:hint="@string/zero"
-                    android:inputType="number"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_nb_bathroom_edittext"/>
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_nb_bathroom_spinner"/>
             <EditText
                     android:id="@+id/fragment_add_location_edittext"
                     android:layout_width="136dp"
@@ -168,7 +169,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/fragment_add_location_title_textview"
                     android:text="@={estateViewModel.location}"
                     android:hint="@string/address"
-            />
+                    android:inputType="text"/>
 
             <ImageView
                     android:id="@+id/fragment_add_surface_ic"
@@ -214,6 +215,28 @@
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_add_location_ic"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_add_description_edittext"
                     android:layout_marginEnd="72dp" app:layout_constraintVertical_bias="1.0"/>
+            <TextView
+                    android:id="@+id/fragment_add_price_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_location_edittext"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_location_edittext"
+                    app:layout_constraintHorizontal_bias="0.489"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_nb_bathroom_title_textview"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_nb_bathroom_title_textview"/>
+            <EditText
+                    android:id="@+id/fragment_add_price_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@={estateViewModel.price}"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_price_textview"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_price_textview"
+                    app:layout_constraintHorizontal_bias="0.444"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_nb_bathroom_spinner"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_nb_bathroom_spinner"/>
             <ImageView
                     android:id="@+id/fragment_add_bathroom_ic"
                     android:src="@drawable/ic_bathroom_24dp"
@@ -227,15 +250,31 @@
                     android:id="@+id/fragment_add_create_button"
                     android:text="@string/create"
                     android:layout_width="83dp"
-                    android:layout_height="74dp"
-                    android:layout_marginTop="60dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_add_location_edittext"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_add_nb_bedroom_title_textview"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="42dp"
+                    android:layout_marginBottom="64dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintHorizontal_bias="0.598"/>
-
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_add_type_spinner"/>
+            <TextView
+                    android:id="@+id/fragment_add_type_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_price_textview"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_price_textview"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_nb_bedroom_title_textview"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_nb_bedroom_title_textview"/>
+            <Spinner
+                    android:id="@+id/fragment_add_type_spinner"
+                    android:layout_width="wrap_content"
+                    android:selectedItemPosition="@={estateViewModel.type}"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_nb_bedroom_spinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_nb_bedroom_spinner"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_add_type_textview"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_add_type_textview"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

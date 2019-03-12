@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import java.security.MessageDigest
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -50,5 +51,35 @@ object Utils {
 
     fun showSnackBar(view : View, message :String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+    fun hash(): String {
+        val bytes = this.toString().toByteArray()
+        val md = MessageDigest.getInstance("SHA-256")
+        val digest = md.digest(bytes)
+        return digest.fold("") { str, it -> str + "%02x".format(it) }
+    }
+    /****************************
+     *******   google map   ******
+     *****************************/
+
+
+    //https://maps.googleapis.com/maps/api/staticmap?
+    // center=avenue+de+la+resistance,lannion,
+    // &zoom=13
+    // &size=600x300
+    // &maptype=roadmap
+    // &markers=color:green%7Clabel:G%7C40.711614,-74.012318
+    // &key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
+
+    //geocoding address
+    //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
+    fun getStaticMapUrlFromAddress(location:String) :String{
+        val zoom=13
+        val size=200
+        val type="roadmap"
+        val apiKey="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
+
+        return "https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
+
     }
 }
