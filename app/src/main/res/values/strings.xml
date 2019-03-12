@@ -26,12 +26,5 @@
     <string name="photo">photo</string>
     <string name="price">Price :</string>
     <string name="type">Type :</string>
-    <string-array name="type_array">
-        <item>Apt</item>
-        <item>Loft</item>
-        <item>House</item>
-        <item>Flat</item>
-        <item>Studio</item>
-        <item>Other</item>
-    </string-array>
+    <string name="dollar">$</string>
 </resources>

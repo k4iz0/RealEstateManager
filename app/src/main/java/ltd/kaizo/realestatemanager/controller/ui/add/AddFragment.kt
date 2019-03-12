@@ -8,7 +8,6 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -16,15 +15,12 @@ import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
-import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
-import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import timber.log.Timber
 
 
-class AddFragment : BaseFragment(){
+class AddFragment : BaseFragment() {
 
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var parent: EstateActivity
@@ -54,7 +50,6 @@ class AddFragment : BaseFragment(){
      */
     override fun updateDesign() {
         this.configureViewModel()
-        this.configureAddButton()
         this.configureObserver()
         this.configureFab()
         this.configureSpinner()
@@ -63,12 +58,11 @@ class AddFragment : BaseFragment(){
     private fun configureSpinner() {
         val items = (0..20).toList()
         val adapter = ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, items)
-        fragment_add_surface_spinner.adapter = adapter
         fragment_add_nb_room_spinner.adapter = adapter
         fragment_add_nb_bedroom_spinner.adapter = adapter
         fragment_add_nb_bathroom_spinner.adapter = adapter
         val typeAdapter =
-            ArrayAdapter.createFromResource(context, R.array.type_array, R.layout.support_simple_spinner_dropdown_item)
+            ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
         fragment_add_type_spinner.adapter = typeAdapter
 
     }
@@ -89,6 +83,12 @@ class AddFragment : BaseFragment(){
                 }
 
             })
+        estateViewModel.isFinish.observe(this, Observer { isFinish ->
+            if (isFinish) {
+                parent.finish()
+                estateViewModel.isFinish.value = false
+            }
+        })
 
     }
 
@@ -100,39 +100,6 @@ class AddFragment : BaseFragment(){
 
     }
 
-    private fun configureAddButton() {
-        fragment_add_create_button.setOnClickListener {
-            createEstate()
-        }
-    }
-
-    private fun createEstate() {
-
-        if (estateViewModel.checkFieldView()) {
-            val estateToCreate = Estate(
-                0,
-                resources.getStringArray(R.array.type_array)[estateViewModel.type.value!!],
-                estateViewModel.price.value?.toInt()!!,
-                estateViewModel.surface.value!!,
-                estateViewModel.nbRoom.value!!,
-                estateViewModel.nbBathroom.value!!,
-                estateViewModel.nbBedroom.value!!,
-                estateViewModel.description.value!!,
-                estateViewModel.location.value!!,
-                getStaticMapUrlFromAddress(estateViewModel.location.value!!),
-                true,
-                "18/02/2019",
-                "",
-                estateViewModel.managerName.value!!
-            )
-            estateViewModel.createEstate(estateToCreate)
-            estateViewModel.message.value = "estate successfully created"
-            parent.finish()
-        } else {
-            estateViewModel.message.value = "an error has occurred"
-        }
-
-    }
 
     private fun selectPictureFromDevice() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
