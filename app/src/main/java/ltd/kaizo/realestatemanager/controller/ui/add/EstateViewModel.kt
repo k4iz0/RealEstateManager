@@ -6,63 +6,89 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.Utils
+import timber.log.Timber
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
     val message = MutableLiveData<String>()
-
     val description = MutableLiveData<String>()
     val location = MutableLiveData<String>()
-    val surface = MutableLiveData<Int>()
+    val surface = MutableLiveData<String>()
     val nbRoom = MutableLiveData<Int>()
     val nbBedroom = MutableLiveData<Int>()
     val nbBathroom = MutableLiveData<Int>()
     val price = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
-
     var managerName = MutableLiveData<String>()
+    val isFinish = MutableLiveData<Boolean>()
+    var estateId: Long = -1
 
-    init {
-        this.configureValues()
-    }
+    val typeArray = listOf(
+        "Apt",
+        "Loft",
+        "House",
+        "Flat",
+        "Studio",
+        "Other"
+    )
 
     fun getPhotoListById(id: Int): LiveData<List<Photo>> {
         return estateDataSource.getPhotoListById(id)
-    }
-
-    private fun configureValues() {
-        if (surface.value == null) {
-            surface.value = 0
-        }
-        if (nbRoom.value == null) {
-            nbRoom.value = 0
-        }
-        if (nbBedroom.value == null) {
-            nbBedroom.value = 0
-        }
-        if (nbBathroom.value == null) {
-            nbBathroom.value = 0
-        }
     }
 
     fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
 
-    fun createEstate(estate: Estate) {
-        executor.execute { estateDataSource.insertEstate(estate) }
-    }
-
-    fun checkFieldView(): Boolean =
-        (description.value != ""
+    private fun checkFieldView(): Boolean {
+        Timber.i("surface = ${surface.value}")
+        return (description.value != ""
                 && location.value != ""
                 && surface.value != null
+                && surface.value != ""
                 && nbRoom.value != null
                 && nbBathroom.value != null
                 && nbBedroom.value != null
                 && type.value != null
                 && price.value != null
                 && price.value != "")
+    }
+
+    fun createEstate() {
+
+        if (checkFieldView()) {
+            val estateToCreate = Estate(
+                0,
+                typeArray[type.value!!],
+                price.value?.toInt()!!,
+                surface.value?.toInt()!!,
+                nbRoom.value!!,
+                nbBathroom.value!!,
+                nbBedroom.value!!,
+                description.value!!,
+                location.value!!,
+                Utils.getStaticMapUrlFromAddress(location.value!!),
+                true,
+                "18/02/2019",
+                "",
+                managerName.value!!
+            )
+            executor.execute {
+                estateId = estateDataSource.insertEstate(estateToCreate)
+            }
+            
+            if (estateId.toInt() != -1) {
+                message.value = "estate successfully created"
+                isFinish.value = true
+            } else {
+                message.value = "error inserting data"
+            }
 
 
+        } else {
+            message.value = "verify your data"
+        }
+
+    }
 }

@@ -21,7 +21,7 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getPhotoListById(id)
     }
     //INSERT
-    fun insertEstate(estate: Estate) {
+    fun insertEstate(estate: Estate): Long {
         return estateDao.insertEstate(estate)
     }
 

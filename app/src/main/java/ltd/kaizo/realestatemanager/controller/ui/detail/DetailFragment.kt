@@ -44,6 +44,7 @@ class DetailFragment : BaseFragment() {
         fragment_detail_nb_bedroom_textview.text = estate.nbBedroom.toString()
         fragment_detail_nb_bathroom_textview.text = estate.nbBathroom.toString()
         fragment_detail_location_textview.text = estate.address
+        fragment_detail_price.text = estate.price.toString()
         Picasso.get().load(getStaticMapUrlFromAddress(estate.address)).into(fragment_detail_map_container)
     }
 

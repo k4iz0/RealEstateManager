@@ -204,22 +204,31 @@
             android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/fragment_add_house_ic"
             app:layout_constraintHorizontal_bias="0.0"/>
     <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" tools:layout_editor_absoluteY="555dp"
-            android:id="@+id/fragment_detail_price" app:layout_constraintStart_toStartOf="@+id/fragment_add_bedroom_ic"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_detail_nb_bedroom_title_textview"
-            android:layout_marginEnd="8dp" tools:text="300000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
-    <TextView
-            android:text="$"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fragement_detail_currency"
+            android:id="@+id/fragment_detail_price"
+            app:layout_constraintStart_toStartOf="@+id/fragment_add_bedroom_ic"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_detail_nb_bedroom_title_textview"
+            android:layout_marginEnd="8dp"
+            tools:text="300000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_detail_nb_bedroom_textview"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintVertical_bias="0.201"/>
+    <TextView
+            android:text="@string/dollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_detail_currency"
             app:layout_constraintTop_toTopOf="@+id/fragment_detail_price"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_detail_price"
-            app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/fragment_detail_price"
-            android:layout_marginStart="8dp" android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/fragment_detail_price"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

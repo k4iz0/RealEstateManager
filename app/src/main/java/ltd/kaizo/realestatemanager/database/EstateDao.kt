@@ -12,7 +12,7 @@ import ltd.kaizo.realestatemanager.model.Photo
 interface EstateDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEstate(estate: Estate)
+    fun insertEstate(estate: Estate):Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPhoto(photo: Photo)
