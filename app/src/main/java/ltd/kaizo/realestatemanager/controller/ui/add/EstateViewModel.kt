@@ -22,7 +22,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val type = MutableLiveData<Int>()
     var managerName = MutableLiveData<String>()
     val isFinish = MutableLiveData<Boolean>()
-    var estateId: Long = -1
+    val pictureList :MutableList<Photo> = mutableListOf()
 
     val typeArray = listOf(
         "Apt",
@@ -33,17 +33,15 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         "Other"
     )
 
-    fun getPhotoListById(id: Int): LiveData<List<Photo>> {
-        return estateDataSource.getPhotoListById(id)
-    }
+//    fun getPhotoListById(id: Int): LiveData<List<Photo>> {
+//        return estateDataSource.getPhotoListById(id)
+//    }
 
     fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
 
-    private fun checkFieldView(): Boolean {
-        Timber.i("surface = ${surface.value}")
-        return (description.value != ""
+    private fun checkFieldView(): Boolean =(description.value != ""
                 && location.value != ""
                 && surface.value != null
                 && surface.value != ""
@@ -53,8 +51,13 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 && type.value != null
                 && price.value != null
                 && price.value != "")
-    }
 
+    fun insertPhotoFromList(pictureList :List<Photo>, id : Long) {
+        for (photo in pictureList) {
+            photo.estateId=id
+            insertPhoto(photo)
+        }
+    }
     fun createEstate() {
 
         if (checkFieldView()) {
@@ -75,16 +78,16 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 managerName.value!!
             )
             executor.execute {
-                estateId = estateDataSource.insertEstate(estateToCreate)
-            }
-            
-            if (estateId.toInt() != -1) {
-                message.value = "estate successfully created"
-                isFinish.value = true
-            } else {
-                message.value = "error inserting data"
-            }
+               val estateId = estateDataSource.insertEstate(estateToCreate)
 
+            if (estateId.toInt() != -1) {
+                insertPhotoFromList(pictureList,estateId)
+                message.postValue("estate successfully created")
+                isFinish.postValue(true)
+            } else {
+                message.postValue("error inserting data")
+            }
+        }
 
         } else {
             message.value = "verify your data"

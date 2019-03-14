@@ -21,8 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"
     />
-    <HorizontalScrollView
-            android:id="@+id/fragment_detail_scrollview"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_detail_picture_list_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="90dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_media_textview"
             android:layout_marginTop="12dp">
 
-    </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
     <TextView
             android:id="@+id/fragment_detail_description_title_textview"
             android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             android:text="@string/description"
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_media_textview"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_detail_scrollview"/>
+            app:layout_constraintTop_toBottomOf="@+id/fragment_detail_picture_list_recycle_view"/>
     <TextView
             android:id="@+id/fragment_detail_description_textview"
             android:layout_width="match_parent"

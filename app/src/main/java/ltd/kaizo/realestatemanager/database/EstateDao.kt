@@ -24,5 +24,5 @@ interface EstateDao {
     fun getEstateById(id: Int): LiveData<Estate>
 
     @Query("SELECT * FROM photo WHERE estateId=:id")
-    fun getPhotoListById(id: Int) : LiveData<List<Photo>>
+    fun getPhotoListById(id: Int) : MutableList<Photo>
 }

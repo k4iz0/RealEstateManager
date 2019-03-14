@@ -9,15 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
+import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
+import timber.log.Timber
 
 
 class AddFragment : BaseFragment() {
@@ -26,7 +31,9 @@ class AddFragment : BaseFragment() {
     private lateinit var parent: EstateActivity
     private lateinit var binding: FragmentAddBinding
     private lateinit var uriImageSelected: Uri
-
+    private lateinit var adapter: PictureListAdapter
+    private var pictureListTmp: MutableList<Photo> = mutableListOf()
+    private lateinit var pictureTmp: Photo
 
     companion object {
         fun newInstance() = AddFragment()
@@ -53,6 +60,25 @@ class AddFragment : BaseFragment() {
         this.configureObserver()
         this.configureFab()
         this.configureSpinner()
+        this.configureRecycleView()
+    }
+
+    private fun configureRecycleView() {
+        adapter = PictureListAdapter(estateViewModel.pictureList) { photo -> onPictureItemClicked(photo) }
+        fragment_add_picture_list_recycle_view.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        fragment_add_picture_list_recycle_view.adapter = adapter
+    }
+
+    private fun updateList(list: List<Photo>) {
+        estateViewModel.pictureList.clear()
+        estateViewModel.pictureList.addAll(list)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun onPictureItemClicked(photo: Photo) {
+        //launch default image viewer on device to show the picture
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(photo.uri)))
     }
 
     private fun configureSpinner() {
@@ -113,15 +139,33 @@ class AddFragment : BaseFragment() {
                 if (resultCode == RESULT_OK) {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
+                        this.pictureTmp = Photo(0, uriImageSelected.toString())
+                        showAlertDialog()
                     }
-                    val picture = Photo(0, uriImageSelected.toString())
-                    picture.name = "kitchen"
-                    estateViewModel.insertPhoto(picture)
                 } else {
                     estateViewModel.message.value = getString(R.string.no_picture_found)
                 }
             }
         }
 
+    }
+
+
+    private fun showAlertDialog() {
+        val edittext = EditText(context)
+        val alert = AlertDialog.Builder(parent)
+        alert.setTitle("Picture name")
+
+        alert.setView(edittext)
+
+        alert.setPositiveButton(android.R.string.ok) { dialog, whichButton ->
+            if (edittext.text.toString() != "") {
+                this.pictureTmp.name = edittext.text.toString()
+                Timber.i("name = ${pictureTmp.name}")
+                this.pictureListTmp.add(this.pictureTmp)
+                this.updateList(this.pictureListTmp)
+            }
+        }
+        alert.show()
     }
 }
