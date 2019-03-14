@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
+import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
 
@@ -11,6 +12,10 @@ val estateList = estateDataSource.getAllEstate()
 
     fun getEstateById(id: Int): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
+    }
+
+    fun getPictureListFromId(id :Int):MutableList<Photo> {
+        executor.execute { estateDataSource.getPhotoListById(id)}
     }
 
 }

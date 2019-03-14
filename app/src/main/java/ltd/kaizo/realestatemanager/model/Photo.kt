@@ -1,6 +1,5 @@
 package ltd.kaizo.realestatemanager.model
 
-import android.net.Uri
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
@@ -15,8 +14,8 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Photo(
-    @PrimaryKey(autoGenerate = true)
-    val estateId:Int ,
+    @PrimaryKey
+    var estateId: Long,
     val uri: String,
-    var name: String =""
+    var name: String = ""
 )

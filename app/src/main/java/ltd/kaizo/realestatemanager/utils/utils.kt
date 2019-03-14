@@ -2,9 +2,13 @@ package ltd.kaizo.realestatemanager.utils
 
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.net.wifi.WifiManager
 import android.view.View
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.model.Photo
 import java.security.MessageDigest
 
 import java.text.DateFormat
@@ -58,6 +62,7 @@ object Utils {
         val digest = md.digest(bytes)
         return digest.fold("") { str, it -> str + "%02x".format(it) }
     }
+
     /****************************
      *******   google map   ******
      *****************************/

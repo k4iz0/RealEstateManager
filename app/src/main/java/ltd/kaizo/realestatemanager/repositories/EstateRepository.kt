@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import ltd.kaizo.realestatemanager.database.EstateDao
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
+import timber.log.Timber
 
 class EstateRepository(val estateDao: EstateDao) {
 
@@ -17,7 +18,7 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getEstateById(id)
     }
 
-    fun getPhotoListById(id: Int): LiveData<List<Photo>> {
+    fun getPhotoListById(id: Int): MutableList<Photo> {
         return estateDao.getPhotoListById(id)
     }
     //INSERT
