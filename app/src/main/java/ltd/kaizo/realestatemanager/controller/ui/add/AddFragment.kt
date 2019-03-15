@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.add
 import android.app.Activity.RESULT_OK
 import android.content.ContentValues
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -10,14 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.android.synthetic.main.picture_name_dialog.*
-import kotlinx.android.synthetic.main.picture_pick_choice_dialog.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
@@ -26,7 +23,6 @@ import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import timber.log.Timber
 
 
 class AddFragment : BaseFragment() {
@@ -132,20 +128,26 @@ class AddFragment : BaseFragment() {
     }
 
     private fun showAddPictureAlertDialog() {
-        val alertDialog = AlertDialog.Builder(parent)
-        with(alertDialog) {
-            setView(R.layout.picture_pick_choice_dialog)
-            setNegativeButton(android.R.string.cancel) { dialog, which ->
-                dialog.dismiss()
-            }
-            setNeutralButton("Camera") { dialog, which ->
-                selectPictureFromCamera()
-            }
-            setPositiveButton("Gallery") { dialog, which ->
-                selectPictureFromDevice()
-            }
-            show()
-        }
+        val dialog = AddPictureDialogFragment()
+//        dialog.setTargetFragment(this, 1)
+//        dialog.setStyle(androidx.appcompat.app.AppCompatDialogFragment.STYLE_NO_TITLE,R.style.customDialog)
+
+        fragmentManager?.let { dialog.show(it, "AddPictureDialogfragment") }
+
+//        val alertDialog = AlertDialog.Builder(parent)
+//        with(alertDialog) {
+//            setView(R.layout.picture_pick_choice_dialog)
+//            setNegativeButton(android.R.string.cancel) { dialog, which ->
+//                dialog.dismiss()
+//            }
+//            setNeutralButton("Camera") { dialog, which ->
+//                selectPictureFromCamera()
+//            }
+//            setPositiveButton("Gallery") { dialog, which ->
+//                selectPictureFromDevice()
+//            }
+//            show()
+//        }
     }
 
 
@@ -172,8 +174,8 @@ class AddFragment : BaseFragment() {
                 if (resultCode == RESULT_OK) {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
-                        this.pictureTmp = Photo(0,0, uriImageSelected.toString())
-                        showAlertDialog()
+                        this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
+//                        showAlertDialog()
                     }
                 } else {
                     estateViewModel.message.value = getString(R.string.no_picture_found)
@@ -182,8 +184,8 @@ class AddFragment : BaseFragment() {
             RC_TAKE_PHOTO -> if (resultCode == RESULT_OK) {
                 if (image_uri != null) {
                     uriImageSelected = image_uri as Uri
-                    this.pictureTmp = Photo(0,0, uriImageSelected.toString())
-                    showAlertDialog()
+                    this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
+//                    showAlertDialog()
                 }
             } else {
                 estateViewModel.message.value = getString(R.string.error_unknown_error)
@@ -192,22 +194,22 @@ class AddFragment : BaseFragment() {
 
     }
 
-    private fun showAlertDialog() {
-        val alert = AlertDialog.Builder(parent)
-        val view = layoutInflater.inflate(R.layout.picture_name_dialog, null)
-        val editText = view.findViewById(R.id.picture_name_dialog_edittext) as EditText
-        with(alert) {
-            setView(view)
-            setTitle(getString(R.string.picture_name))
-            setPositiveButton(android.R.string.ok) { dialog, whichButton ->
-                if (editText.text.toString() != "") {
-                    pictureTmp.name = editText.text.toString()
-                    Timber.i("name = ${pictureTmp.name}")
-                    pictureListTmp.add(pictureTmp)
-                    updateList(pictureListTmp)
-                }
-            }
-            show()
-        }
-    }
+//    private fun showAlertDialog() {
+//        val alert = AlertDialog.Builder(parent)
+//        val view = layoutInflater.inflate(R.layout.picture_name_dialog, null)
+//        val editText = view.findViewById(R.id.picture_name_dialog_edittext) as EditText
+//        with(alert) {
+//            setView(view)
+//            setTitle(getString(R.string.picture_name))
+//            setPositiveButton(android.R.string.ok) { dialog, whichButton ->
+//                if (editText.text.toString() != "") {
+//                    pictureTmp.name = editText.text.toString()
+//                    Timber.i("name = ${pictureTmp.name}")
+//                    pictureListTmp.add(pictureTmp)
+//                    updateList(pictureListTmp)
+//                }
+//            }
+//            show()
+//        }
+//    }
 }

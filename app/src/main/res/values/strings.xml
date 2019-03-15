@@ -28,4 +28,7 @@
     <string name="type">Type :</string>
     <string name="dollar">$</string>
     <string name="picture_name">Picture name</string>
+    <string name="add_picture">Add picture</string>
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
 </resources>
