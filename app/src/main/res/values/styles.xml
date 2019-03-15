@@ -1,11 +1,16 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--TOOLBAR-->
+    <style name="customDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:padding">8dp</item>
     </style>
 
     <!--TOOLBAR-->
@@ -15,4 +20,22 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
     <style name="LoginTheme"/>
+
+    <!--title-->
+    <style name="titleTextView">
+    <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!--button-->
+    <style name="ButtonTextStyleBlue">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!--BIG title-->
+    <style name="bigTitleTextView">
+    <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

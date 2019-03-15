@@ -16,7 +16,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
+            style="@style/titleTextView"
             android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"
@@ -39,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/description"
+            style="@style/titleTextView"
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_media_textview"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_picture_list_recycle_view"/>
@@ -58,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/surface"
+            style="@style/titleTextView"
             app:layout_constraintTop_toTopOf="@+id/fragment_add_surface_ic"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_add_surface_ic"
             app:layout_constraintVertical_bias="0.0"
@@ -77,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_rooms"
+            style="@style/titleTextView"
             app:layout_constraintTop_toTopOf="@+id/fragment_add_house_ic"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_add_house_ic"
             app:layout_constraintVertical_bias="0.0" app:layout_constraintStart_toEndOf="@+id/fragment_add_house_ic"
@@ -94,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_bathrooms"
+            style="@style/titleTextView"
             app:layout_constraintTop_toTopOf="@+id/fragment_add_bathroom_ic"
             app:layout_constraintStart_toEndOf="@+id/fragment_add_bathroom_ic" android:layout_marginStart="8dp"/>
     <TextView
@@ -111,6 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/number_of_bedrooms"
+            style="@style/titleTextView"
             app:layout_constraintTop_toTopOf="@+id/fragment_add_bedroom_ic"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_add_bedroom_ic"
             app:layout_constraintVertical_bias="0.0"
@@ -143,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_description_textview"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_description_textview"/>
     <ImageView
@@ -168,7 +173,7 @@
             android:id="@+id/fragment_detail_map_container"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/fragment_detail_location_textview"
             app:layout_constraintStart_toEndOf="@+id/fragment_detail_nb_bedroom_title_textview"
@@ -189,6 +194,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/location"
+            style="@style/titleTextView"
             app:layout_constraintTop_toTopOf="@+id/fragment_add_location_ic"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_add_location_ic"
             app:layout_constraintEnd_toEndOf="@+id/fragment_detail_location_textview"
