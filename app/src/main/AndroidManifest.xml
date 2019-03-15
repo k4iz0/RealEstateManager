@@ -5,15 +5,18 @@
     <uses-permission android:name="android.Manifest.permission.INTERNET"/>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-            android:allowBackup="true"
+
+    android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".controller.ui.add.EstateActivity" android:parentActivityName=".controller.ui.list.ListActivity">
+        <activity android:name=".controller.ui.add.EstateActivity"
+                  android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>
         <activity android:name=".controller.ui.login.LoginActivity">
             <intent-filter>
@@ -24,6 +27,6 @@
         </activity>
         <activity android:name=".controller.ui.list.ListActivity">
         </activity>
-    </application>
+</application>
 
 </manifest>

@@ -50,6 +50,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    //WORKERMANAGER
+    implementation "android.arch.work:work-runtime-ktx:1.0.0"
     //FIREBASE
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
