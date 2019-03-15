@@ -14,15 +14,15 @@ interface EstateDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEstate(estate: Estate):Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPhoto(photo: Photo)
 
     @Query("SELECT * FROM estate")
     fun getAllEstate(): LiveData<List<Estate>>
 
     @Query("SELECT * FROM estate WHERE id=:id")
-    fun getEstateById(id: Int): LiveData<Estate>
+    fun getEstateById(id: Long): LiveData<Estate>
 
     @Query("SELECT * FROM photo WHERE estateId=:id")
-    fun getPhotoListById(id: Int) : MutableList<Photo>
+    fun getPhotoListById(id: Long) : LiveData<List<Photo>>
 }

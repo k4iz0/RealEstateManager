@@ -14,7 +14,8 @@ import androidx.room.PrimaryKey
     )]
 )
 data class Photo(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val photoId:Long,
     var estateId: Long,
     val uri: String,
     var name: String = ""

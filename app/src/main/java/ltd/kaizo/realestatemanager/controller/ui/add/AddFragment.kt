@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -145,8 +146,6 @@ class AddFragment : BaseFragment() {
             }
             show()
         }
-        picture_pick_dialog_camera_btn.setOnClickListener {  selectPictureFromCamera() }
-        picture_pick_dialog_gallery_btn.setOnClickListener {  selectPictureFromDevice() }
     }
 
 
@@ -173,7 +172,7 @@ class AddFragment : BaseFragment() {
                 if (resultCode == RESULT_OK) {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
-                        this.pictureTmp = Photo(0, uriImageSelected.toString())
+                        this.pictureTmp = Photo(0,0, uriImageSelected.toString())
                         showAlertDialog()
                     }
                 } else {
@@ -183,7 +182,7 @@ class AddFragment : BaseFragment() {
             RC_TAKE_PHOTO -> if (resultCode == RESULT_OK) {
                 if (image_uri != null) {
                     uriImageSelected = image_uri as Uri
-                    this.pictureTmp = Photo(0, uriImageSelected.toString())
+                    this.pictureTmp = Photo(0,0, uriImageSelected.toString())
                     showAlertDialog()
                 }
             } else {
@@ -195,12 +194,14 @@ class AddFragment : BaseFragment() {
 
     private fun showAlertDialog() {
         val alert = AlertDialog.Builder(parent)
+        val view = layoutInflater.inflate(R.layout.picture_name_dialog, null)
+        val editText = view.findViewById(R.id.picture_name_dialog_edittext) as EditText
         with(alert) {
-            setView(R.layout.picture_name_dialog)
+            setView(view)
             setTitle(getString(R.string.picture_name))
             setPositiveButton(android.R.string.ok) { dialog, whichButton ->
-                if (picture_name_dialog_edittext.text.toString() != "") {
-                    pictureTmp.name = picture_name_dialog_edittext.text.toString()
+                if (editText.text.toString() != "") {
+                    pictureTmp.name = editText.text.toString()
                     Timber.i("name = ${pictureTmp.name}")
                     pictureListTmp.add(pictureTmp)
                     updateList(pictureListTmp)

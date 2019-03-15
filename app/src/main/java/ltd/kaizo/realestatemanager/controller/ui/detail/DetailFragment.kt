@@ -16,10 +16,11 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
+import timber.log.Timber
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
-    private var estateId: Int = 1
+    private var estateId: Long = 1
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<Photo> = mutableListOf()
 
@@ -33,7 +34,7 @@ class DetailFragment : BaseFragment() {
 
     override fun configureDesign() {
         if (arguments != null) {
-            this.estateId = this.arguments!!.getInt(ESTATE_ID)
+            this.estateId = this.arguments!!.getLong(ESTATE_ID)
         }
 
     }
@@ -53,9 +54,19 @@ class DetailFragment : BaseFragment() {
     override fun updateDesign() {
         val parent = activity as ListActivity
         listViewModel = parent.listViewModel
-        listViewModel.getEstateById(this.estateId).observe(this, Observer { estate -> updateUi(estate) })
-        this.pictureList = listViewModel.getPictureListFromId(estateId)
         this.configureRecycleView()
+        this.configureObserver()
+    }
+
+    private fun configureObserver() {
+        //get estate detail
+        listViewModel.getEstateById(this.estateId).observe(this, Observer { estate -> updateUi(estate) })
+        listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->
+            Timber.i("size of the list = ${list.size}")
+            updateList(list)
+        })
+
+
     }
 
     private fun updateList(list: List<Photo>) {

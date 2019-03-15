@@ -53,8 +53,10 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 && price.value != "")
 
     private fun insertPhotoFromList(pictureList :List<Photo>, id : Long) {
+        Timber.i("picturelist size = ${pictureList.size}")
         for (photo in pictureList) {
             photo.estateId=id
+            Timber.i("inserting $photo")
             insertPhoto(photo)
         }
     }
