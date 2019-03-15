@@ -37,7 +37,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
 //        return estateDataSource.getPhotoListById(id)
 //    }
 
-    fun insertPhoto(photo: Photo) {
+    private fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
 
@@ -52,7 +52,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 && price.value != null
                 && price.value != "")
 
-    fun insertPhotoFromList(pictureList :List<Photo>, id : Long) {
+    private fun insertPhotoFromList(pictureList :List<Photo>, id : Long) {
         for (photo in pictureList) {
             photo.estateId=id
             insertPhoto(photo)

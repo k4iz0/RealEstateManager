@@ -6,6 +6,7 @@ import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.injection.Injection
+import ltd.kaizo.realestatemanager.utils.CAMERA_PERM
 import ltd.kaizo.realestatemanager.utils.WRITE_EXT_PERM
 
 class EstateActivity : BaseActivity() {
@@ -17,7 +18,7 @@ class EstateActivity : BaseActivity() {
     override fun configureDesign() {
         this.configureToolbar()
         this.configureViewModel()
-        runWithPermissions(WRITE_EXT_PERM) {
+        runWithPermissions(WRITE_EXT_PERM, CAMERA_PERM) {
             this.configureAndShowAddFragment()
         }
     }
