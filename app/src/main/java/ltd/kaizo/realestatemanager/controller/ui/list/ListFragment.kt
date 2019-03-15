@@ -45,9 +45,8 @@ class ListFragment : BaseFragment() {
     }
 
     private fun onEstateItemClicked(estate: Estate) {
-        Timber.i("you click on a ${estate.type}")
         val arg = Bundle()
-        arg.putInt(ESTATE_ID, estate.id)
+        arg.putLong(ESTATE_ID, estate.id)
         val detailFragment = DetailFragment.newInstance()
         detailFragment.arguments = arg
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {

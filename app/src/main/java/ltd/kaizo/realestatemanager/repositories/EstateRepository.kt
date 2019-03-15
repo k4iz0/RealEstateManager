@@ -14,11 +14,11 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getAllEstate()
     }
 
-    fun getEstateById(id:Int): LiveData<Estate> {
+    fun getEstateById(id:Long): LiveData<Estate> {
         return estateDao.getEstateById(id)
     }
 
-    fun getPhotoListById(id: Int): MutableList<Photo> {
+    fun getPhotoListById(id: Long): LiveData<List<Photo>> {
         return estateDao.getPhotoListById(id)
     }
     //INSERT
