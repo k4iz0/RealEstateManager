@@ -22,6 +22,7 @@ import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
+import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 
@@ -30,11 +31,8 @@ class AddFragment : BaseFragment() {
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var parent: EstateActivity
     private lateinit var binding: FragmentAddBinding
-    private lateinit var uriImageSelected: Uri
     private lateinit var adapter: PictureListAdapter
-    private var pictureListTmp: MutableList<Photo> = mutableListOf()
-    private lateinit var pictureTmp: Photo
-    private var image_uri: Uri? = null
+    private val pictureListTmp: MutableList<Photo> = mutableListOf()
 
     companion object {
         fun newInstance() = AddFragment()
@@ -116,6 +114,10 @@ class AddFragment : BaseFragment() {
                 estateViewModel.isFinish.value = false
             }
         })
+        estateViewModel.pictureTmp.observe(this, Observer { picture ->
+            pictureListTmp.add(picture)
+            updateList(pictureListTmp)
+        })
 
     }
 
@@ -132,7 +134,7 @@ class AddFragment : BaseFragment() {
 //        dialog.setTargetFragment(this, 1)
 //        dialog.setStyle(androidx.appcompat.app.AppCompatDialogFragment.STYLE_NO_TITLE,R.style.customDialog)
 
-        fragmentManager?.let { dialog.show(it, "AddPictureDialogfragment") }
+        fragmentManager?.let { dialog.show(it, TAG_DIALOG) }
 
 //        val alertDialog = AlertDialog.Builder(parent)
 //        with(alertDialog) {
@@ -150,49 +152,6 @@ class AddFragment : BaseFragment() {
 //        }
     }
 
-
-    private fun selectPictureFromDevice() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, RC_CHOOSE_PHOTO)
-    }
-
-    private fun selectPictureFromCamera() {
-        val values = ContentValues()
-        values.put(MediaStore.Images.Media.TITLE, "New Picture")
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-        image_uri = parent.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
-        startActivityForResult(cameraIntent, RC_TAKE_PHOTO)
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            RC_CHOOSE_PHOTO -> {
-                if (resultCode == RESULT_OK) {
-                    if (data != null) {
-                        uriImageSelected = data.data as Uri
-                        this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
-//                        showAlertDialog()
-                    }
-                } else {
-                    estateViewModel.message.value = getString(R.string.no_picture_found)
-                }
-            }
-            RC_TAKE_PHOTO -> if (resultCode == RESULT_OK) {
-                if (image_uri != null) {
-                    uriImageSelected = image_uri as Uri
-                    this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
-//                    showAlertDialog()
-                }
-            } else {
-                estateViewModel.message.value = getString(R.string.error_unknown_error)
-            }
-        }
-
-    }
 
 //    private fun showAlertDialog() {
 //        val alert = AlertDialog.Builder(parent)
