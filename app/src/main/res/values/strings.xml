@@ -30,11 +30,13 @@
     <string name="picture_name">Picture name</string>
     <string name="add_picture">Add picture</string>
     <string name="save">save</string>
-    <string name="cancel">cancel</string>
     <string name="postal_code">postal code</string>
     <string name="city">city</string>
     <string name="sold_out">sold out :</string>
-    <string name="date">Date :</string>
+    <string name="date">start date :</string>
     <string name="sold">sold</string>
     <string name="manager">manager :</string>
+    <string name="logout">logout</string>
+    <string name="settings">settings</string>
+    <string name="user_logout">user log out</string>
 </resources>

@@ -46,7 +46,6 @@ class AddPictureDialogFragment : DialogFragment() {
 
     private fun configureDesign() {
         this.configureViewModel()
-        dialog?.setTitle(getString(R.string.add_picture))
     }
 
     private fun configureViewModel() {
@@ -54,6 +53,15 @@ class AddPictureDialogFragment : DialogFragment() {
         estateViewModel = parent.estateViewModel
         binding.lifecycleOwner = this
         binding.addPictureDialogFragment = this
+        this.configureObserver()
+    }
+    /****************************
+    *******   OBSERVERS  ********
+    *****************************/
+
+
+    private fun configureObserver() {
+        // Picture Name
         pictureName.observe(this, Observer { name -> pictureTmp.name = name })
     }
 
