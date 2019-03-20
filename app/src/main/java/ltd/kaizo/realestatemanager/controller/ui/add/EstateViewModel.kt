@@ -22,6 +22,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val type = MutableLiveData<Int>()
     val managerName = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
+    val dateIn = MutableLiveData<String>()
     val isFinish = MutableLiveData<Boolean>()
     val pictureList: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
@@ -68,6 +69,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
             if (pictureList.size == 0) {
                 message.value = "You must add at least 1 picture"
             } else {
+                if (isSold.value == null) {
+                    isSold.value = false
+                }
                 val estateToCreate = Estate(
                     0,
                     "",
@@ -81,7 +85,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     address.value!!,
                     postalCode.value!!,
                     city.value!!,
-                    isSold.value.let { false },
+                    isSold.value!!,
                     "18/02/2019",
                     "",
                     managerName.value!!
