@@ -33,4 +33,5 @@
     <string name="cancel">cancel</string>
     <string name="postal_code">postal code</string>
     <string name="city">city</string>
+    <string name="sold_out">sold out :</string>
 </resources>
