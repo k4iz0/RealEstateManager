@@ -86,7 +86,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     postalCode.value!!,
                     city.value!!,
                     isSold.value!!,
-                    "18/02/2019",
+                    dateIn.value!!,
                     "",
                     managerName.value!!
                 )

@@ -7,16 +7,19 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
+import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.injection.Injection
+import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-     lateinit var listViewModel: ListViewModel
+    lateinit var listViewModel: ListViewModel
     /****************************
      *********   DESIGN   ********
      *****************************/
@@ -69,6 +72,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         activity_List_drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         activity_list_navigation_view.setNavigationItemSelectedListener(this)
+        activity_list_navigation_view.itemIconTintList = null
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -77,9 +81,26 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 activity_List_drawer_layout.openDrawer(GravityCompat.START)
                 true
             }
+            R.id.activity_main_drawer_settings -> {
+                showSnackBar(activity_list_coordinator_layout,"wip")
+                true
+            }
+            R.id.activity_main_drawer_logout -> {
+                this.signOutUserFromFirebase()
+                showSnackBar(activity_list_coordinator_layout, getString(R.string.user_logout))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    private fun signOutUserFromFirebase() {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnSuccessListener {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

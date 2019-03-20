@@ -1,16 +1,15 @@
 package ltd.kaizo.realestatemanager.utils
 
 
+import android.app.Activity
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.google.android.material.snackbar.Snackbar
 import java.security.MessageDigest
-
 import java.text.SimpleDateFormat
-import java.util.Date
-import android.app.Activity
-import android.view.inputmethod.InputMethodManager
+import java.util.*
 
 
 object Utils {
@@ -51,14 +50,8 @@ object Utils {
         return wifi.isWifiEnabled
     }
 
-    fun showSnackBar(view : View, message :String) {
+    fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
-    }
-    fun hash(): String {
-        val bytes = this.toString().toByteArray()
-        val md = MessageDigest.getInstance("SHA-256")
-        val digest = md.digest(bytes)
-        return digest.fold("") { str, it -> str + "%02x".format(it) }
     }
 
     /****************************
@@ -76,13 +69,13 @@ object Utils {
 
     //geocoding address
     //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
-    fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String) :String{
-        val zoom=13
-        val size=200
-        val type="roadmap"
-        val apiKey="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
+    fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String): String {
+        val zoom = 13
+        val size = 200
+        val type = "roadmap"
+        val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
         val location = "$address, $postalCode, $city"
-        return "https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
+        return "https://maps.googleapis.com/maps/api/staticmap?center=$location&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
 
     }
 

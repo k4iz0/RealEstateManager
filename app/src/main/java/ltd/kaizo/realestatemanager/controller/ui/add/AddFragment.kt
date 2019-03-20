@@ -20,6 +20,8 @@ import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
+import ltd.kaizo.realestatemanager.utils.Utils.todayDate
+import timber.log.Timber
 
 
 class AddFragment : BaseFragment() {
@@ -94,8 +96,12 @@ class AddFragment : BaseFragment() {
             showAddPictureAlertDialog()
         }
     }
+    /****************************
+     *******   OBSERVERS  ********
+     *****************************/
 
     private fun configureObserver() {
+        //message for snackbar
         estateViewModel.message.observe(
             this,
             Observer { message ->
@@ -105,15 +111,24 @@ class AddFragment : BaseFragment() {
                 }
 
             })
+        //Boolean to finish activity after room request
         estateViewModel.isFinish.observe(this, Observer { isFinish ->
             if (isFinish) {
                 parentActivity.finish()
                 estateViewModel.isFinish.value = false
             }
         })
+        //update the picture list for the add/edit fragment
         estateViewModel.pictureTmp.observe(this, Observer { picture ->
             pictureListTmp.add(picture)
             updateList(pictureListTmp)
+        })
+        //set the date for the add/edit fragment
+        estateViewModel.dateIn.observe(this, Observer { dateIn ->
+                Timber.i("datein = ${estateViewModel.dateIn.value}")
+            if (estateViewModel.dateIn.value.isNullOrEmpty()) {
+                estateViewModel.dateIn.value = todayDate
+            }
         })
 
     }
