@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
+import org.w3c.dom.Text
 
 class ListAdapter(
     private val estateList: List<Estate>,
@@ -36,6 +37,9 @@ class ListAdapter(
             location.text = estate.city.toUpperCase()
             price.text = estate.price.toString()
             Picasso.get().load(estate.mainPicture).into(picture)
+            if (estate.isSold) {
+                soldState.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -45,6 +49,7 @@ class ListAdapter(
         val type = itemView.findViewById<TextView>(R.id.item_type_textview)!!
         val location = itemView.findViewById<TextView>(R.id.item_location_textview)!!
         val price = itemView.findViewById<TextView>(R.id.item_price_textview)!!
+        val soldState = itemView.findViewById<TextView>(R.id.picture_item_sold_textview)!!
     }
 //    interface EstateListListener {
 //        fun onEstateSelected(estate: Estate)

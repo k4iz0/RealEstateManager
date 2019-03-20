@@ -19,7 +19,7 @@ data class Estate(
     val postalCode:String,
     val city:String,
 //    val poi: MutableList<String>,
-    val isAvailable: Boolean,
+    val isSold: Boolean,
     val dateIn: String,
     val dateOut: String,
     val estateManager: String

@@ -27,6 +27,15 @@
         <item name="android:background">@android:color/white</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <!--sold textview-->
+    <style name="soldTextView">
+    <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <!--button-->
     <style name="ButtonMaterialStyleBlue" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/colorPrimary</item>

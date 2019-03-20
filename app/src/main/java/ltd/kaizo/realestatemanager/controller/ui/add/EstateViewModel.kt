@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
-import ltd.kaizo.realestatemanager.utils.Utils
+import timber.log.Timber
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -20,7 +20,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val nbBathroom = MutableLiveData<Int>()
     val price = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
-    var managerName = MutableLiveData<String>()
+    val managerName = MutableLiveData<String>()
+    val isSold = MutableLiveData<Boolean>()
     val isFinish = MutableLiveData<Boolean>()
     val pictureList: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
@@ -35,28 +36,24 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         "Other"
     )
 
-//    fun getPhotoListById(id: Int): LiveData<List<Photo>> {
-//        return estateDataSource.getPhotoListById(id)
-//    }
-
     private fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
 
     private fun checkFieldView() = (
             description.value != ""
-            && description.value != null
-            && address.value != ""
-            && postalCode.value != ""
-            && city.value != ""
-            && surface.value != null
-            && surface.value != ""
-            && nbRoom.value != null
-            && nbBathroom.value != null
-            && nbBedroom.value != null
-            && type.value != null
-            && price.value != null
-            && price.value != "")
+                    && description.value != null
+                    && address.value != ""
+                    && postalCode.value != ""
+                    && city.value != ""
+                    && surface.value != null
+                    && surface.value != ""
+                    && nbRoom.value != null
+                    && nbBathroom.value != null
+                    && nbBedroom.value != null
+                    && type.value != null
+                    && price.value != null
+                    && price.value != "")
 
     private fun insertPhotoFromList(pictureList: List<Photo>, id: Long) {
         for (photo in pictureList) {
@@ -84,7 +81,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     address.value!!,
                     postalCode.value!!,
                     city.value!!,
-                    true,
+                    isSold.value.let { false },
                     "18/02/2019",
                     "",
                     managerName.value!!

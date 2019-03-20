@@ -7,10 +7,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="media">Media</string>
     <string name="description">Description</string>
-    <string name="surface">Surface</string>
-    <string name="number_of_rooms">Number of rooms</string>
-    <string name="number_of_bathrooms">Number of Bathrooms</string>
-    <string name="number_of_bedrooms">Number of bedrooms</string>
+    <string name="surface">Surface :</string>
+    <string name="number_of_rooms">Number\nof rooms :</string>
+    <string name="number_of_bathrooms">Number\nof Bathrooms :</string>
+    <string name="number_of_bedrooms">Number\nof bedrooms :</string>
     <string name="location">Location</string>
     <string name="connection_succeed">connection successful</string>
     <string name="error_no_internet">error check your internet connection</string>
@@ -34,4 +34,6 @@
     <string name="postal_code">postal code</string>
     <string name="city">city</string>
     <string name="sold_out">sold out :</string>
+    <string name="date">Date :</string>
+    <string name="sold">sold</string>
 </resources>
