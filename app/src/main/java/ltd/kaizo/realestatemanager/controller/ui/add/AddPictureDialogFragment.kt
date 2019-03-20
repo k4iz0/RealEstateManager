@@ -3,7 +3,6 @@ package ltd.kaizo.realestatemanager.controller.ui.add
 
 import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_add_picture_dialog.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPictureDialogBinding
@@ -24,12 +25,12 @@ import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class AddPictureDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddPictureDialogBinding
-    private var image_uri: Uri? = null
+    private var imageUri: Uri? = null
     private lateinit var uriImageSelected: Uri
     private lateinit var parent: EstateActivity
     private lateinit var estateViewModel: EstateViewModel
-    private var pictureTmp: Photo? = null
-
+    private var pictureTmp: Photo = Photo(0, 0, "")
+    val pictureName = MutableLiveData<String>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,10 +43,10 @@ class AddPictureDialogFragment : DialogFragment() {
         super.onActivityCreated(savedInstanceState)
         this.configureDesign()
     }
+
     private fun configureDesign() {
         this.configureViewModel()
         dialog?.setTitle(getString(R.string.add_picture))
-
     }
 
     private fun configureViewModel() {
@@ -53,7 +54,7 @@ class AddPictureDialogFragment : DialogFragment() {
         estateViewModel = parent.estateViewModel
         binding.lifecycleOwner = this
         binding.addPictureDialogFragment = this
-
+        pictureName.observe(this, Observer { name -> pictureTmp.name = name })
     }
 
     fun selectPictureFromDevice() {
@@ -65,18 +66,19 @@ class AddPictureDialogFragment : DialogFragment() {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, "New Picture")
         values.put(MediaStore.Images.Media.DESCRIPTION, "From the Camera")
-        image_uri = parent.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        imageUri = parent.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
         startActivityForResult(cameraIntent, RC_TAKE_PHOTO)
-
     }
 
     fun savePicture() {
         when {
-            estateViewModel.pictureName.value == "" -> showSnackBar(fragment_add_picture_dialog_coordinator_layout,"you need to enter a picture name")
-            pictureTmp?.uri == "" -> showSnackBar(fragment_add_picture_dialog_coordinator_layout,"you need select a picture")
-            pictureTmp == null -> closeDialog()
+            pictureTmp.name == "" -> showSnackBar(
+                add_dialog_fragment_coordinator_layout,
+                "you need to enter a picture name"
+            )
+            pictureTmp.uri == "" -> showSnackBar(add_dialog_fragment_coordinator_layout, "you need select a picture")
             else -> {
                 estateViewModel.pictureTmp.value = pictureTmp
                 closeDialog()
@@ -92,16 +94,16 @@ class AddPictureDialogFragment : DialogFragment() {
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
-                        this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
+                        this.pictureTmp.uri = uriImageSelected.toString()
                     }
                 } else {
                     estateViewModel.message.value = getString(R.string.no_picture_found)
                 }
             }
             RC_TAKE_PHOTO -> if (resultCode == Activity.RESULT_OK) {
-                if (image_uri != null) {
-                    uriImageSelected = image_uri as Uri
-                    this.pictureTmp = Photo(0, 0, uriImageSelected.toString())
+                if (imageUri != null) {
+                    uriImageSelected = imageUri as Uri
+                    this.pictureTmp.uri = uriImageSelected.toString()
                 }
             } else {
                 estateViewModel.message.value = getString(R.string.error_unknown_error)

@@ -10,7 +10,6 @@ import java.util.concurrent.Executor
 
 class ListViewModel(val estateDataSource:EstateRepository, val executor: Executor) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
-    val estateid = MutableLiveData<Long>()
     fun getEstateById(id: Long): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
     }

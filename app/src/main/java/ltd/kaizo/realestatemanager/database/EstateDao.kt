@@ -25,4 +25,7 @@ interface EstateDao {
 
     @Query("SELECT * FROM photo WHERE estateId=:id")
     fun getPhotoListById(id: Long) : LiveData<List<Photo>>
+
+    @Query("UPDATE estate SET mainPicture=:uri WHERE id=:estateId")
+    fun setMainPicture(estateId:Long, uri:String)
 }
