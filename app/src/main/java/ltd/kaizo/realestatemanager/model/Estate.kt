@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class Estate(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
+    val mainPicture:String,
     val type: String,
     val price: Int,
     val surface: Int,
@@ -15,7 +16,8 @@ data class Estate(
     val nbBedroom: Int,
     val description: String,
     val address: String,
-    val gMapAddress:String,
+    val postalCode:String,
+    val city:String,
 //    val poi: MutableList<String>,
     val isAvailable: Boolean,
     val dateIn: String,

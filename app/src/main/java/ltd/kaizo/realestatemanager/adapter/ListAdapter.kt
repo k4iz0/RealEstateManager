@@ -7,13 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
 
 class ListAdapter(
     private val estateList: List<Estate>,
-    private val clickListener: (Estate) -> Unit) :
-    RecyclerView.Adapter<ListAdapter.ListViewHolder>(){
+    private val clickListener: (Estate) -> Unit
+) :
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val viewItem = LayoutInflater.from(parent.context)
@@ -27,11 +29,13 @@ class ListAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val estate = estateList[position]
-        holder.cardView.setOnClickListener{clickListener(estate)}
+
+        holder.cardView.setOnClickListener { clickListener(estate) }
         with(holder) {
             type.text = estate.type
-            location.text = estate.address
+            location.text = estate.city.toUpperCase()
             price.text = estate.price.toString()
+            Picasso.get().load(estate.mainPicture).into(picture)
         }
     }
 

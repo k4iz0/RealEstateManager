@@ -1,15 +1,12 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
-import android.app.Activity.RESULT_OK
-import android.content.ContentValues
 import android.content.Intent
-import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -20,16 +17,14 @@ import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
-import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
-import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
 import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
+import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 
 class AddFragment : BaseFragment() {
-
-    private lateinit var estateViewModel: EstateViewModel
-    private lateinit var parent: EstateActivity
+      private lateinit var estateViewModel: EstateViewModel
+    private lateinit var parentActivity: EstateActivity
     private lateinit var binding: FragmentAddBinding
     private lateinit var adapter: PictureListAdapter
     private val pictureListTmp: MutableList<Photo> = mutableListOf()
@@ -81,13 +76,15 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureSpinner() {
-        val items = (0..20).toList()
-        val adapter = ArrayAdapter(parent, R.layout.support_simple_spinner_dropdown_item, items)
+        val items = (0..15).toList()
+        val adapter = ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, items)
         fragment_add_nb_room_spinner.adapter = adapter
         fragment_add_nb_bedroom_spinner.adapter = adapter
         fragment_add_nb_bathroom_spinner.adapter = adapter
+        fragment_add_constraint_layout.setOnClickListener{hideKeyboard(parentActivity)}
+
         val typeAdapter =
-            ArrayAdapter(parent, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
+            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
         fragment_add_type_spinner.adapter = typeAdapter
 
     }
@@ -110,7 +107,7 @@ class AddFragment : BaseFragment() {
             })
         estateViewModel.isFinish.observe(this, Observer { isFinish ->
             if (isFinish) {
-                parent.finish()
+                parentActivity.finish()
                 estateViewModel.isFinish.value = false
             }
         })
@@ -122,8 +119,8 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureViewModel() {
-        parent = activity as EstateActivity
-        estateViewModel = parent.estateViewModel
+        parentActivity = activity as EstateActivity
+        estateViewModel = parentActivity.estateViewModel
         binding.lifecycleOwner = this
         binding.estateViewModel = estateViewModel
 
@@ -131,44 +128,6 @@ class AddFragment : BaseFragment() {
 
     private fun showAddPictureAlertDialog() {
         val dialog = AddPictureDialogFragment()
-//        dialog.setTargetFragment(this, 1)
-//        dialog.setStyle(androidx.appcompat.app.AppCompatDialogFragment.STYLE_NO_TITLE,R.style.customDialog)
-
         fragmentManager?.let { dialog.show(it, TAG_DIALOG) }
-
-//        val alertDialog = AlertDialog.Builder(parent)
-//        with(alertDialog) {
-//            setView(R.layout.picture_pick_choice_dialog)
-//            setNegativeButton(android.R.string.cancel) { dialog, which ->
-//                dialog.dismiss()
-//            }
-//            setNeutralButton("Camera") { dialog, which ->
-//                selectPictureFromCamera()
-//            }
-//            setPositiveButton("Gallery") { dialog, which ->
-//                selectPictureFromDevice()
-//            }
-//            show()
-//        }
     }
-
-
-//    private fun showAlertDialog() {
-//        val alert = AlertDialog.Builder(parent)
-//        val view = layoutInflater.inflate(R.layout.picture_name_dialog, null)
-//        val editText = view.findViewById(R.id.picture_name_dialog_edittext) as EditText
-//        with(alert) {
-//            setView(view)
-//            setTitle(getString(R.string.picture_name))
-//            setPositiveButton(android.R.string.ok) { dialog, whichButton ->
-//                if (editText.text.toString() != "") {
-//                    pictureTmp.name = editText.text.toString()
-//                    Timber.i("name = ${pictureTmp.name}")
-//                    pictureListTmp.add(pictureTmp)
-//                    updateList(pictureListTmp)
-//                }
-//            }
-//            show()
-//        }
-//    }
 }

@@ -2,18 +2,16 @@ package ltd.kaizo.realestatemanager.utils
 
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.net.wifi.WifiManager
 import android.view.View
-import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.snackbar.Snackbar
-import ltd.kaizo.realestatemanager.model.Photo
 import java.security.MessageDigest
 
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+
 
 object Utils {
 
@@ -78,13 +76,21 @@ object Utils {
 
     //geocoding address
     //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
-    fun getStaticMapUrlFromAddress(location:String) :String{
+    fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String) :String{
         val zoom=13
         val size=200
         val type="roadmap"
         val apiKey="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
-
+        val location = "$address, $postalCode, $city"
         return "https://maps.googleapis.com/maps/api/staticmap?center=${location}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
 
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val view = activity.findViewById<View>(android.R.id.content)
+        if (view != null) {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 }

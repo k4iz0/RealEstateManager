@@ -29,4 +29,8 @@ class EstateRepository(val estateDao: EstateDao) {
     fun insertPhoto(photo: Photo) {
         return estateDao.insertPhoto(photo)
     }
+
+    fun setMainPicture(estateId: Long, uri: String) {
+        return estateDao.setMainPicture(estateId, uri)
+    }
 }

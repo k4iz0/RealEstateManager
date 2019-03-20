@@ -5,9 +5,11 @@
                   type="ltd.kaizo.realestatemanager.controller.ui.add.AddPictureDialogFragment"/>
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/fragment_add_picture_dialog_coordinator_layout"
+            android:id="@+id/add_dialog_fragment_coordinator_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
     <LinearLayout
                   xmlns:app="http://schemas.android.com/apk/res-auto"
                   android:orientation="vertical"
@@ -44,9 +46,10 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:layout_margin="8dp"
+                    android:background="@drawable/border_line"
+                    android:layout_marginTop="16dp"
                     android:hint="@string/picture_name"
-                    android:text="@={estateViewModel.pictureName}"
+                    android:text="@={AddPictureDialogFragment.pictureName}"
                     android:inputType="text"
             />
             <ImageButton
