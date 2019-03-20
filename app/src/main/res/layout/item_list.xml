@@ -28,10 +28,9 @@
                     tools:src="@mipmap/ic_launcher_round"/>
             <TextView
                     android:id="@+id/picture_item_sold_textview"
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:text="@string/sold"
+                    android:text="@string/sold"
                     style="@style/soldTextView"
                     app:layout_constraintBottom_toBottomOf="@+id/picture_item_list_photo"
                     app:layout_constraintEnd_toEndOf="@+id/picture_item_list_photo"

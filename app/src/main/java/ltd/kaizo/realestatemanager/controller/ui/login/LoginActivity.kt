@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
+import ltd.kaizo.realestatemanager.model.UserHelper
 import java.util.*
 
 
@@ -52,6 +53,23 @@ class LoginActivity : BaseActivity() {
 
         if (RC_SIGN_IN == requestCode) {
             if (resultCode == Activity.RESULT_OK) { // SUCCESS
+                if (this.getCurrentUser() != null) {
+                    if (getCurrentUser()?.photoUrl == null) {
+                        //email & password account no picture
+                        UserHelper.createUser(
+                            getCurrentUser()!!.uid,
+                            getCurrentUser()?.displayName,
+                            "",
+                            getCurrentUser()?.email
+                        )
+                    } else {
+                        UserHelper.createUser(
+                            getCurrentUser()!!.uid,
+                            getCurrentUser()?.displayName,
+                            getCurrentUser()?.photoUrl.toString(),
+                            getCurrentUser()?.email
+                        )
+                    }
                 Snackbar.make(
                     activity_login_coordinator_layout,
                     getString(ltd.kaizo.realestatemanager.R.string.connection_succeed),
@@ -78,7 +96,7 @@ class LoginActivity : BaseActivity() {
                 }
             }
         }
-    }
+    }}
 
     private fun startSignInActivity() {
         startActivityForResult(

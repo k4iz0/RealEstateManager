@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
 import org.w3c.dom.Text
+import timber.log.Timber
 
 class ListAdapter(
     private val estateList: List<Estate>,
@@ -37,8 +38,11 @@ class ListAdapter(
             location.text = estate.city.toUpperCase()
             price.text = estate.price.toString()
             Picasso.get().load(estate.mainPicture).into(picture)
+            Timber.i("soldState = ${estate.isSold}")
             if (estate.isSold) {
                 soldState.visibility = View.VISIBLE
+            } else {
+                soldState.visibility = View.INVISIBLE
             }
         }
     }

@@ -20,7 +20,7 @@
 
 
                 <TextView
-                        android:id="@+id/fragment_add_date_textview"
+                        android:id="@+id/fragment_add_date_textview_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/date"
@@ -33,6 +33,30 @@
                         android:layout_marginEnd="8dp"
                         app:layout_constraintHorizontal_bias="0.0"
                 />
+                <TextView
+                        android:id="@+id/fragment_add_date_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@={estateViewModel.dateIn}"
+                        style="@style/titleTextView"
+                        app:layout_constraintTop_toTopOf="@+id/fragment_add_date_textview_title"
+                        app:layout_constraintStart_toEndOf="@+id/fragment_add_date_textview_title"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/fragment_add_date_textview_title"/>
+                <TextView
+                        android:id="@+id/fragment_add_manager_title_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/manager"
+                        style="@style/titleTextView"
+                    />
+                <TextView
+                        android:id="@+id/fragment_add_manager_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@={estateViewModel.managerName}"
+                        style="@style/titleTextView"
+                    />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_add_picture_list_recycle_view"
                         android:layout_width="match_parent"
@@ -43,7 +67,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toBottomOf="@+id/fragment_add_date_textview"
+                        app:layout_constraintTop_toBottomOf="@+id/fragment_add_date_textview_title"
                         android:layout_marginTop="8dp">
 
 
