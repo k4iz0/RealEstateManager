@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.Utils
 import timber.log.Timber
 import java.util.concurrent.Executor
 
@@ -23,10 +24,14 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val managerName = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
     val dateIn = MutableLiveData<String>()
+    val dateOut = MutableLiveData<String>()
     val isFinish = MutableLiveData<Boolean>()
     val pictureList: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
 
+init {
+    dateIn.value = Utils.todayDate
+}
 
     val typeArray = listOf(
         "Apt",
@@ -36,6 +41,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         "Studio",
         "Other"
     )
+
 
     private fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
@@ -87,7 +93,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     city.value!!,
                     isSold.value!!,
                     dateIn.value!!,
-                    "",
+                    dateOut.value,
                     managerName.value!!
                 )
                 executor.execute {

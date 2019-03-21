@@ -21,6 +21,6 @@ data class Estate(
 //    val poi: MutableList<String>,
     val isSold: Boolean,
     val dateIn: String,
-    val dateOut: String,
+    val dateOut: String?,
     val estateManager: String
 )
