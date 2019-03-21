@@ -1,12 +1,12 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,14 +18,16 @@ import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
+import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import ltd.kaizo.realestatemanager.utils.Utils.todayDate
 import timber.log.Timber
+import java.util.*
 
 
 class AddFragment : BaseFragment() {
-      private lateinit var estateViewModel: EstateViewModel
+    private lateinit var estateViewModel: EstateViewModel
     private lateinit var parentActivity: EstateActivity
     private lateinit var binding: FragmentAddBinding
     private lateinit var adapter: PictureListAdapter
@@ -56,6 +58,7 @@ class AddFragment : BaseFragment() {
         this.configureObserver()
         this.configureFab()
         this.configureSpinner()
+        this.configureDateInOnClickListener()
         this.configureRecycleView()
     }
 
@@ -77,18 +80,8 @@ class AddFragment : BaseFragment() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(photo.uri)))
     }
 
-    private fun configureSpinner() {
-        val items = (0..15).toList()
-        val adapter = ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, items)
-        fragment_add_nb_room_spinner.adapter = adapter
-        fragment_add_nb_bedroom_spinner.adapter = adapter
-        fragment_add_nb_bathroom_spinner.adapter = adapter
-        fragment_add_constraint_layout.setOnClickListener{hideKeyboard(parentActivity)}
-
-        val typeAdapter =
-            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
-        fragment_add_type_spinner.adapter = typeAdapter
-
+    private fun configureDateInOnClickListener() {
+        fragment_add_date_edittext.setOnClickListener { configureDatePicker(1) }
     }
 
     private fun configureFab() {
@@ -96,6 +89,29 @@ class AddFragment : BaseFragment() {
             showAddPictureAlertDialog()
         }
     }
+
+    private fun configureSpinner() {
+        val items = (0..15).toList()
+        val adapter = ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, items)
+        fragment_add_nb_room_spinner.adapter = adapter
+        fragment_add_nb_bedroom_spinner.adapter = adapter
+        fragment_add_nb_bathroom_spinner.adapter = adapter
+        fragment_add_constraint_layout.setOnClickListener { hideKeyboard(parentActivity) }
+
+        val typeAdapter =
+            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
+        fragment_add_type_spinner.adapter = typeAdapter
+
+    }
+
+    private fun configureViewModel() {
+        parentActivity = activity as EstateActivity
+        estateViewModel = parentActivity.estateViewModel
+        binding.lifecycleOwner = this
+        binding.estateViewModel = estateViewModel
+
+    }
+
     /****************************
      *******   OBSERVERS  ********
      *****************************/
@@ -123,22 +139,40 @@ class AddFragment : BaseFragment() {
             pictureListTmp.add(picture)
             updateList(pictureListTmp)
         })
-        //set the date for the add/edit fragment
-        estateViewModel.dateIn.observe(this, Observer { dateIn ->
-                Timber.i("datein = ${estateViewModel.dateIn.value}")
-            if (estateViewModel.dateIn.value.isNullOrEmpty()) {
-                estateViewModel.dateIn.value = todayDate
+        //soldState switch
+        estateViewModel.isSold.observe(this, Observer { booleanValue ->
+            if (booleanValue) {
+                //switch source = 2
+                configureDatePicker(2)
             }
         })
 
     }
+        /****************************
+        *********   DIALOG   ********
+        *****************************/
 
-    private fun configureViewModel() {
-        parentActivity = activity as EstateActivity
-        estateViewModel = parentActivity.estateViewModel
-        binding.lifecycleOwner = this
-        binding.estateViewModel = estateViewModel
 
+    private fun configureDatePicker(source:Int) {
+        val myCalendar = Calendar.getInstance()
+        val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val MyYear = add0ToDate(year)
+            val MyMonth = add0ToDate(month)
+            val MyDay = add0ToDate(dayOfMonth)
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            when (source) {
+                1 -> estateViewModel.dateIn.value = "$MyDay/$MyMonth/$MyYear"
+                2 -> estateViewModel.dateOut.value = "$MyDay/$MyMonth/$MyYear"
+            }
+
+        }
+        DatePickerDialog(
+            parentActivity, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+            myCalendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
     }
 
     private fun showAddPictureAlertDialog() {

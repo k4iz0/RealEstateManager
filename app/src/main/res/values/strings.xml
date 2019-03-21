@@ -32,7 +32,7 @@
     <string name="save">save</string>
     <string name="postal_code">postal code</string>
     <string name="city">city</string>
-    <string name="sold_out">sold out :</string>
+    <string name="sold_out">sold :</string>
     <string name="date">start date :</string>
     <string name="sold">sold</string>
     <string name="manager">manager :</string>
