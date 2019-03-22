@@ -12,14 +12,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.picture_item_list.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
-import ltd.kaizo.realestatemanager.utils.RC_DATE_IN
-import ltd.kaizo.realestatemanager.utils.RC_DATE_OUT
-import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
+import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
@@ -65,15 +64,28 @@ class AddFragment : BaseFragment() {
         this.configureSpinner()
         this.configureFab()
         this.configureDateInOnClickListener()
-        this.configureMainPictureButton()
+
     }
 
-    private fun configureMainPictureButton() {
+    private fun configureMainPictureButton(photo: Photo) {
+        Timber.i("favorite ${photo.name}")
+    }
 
+    private fun configureRemovePictureButton(photo: Photo) {
+            pictureListTmp.remove(photo)
+
+            updateList(pictureListTmp)
     }
 
     private fun configureRecycleView() {
-        adapter = PictureListAdapter(estateViewModel.pictureList) { photo -> onPictureItemClicked(photo) }
+        adapter = PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photo, sourceCode ->
+            when (sourceCode) {
+           RC_PICTURE_LISTENER_VIEW-> onPictureItemClicked(photo)
+           RC_PICTURE_LISTENER_FAVORITE-> this.configureMainPictureButton(photo)
+           RC_PICTURE_LISTENER_REMOVE-> this.configureRemovePictureButton(photo)
+
+            }
+        }
         fragment_add_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_add_picture_list_recycle_view.adapter = adapter
@@ -167,7 +179,7 @@ class AddFragment : BaseFragment() {
     private fun configureDatePicker(source:Int) {
         val myCalendar = Calendar.getInstance()
 
-        val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        val date = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             val MyYear = add0ToDate(year)
             val MyMonth = add0ToDate(month)
             val MyDay = add0ToDate(dayOfMonth)

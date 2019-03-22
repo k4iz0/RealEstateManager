@@ -15,6 +15,7 @@ import ltd.kaizo.realestatemanager.controller.ui.list.ListViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
+import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
 import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
 import timber.log.Timber
 
@@ -40,7 +41,7 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        adapter = PictureListAdapter(pictureList) { photo -> onPictureItemClicked(photo) }
+        adapter = PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
         fragment_detail_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_detail_picture_list_recycle_view.adapter = adapter
