@@ -17,6 +17,8 @@ import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.utils.RC_DATE_IN
+import ltd.kaizo.realestatemanager.utils.RC_DATE_OUT
 import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
@@ -63,6 +65,11 @@ class AddFragment : BaseFragment() {
         this.configureSpinner()
         this.configureFab()
         this.configureDateInOnClickListener()
+        this.configureMainPictureButton()
+    }
+
+    private fun configureMainPictureButton() {
+
     }
 
     private fun configureRecycleView() {
@@ -84,7 +91,7 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureDateInOnClickListener() {
-        fragment_add_date_edittext.setOnClickListener { configureDatePicker(1) }
+        fragment_add_date_edittext.setOnClickListener { configureDatePicker(RC_DATE_IN) }
     }
 
     private fun configureFab() {
@@ -145,8 +152,7 @@ class AddFragment : BaseFragment() {
         //soldState switch
         estateViewModel.isSold.observe(this, Observer { booleanValue ->
             if (booleanValue) {
-                //switch source = 2
-                configureDatePicker(2)
+                configureDatePicker(RC_DATE_OUT)
             } else {
                 estateViewModel.dateOut.value = ""
             }
@@ -169,8 +175,8 @@ class AddFragment : BaseFragment() {
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             when (source) {
-                1 -> estateViewModel.dateIn.value = "$MyDay/$MyMonth/$MyYear"
-                2 -> estateViewModel.dateOut.value = "$MyDay/$MyMonth/$MyYear"
+                RC_DATE_IN -> estateViewModel.dateIn.value = "$MyDay/$MyMonth/$MyYear"
+                RC_DATE_OUT -> estateViewModel.dateOut.value = "$MyDay/$MyMonth/$MyYear"
             }
 
         }
