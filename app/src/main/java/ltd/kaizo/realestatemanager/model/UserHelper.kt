@@ -12,7 +12,7 @@ object UserHelper {
 //            .orderBy("username")
 
 
-    fun createUser(uid: String, username: String?, urlPicture: String, email: String?): Task<Void> {
+    fun createUser(uid: String, username: String, urlPicture: String, email: String): Task<Void> {
 
         val userToCreate = User(uid, username, urlPicture, email)
         return UserHelper.usersCollection.document(uid).set(userToCreate)

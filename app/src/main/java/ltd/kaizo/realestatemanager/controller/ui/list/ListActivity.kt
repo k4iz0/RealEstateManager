@@ -9,6 +9,8 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_list_nav_header.*
 import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
@@ -16,10 +18,13 @@ import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.injection.Injection
+import ltd.kaizo.realestatemanager.model.User
+import ltd.kaizo.realestatemanager.model.UserHelper
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var listViewModel: ListViewModel
+    private lateinit var currentUser: User
     /****************************
      *********   DESIGN   ********
      *****************************/
@@ -31,6 +36,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun configureDesign() {
         setSupportActionBar(activity_list_toolbar)
         this.configureViewModel()
+        this.configureCurrentUser()
         this.configureAndShowListFragment()
         this.configureAndShowDetailFragment()
         this.configureNavigationDrawer()
@@ -82,7 +88,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 true
             }
             R.id.activity_main_drawer_settings -> {
-                showSnackBar(activity_list_coordinator_layout,"wip")
+                showSnackBar(activity_list_coordinator_layout, "wip")
                 true
             }
             R.id.activity_main_drawer_logout -> {
@@ -93,6 +99,22 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    private fun configureCurrentUser() {
+        UserHelper.getUser(getCurrentUser()!!.uid)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful && task.result != null) {
+                    currentUser = task.result!!.toObject<User>(User::class.java)!!
+                    updateNavHeaderDesign()
+                }
+            }
+    }
+
+    private fun updateNavHeaderDesign() {
+        nav_header_username.text = currentUser.username
+        nav_header_email.text = currentUser.email
+        Picasso.get().load(currentUser.urlPicture).into(nav_header_avatar)
     }
 
     private fun signOutUserFromFirebase() {

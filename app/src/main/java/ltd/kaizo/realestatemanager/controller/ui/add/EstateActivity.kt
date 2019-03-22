@@ -11,17 +11,20 @@ import ltd.kaizo.realestatemanager.utils.WRITE_EXT_PERM
 
 class EstateActivity : BaseActivity() {
     lateinit var estateViewModel: EstateViewModel
+
     override fun getFragmentLayout(): Int {
         return R.layout.activity_estate
     }
 
     override fun configureDesign() {
         this.configureToolbar()
+
         this.configureViewModel()
         runWithPermissions(WRITE_EXT_PERM, CAMERA_PERM) {
             this.configureAndShowAddFragment()
         }
     }
+
     private fun configureToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.activity_estate_toolbar)
         setSupportActionBar(toolbar)
@@ -40,6 +43,5 @@ class EstateActivity : BaseActivity() {
         estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
         estateViewModel.managerName.value = getCurrentUser()!!.displayName.toString()
     }
-
 
 }

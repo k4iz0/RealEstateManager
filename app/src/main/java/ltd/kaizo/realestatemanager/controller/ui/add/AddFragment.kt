@@ -21,7 +21,6 @@ import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import ltd.kaizo.realestatemanager.utils.Utils.todayDate
 import timber.log.Timber
 import java.util.*
 
@@ -56,10 +55,14 @@ class AddFragment : BaseFragment() {
     override fun updateDesign() {
         this.configureViewModel()
         this.configureObserver()
-        this.configureFab()
-        this.configureSpinner()
-        this.configureDateInOnClickListener()
+        this.configureButtonAndEvent()
         this.configureRecycleView()
+    }
+
+    private fun configureButtonAndEvent() {
+        this.configureSpinner()
+        this.configureFab()
+        this.configureDateInOnClickListener()
     }
 
     private fun configureRecycleView() {
@@ -144,6 +147,8 @@ class AddFragment : BaseFragment() {
             if (booleanValue) {
                 //switch source = 2
                 configureDatePicker(2)
+            } else {
+                estateViewModel.dateOut.value = ""
             }
         })
 
@@ -155,6 +160,7 @@ class AddFragment : BaseFragment() {
 
     private fun configureDatePicker(source:Int) {
         val myCalendar = Calendar.getInstance()
+
         val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             val MyYear = add0ToDate(year)
             val MyMonth = add0ToDate(month)
@@ -168,11 +174,14 @@ class AddFragment : BaseFragment() {
             }
 
         }
+            val datePickerDialog =
         DatePickerDialog(
             parentActivity, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
             myCalendar.get(Calendar.DAY_OF_MONTH)
-        ).show()
+        )
+            datePickerDialog.setOnDismissListener { if (fragment_add_dateOut_textview.text == "") fragment_add_sold_switch.isChecked = false }
+            datePickerDialog.show()
     }
 
     private fun showAddPictureAlertDialog() {

@@ -39,4 +39,8 @@
     <string name="logout">logout</string>
     <string name="settings">settings</string>
     <string name="user_logout">user log out</string>
+    <string name="no_username">no username found</string>
+    <string name="no_email">no email found</string>
+
+
 </resources>
