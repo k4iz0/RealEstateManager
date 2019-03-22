@@ -23,6 +23,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val price = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
     val managerName = MutableLiveData<String>()
+    val mainPicture = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
     val dateIn = MutableLiveData<String>()
     val dateOut = MutableLiveData<String>()

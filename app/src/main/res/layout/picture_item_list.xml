@@ -10,9 +10,13 @@
         android:clickable="true"
          app:cardCornerRadius="5dp"
        >
+<FrameLayout android:layout_width="match_parent" android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
+
         <ImageView
                 android:id="@+id/picture_item_list_photo"
                 android:layout_width="90dp"
@@ -21,7 +25,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/logo"/>
+        <ImageButton
+                android:id="@+id/picture_item_favorite_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_heart_empty_blue"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/logo"
+        />
+         <ImageButton
+                android:id="@+id/picture_item_remove_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_remove_red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/logo"
+        />
         <TextView
                 android:id="@+id/picture_item_list_name_textview"
                 android:layout_width="match_parent"
@@ -37,4 +62,5 @@
         />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
 </androidx.cardview.widget.CardView>
