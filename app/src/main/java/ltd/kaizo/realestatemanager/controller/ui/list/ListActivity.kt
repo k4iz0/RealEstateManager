@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
-import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User

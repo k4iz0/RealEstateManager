@@ -12,8 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
-import kotlinx.android.synthetic.main.item_list.*
-import kotlinx.android.synthetic.main.picture_item_list.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
@@ -23,7 +21,6 @@ import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import timber.log.Timber
 import java.util.*
 
 
@@ -32,7 +29,6 @@ class AddFragment : BaseFragment() {
     private lateinit var parentActivity: EstateActivity
     private lateinit var binding: FragmentAddBinding
     private lateinit var adapter: PictureListAdapter
-    private val pictureListTmp: MutableList<Photo> = mutableListOf()
 
     companion object {
         fun newInstance() = AddFragment()
@@ -71,24 +67,32 @@ class AddFragment : BaseFragment() {
     private fun configureMainPictureButton(photo: Photo) {
 
         when (photo.mainPicture) {
-        true ->  photo.mainPicture = false
-        false ->  photo.mainPicture = true
+            true -> photo.mainPicture = false
+
+            false ->  {
+                clearMainPictureInList()
+                photo.mainPicture = true}
+        }
+        updateList(estateViewModel.pictureListTmp)
     }
-        updateList(pictureListTmp)
-        Timber.i("favorite ${photo.name}")
+
+    private fun clearMainPictureInList() {
+        for (picture in estateViewModel.pictureListTmp) {
+            picture.mainPicture = false
+        }
     }
 
     private fun configureRemovePictureButton(photo: Photo) {
-            pictureListTmp.remove(photo)
-            updateList(pictureListTmp)
+        estateViewModel.pictureListTmp.remove(photo)
+        updateList(estateViewModel.pictureListTmp)
     }
 
     private fun configureRecycleView() {
         adapter = PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photo, sourceCode ->
             when (sourceCode) {
-           RC_PICTURE_LISTENER_VIEW-> onPictureItemClicked(photo)
-           RC_PICTURE_LISTENER_FAVORITE-> this.configureMainPictureButton(photo)
-           RC_PICTURE_LISTENER_REMOVE-> this.configureRemovePictureButton(photo)
+                RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photo)
+                RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photo)
+                RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photo)
 
             }
         }
@@ -164,8 +168,10 @@ class AddFragment : BaseFragment() {
         })
         //update the picture list for the add/edit fragment
         estateViewModel.pictureTmp.observe(this, Observer { picture ->
-            pictureListTmp.add(picture)
-            updateList(pictureListTmp)
+            if (!estateViewModel.pictureListTmp.contains(picture)) {
+                estateViewModel.pictureListTmp.add(picture)
+            }
+            updateList(estateViewModel.pictureListTmp)
         })
         //soldState switch
         estateViewModel.isSold.observe(this, Observer { booleanValue ->
@@ -177,12 +183,13 @@ class AddFragment : BaseFragment() {
         })
 
     }
-        /****************************
-        *********   DIALOG   ********
-        *****************************/
+
+    /****************************
+     *********   DIALOG   ********
+     *****************************/
 
 
-    private fun configureDatePicker(source:Int) {
+    private fun configureDatePicker(source: Int) {
         val myCalendar = Calendar.getInstance()
 
         val date = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -198,14 +205,16 @@ class AddFragment : BaseFragment() {
             }
 
         }
-            val datePickerDialog =
-        DatePickerDialog(
-            parentActivity, date, myCalendar
-                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)
-        )
-            datePickerDialog.setOnDismissListener { if (fragment_add_dateOut_textview.text == "") fragment_add_sold_switch.isChecked = false }
-            datePickerDialog.show()
+        val datePickerDialog =
+            DatePickerDialog(
+                parentActivity, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            )
+        datePickerDialog.setOnDismissListener {
+            if (fragment_add_dateOut_textview.text == "") fragment_add_sold_switch.isChecked = false
+        }
+        datePickerDialog.show()
     }
 
     private fun showAddPictureAlertDialog() {

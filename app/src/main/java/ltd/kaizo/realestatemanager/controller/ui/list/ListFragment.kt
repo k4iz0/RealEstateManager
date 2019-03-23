@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.list_fragment.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
-import ltd.kaizo.realestatemanager.controller.ui.detail.DetailFragment
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import timber.log.Timber

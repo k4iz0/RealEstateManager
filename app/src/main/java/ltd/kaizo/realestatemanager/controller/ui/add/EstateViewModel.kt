@@ -28,6 +28,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val dateOut = MutableLiveData<String>()
     val isFinish = MutableLiveData<Boolean>()
     val pictureList: MutableList<Photo> = mutableListOf()
+    val pictureListTmp: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
 
 init {
