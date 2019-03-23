@@ -23,7 +23,6 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val price = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
     val managerName = MutableLiveData<String>()
-    val mainPicture = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
     val dateIn = MutableLiveData<String>()
     val dateOut = MutableLiveData<String>()
@@ -101,7 +100,7 @@ init {
                 executor.execute {
                     val estateId = estateDataSource.insertEstate(estateToCreate)
                     if (estateId.toInt() != -1) {
-                        setMainPicture(estateId, pictureList[0].uri)
+                        setMainPicture(estateId)
                         insertPhotoFromList(pictureList, estateId)
                         message.postValue("estate successfully created")
                         isFinish.postValue(true)
@@ -116,7 +115,13 @@ init {
 
     }
 
-    private fun setMainPicture(estateId: Long, uri: String) {
+    private fun setMainPicture(estateId: Long) {
+        var uri = ""
+        for (photo in pictureList) {
+            if (photo.mainPicture) {
+                uri = photo.uri
+            }
+        }
         executor.execute {
             estateDataSource.setMainPicture(estateId, uri)
         }

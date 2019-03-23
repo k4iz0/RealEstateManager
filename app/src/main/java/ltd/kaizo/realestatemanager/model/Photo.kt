@@ -20,5 +20,6 @@ data class Photo(
     @ColumnInfo(index = true)
     var estateId: Long,
     var uri: String,
-    var name: String = ""
+    var name: String = "",
+    var mainPicture:Boolean = false
 )

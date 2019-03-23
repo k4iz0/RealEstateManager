@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.item_list.*
 import kotlinx.android.synthetic.main.picture_item_list.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
@@ -68,12 +69,17 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureMainPictureButton(photo: Photo) {
+
+        when (photo.mainPicture) {
+        true ->  photo.mainPicture = false
+        false ->  photo.mainPicture = true
+    }
+        updateList(pictureListTmp)
         Timber.i("favorite ${photo.name}")
     }
 
     private fun configureRemovePictureButton(photo: Photo) {
             pictureListTmp.remove(photo)
-
             updateList(pictureListTmp)
     }
 

@@ -48,6 +48,11 @@ class PictureListAdapter(
             } else {
                 heartBtn.setOnClickListener { clickListener (picture, RC_PICTURE_LISTENER_FAVORITE) }
                 removeBtn.setOnClickListener { clickListener (picture, RC_PICTURE_LISTENER_REMOVE) }
+
+                when (picture.mainPicture) {
+                    true -> heartBtn.setBackgroundResource(R.drawable.ic_heart_full_blue)
+                    false -> heartBtn.setBackgroundResource(R.drawable.ic_heart_empty_blue)
+                }
             }
         }
     }
