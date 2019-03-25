@@ -19,9 +19,9 @@ import timber.log.Timber
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
-    private var estateId: Long = 1
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<Photo> = mutableListOf()
+    private lateinit var parentActivity: ListActivity
 
     companion object {
         fun newInstance() = DetailFragment()
@@ -31,11 +31,12 @@ class DetailFragment : BaseFragment() {
         get() = R.layout.fragment_detail
 
 
-    override fun configureDesign() {
-        if (arguments != null) {
-            this.estateId = this.arguments!!.getLong(ESTATE_ID)
-        }
+    override fun configureDesign() {}
 
+
+    private fun configureViewModel() {
+        parentActivity = activity as ListActivity
+        listViewModel = parentActivity.listViewModel
     }
 
     private fun configureRecycleView() {
@@ -51,17 +52,16 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun updateDesign() {
-        val parent = activity as ListActivity
-        listViewModel = parent.listViewModel
+        this.configureViewModel()
         this.configureRecycleView()
         this.configureObserver()
     }
 
     private fun configureObserver() {
         //get estate detail
-        listViewModel.getEstateById(this.estateId).observe(this, Observer { estate -> updateUi(estate) })
-        listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->
-            Timber.i("size of the list = ${list.size}")
+        listViewModel.getEstateById(listViewModel.estateId.value!!).observe(this, Observer { estate -> updateUi(estate) })
+        //get estate's picture's list
+        listViewModel.getPictureListFromId(listViewModel.estateId.value!!).observe(this, Observer { list ->
             updateList(list)
         })
 

@@ -2,12 +2,10 @@ package ltd.kaizo.realestatemanager.controller.ui.add
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils
-import timber.log.Timber
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -30,10 +28,11 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val pictureList: MutableList<Photo> = mutableListOf()
     val pictureListTmp: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
+    private var mainPicture = ""
 
-init {
-    dateIn.value = Utils.todayDate
-}
+    init {
+        dateIn.value = Utils.todayDate
+    }
 
     val typeArray = listOf(
         "Apt",
@@ -53,8 +52,11 @@ init {
             description.value != ""
                     && description.value != null
                     && address.value != ""
+                    && address.value != null
                     && postalCode.value != ""
+                    && postalCode.value != null
                     && city.value != ""
+                    && city.value != null
                     && surface.value != null
                     && surface.value != ""
                     && nbRoom.value != null
@@ -74,40 +76,36 @@ init {
     fun createEstate() {
 
         if (checkFieldView()) {
-            if (pictureList.size == 0) {
-                message.value = "You must add at least 1 picture"
-            } else {
-                if (isSold.value == null) {
-                    isSold.value = false
-                }
-                val estateToCreate = Estate(
-                    0,
-                    "",
-                    typeArray[type.value!!],
-                    price.value?.toInt()!!,
-                    surface.value?.toInt()!!,
-                    nbRoom.value!!,
-                    nbBathroom.value!!,
-                    nbBedroom.value!!,
-                    description.value!!,
-                    address.value!!,
-                    postalCode.value!!,
-                    city.value!!,
-                    isSold.value!!,
-                    dateIn.value!!,
-                    dateOut.value,
-                    managerName.value!!
-                )
-                executor.execute {
-                    val estateId = estateDataSource.insertEstate(estateToCreate)
-                    if (estateId.toInt() != -1) {
-                        setMainPicture(estateId)
-                        insertPhotoFromList(pictureList, estateId)
-                        message.postValue("estate successfully created")
-                        isFinish.postValue(true)
-                    } else {
-                        message.postValue("error inserting data")
+            when {
+
+                (pictureList.size == 0) -> message.value = "You must add at least 1 picture"
+
+                !checkMainPicture() -> message.value = "You must choose a main picture"
+
+                else -> {
+                    if (isSold.value == null) {
+                        isSold.value = false
                     }
+                    val estateToCreate = Estate(
+                        0,
+                        "",
+                        typeArray[type.value!!],
+                        price.value?.toInt()!!,
+                        surface.value?.toInt()!!,
+                        nbRoom.value!!,
+                        nbBathroom.value!!,
+                        nbBedroom.value!!,
+                        description.value!!,
+                        address.value!!,
+                        postalCode.value!!,
+                        city.value!!,
+                        isSold.value!!,
+                        dateIn.value!!,
+                        dateOut.value,
+                        managerName.value!!
+                    )
+                    //ALL GREEN -> Insert Estate
+                    insertEstate(estateToCreate)
                 }
             }
         } else {
@@ -116,15 +114,33 @@ init {
 
     }
 
-    private fun setMainPicture(estateId: Long) {
-        var uri = ""
-        for (photo in pictureList) {
-            if (photo.mainPicture) {
-                uri = photo.uri
+    private fun checkMainPicture(): Boolean {
+        var valid = false
+        for (picture in pictureListTmp) {
+            if (picture.mainPicture)
+                valid = true
+            mainPicture = picture.uri
+        }
+        return valid
+    }
+
+    private fun insertEstate(estateToCreate: Estate) {
+        executor.execute {
+            val estateId = estateDataSource.insertEstate(estateToCreate)
+            if (estateId.toInt() != -1) {
+                insertPhotoFromList(pictureList, estateId)
+                setMainPicture(estateId)
+                message.postValue("estate successfully created")
+                isFinish.postValue(true)
+            } else {
+                message.postValue("error inserting data")
             }
         }
-        executor.execute {
-            estateDataSource.setMainPicture(estateId, uri)
+    }
+
+    private fun setMainPicture(estateId: Long) {
+              executor.execute {
+            estateDataSource.setMainPicture(estateId, mainPicture)
         }
     }
 }
