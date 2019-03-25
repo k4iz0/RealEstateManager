@@ -20,6 +20,7 @@ class ListFragment : BaseFragment() {
     private lateinit var listViewModel: ListViewModel
     private lateinit var adapter: ListAdapter
     private lateinit var estateList: MutableList<Estate>
+    private lateinit var parentActivity: ListActivity
 
     override val fragmentLayout: Int
         get() = R.layout.list_fragment
@@ -27,14 +28,23 @@ class ListFragment : BaseFragment() {
     override fun configureDesign() {}
 
     override fun updateDesign() {
-        val parent = activity as ListActivity
-        listViewModel = parent.listViewModel
+       this.configureViewModel()
         this.configureRecycleView()
+        this.configureObserver()
+    }
+
+    private fun configureObserver() {
+        //ESTATE LIST
         listViewModel.estateList.observe(viewLifecycleOwner, Observer { list ->
             updateList(list)
         })
     }
 
+
+    private fun configureViewModel() {
+        parentActivity = activity as ListActivity
+        listViewModel = parentActivity.listViewModel
+    }
 
     private fun configureRecycleView() {
         estateList = mutableListOf()
@@ -44,10 +54,8 @@ class ListFragment : BaseFragment() {
     }
 
     private fun onEstateItemClicked(estate: Estate) {
-        val arg = Bundle()
-        arg.putLong(ESTATE_ID, estate.id)
+        listViewModel.estateId.value = estate.id
         val detailFragment = DetailFragment.newInstance()
-        detailFragment.arguments = arg
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Timber.i("land mode")
             activity!!.supportFragmentManager

@@ -12,7 +12,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.DATABASE_NAME
 
-@Database(entities = [Estate::class, Photo::class], version = 1, exportSchema = false)
+@Database(entities = [Estate::class, Photo::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun estateDao(): EstateDao
 
@@ -26,6 +26,7 @@ abstract class AppDatabase : RoomDatabase() {
                         AppDatabase::class.java, DATABASE_NAME
                     )
 //                        .addCallback(fillDB())
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }

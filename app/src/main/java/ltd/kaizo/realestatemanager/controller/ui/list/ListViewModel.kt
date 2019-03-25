@@ -8,14 +8,15 @@ import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
 
-class ListViewModel(val estateDataSource:EstateRepository, val executor: Executor) : ViewModel() {
+class ListViewModel(val estateDataSource: EstateRepository, val executor: Executor) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
+    val estateId = MutableLiveData<Long>()
     fun getEstateById(id: Long): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
     }
 
-    fun getPictureListFromId(id :Long):LiveData<List<Photo>> {
-        return  estateDataSource.getPhotoListById(id)
+    fun getPictureListFromId(id: Long): LiveData<List<Photo>> {
+        return estateDataSource.getPhotoListById(id)
     }
 
 }
