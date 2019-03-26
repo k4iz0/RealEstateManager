@@ -42,6 +42,7 @@
     <string name="no_username">no username found</string>
     <string name="no_email">no email found</string>
     <string name="sold_on">Sold on</string>
+    <string name="update">update</string>
 
 
 </resources>

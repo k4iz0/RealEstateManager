@@ -1,5 +1,6 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
@@ -42,8 +43,12 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         "Studio",
         "Other"
     )
-
-
+    fun getEstateById(id: Long): LiveData<Estate> {
+        return estateDataSource.getEstateById(id)
+    }
+    fun getPictureListFromId(id: Long): LiveData<List<Photo>> {
+        return estateDataSource.getPhotoListById(id)
+    }
     private fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
