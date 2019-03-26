@@ -8,9 +8,9 @@
     <string name="media">Media</string>
     <string name="description">Description</string>
     <string name="surface">Surface :</string>
-    <string name="number_of_rooms">Number\nof rooms :</string>
-    <string name="number_of_bathrooms">Number\nof Bathrooms :</string>
-    <string name="number_of_bedrooms">Number\nof bedrooms :</string>
+    <string name="number_of_rooms">rooms :</string>
+    <string name="number_of_bathrooms">Bathrooms :</string>
+    <string name="number_of_bedrooms">bedrooms :</string>
     <string name="location">Location</string>
     <string name="connection_succeed">connection successful</string>
     <string name="error_no_internet">error check your internet connection</string>
@@ -41,6 +41,7 @@
     <string name="user_logout">user log out</string>
     <string name="no_username">no username found</string>
     <string name="no_email">no email found</string>
+    <string name="sold_on">Sold on</string>
 
 
 </resources>

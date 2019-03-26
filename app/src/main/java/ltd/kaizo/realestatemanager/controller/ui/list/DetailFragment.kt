@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.content.Intent
 import android.net.Uri
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
@@ -75,14 +76,21 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun updateUi(estate: Estate) {
-        val address = "${estate.address} \n ${estate.postalCode} ${estate.city.toUpperCase()}"
         fragment_detail_description_textview.text = estate.description
         fragment_detail_surface_textview.text = estate.surface.toString()
         fragment_detail_nb_room_textview.text = estate.nbRoom.toString()
         fragment_detail_nb_bedroom_textview.text = estate.nbBedroom.toString()
         fragment_detail_nb_bathroom_textview.text = estate.nbBathroom.toString()
-        fragment_detail_location_textview.text = address
+        fragment_detail_address_textview.text = estate.address
+        fragment_detail_postal_code_textview.text = estate.postalCode
+        fragment_detail_city_textview.text = estate.city.toUpperCase()
         fragment_detail_price.text = estate.price.toString()
+        fragment_add_manager_name_textview.text = estate.estateManager
+        fragment_add_date_in_textview.text = estate.dateIn
+        if (estate.isSold) {
+            fragment_detail_sold_on_textview.visibility = View.VISIBLE
+            fragment_detail_date_out_textview.text = estate.dateOut
+        }
         updateList(pictureList)
         Picasso.get().load(getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
     }
