@@ -12,15 +12,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
+import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
+import timber.log.Timber
 import java.util.*
 
 
@@ -29,13 +32,20 @@ class AddFragment : BaseFragment() {
     private lateinit var parentActivity: EstateActivity
     private lateinit var binding: FragmentAddBinding
     private lateinit var adapter: PictureListAdapter
+    private lateinit var datePickerDialog: DatePickerDialog
+    private var sourceTag = 0
+    private var estateId:Long = 0
 
     companion object {
-        fun newInstance() = AddFragment()
+        fun newInstance() =  AddFragment()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
+        if (arguments != null) {
+            this.sourceTag = this.arguments!!.getInt(ESTATE_SOURCE)
+            this.estateId = this.arguments!!.getLong(ESTATE_ID)
+        }
         return binding.root
     }
 
@@ -46,6 +56,34 @@ class AddFragment : BaseFragment() {
     * onCreateView
     */
     override fun configureDesign() {}
+
+    private fun configureEstate() {
+       val tmpEstate =  estateViewModel.getEstateById(this.estateId)
+        tmpEstate.observe(this, Observer { estate ->
+            if (estate != null) {
+                Timber.i("$estate")
+            updateUi(estate)
+            }
+        })
+    }
+
+    private fun updateUi(estate: Estate) {
+        fragment_add_description_edittext.setText(estate.description)
+        fragment_add_surface_edittext.setText(estate.surface.toString())
+        fragment_add_nb_room_spinner.setSelection(estate.nbRoom + 1)
+        fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom + 1)
+        fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom + 1)
+        fragment_add_address_edittext.setText(estate.address)
+        fragment_add_postal_code_edittext.setText(estate.postalCode)
+        fragment_add_city_edittext.setText(estate.city)
+        fragment_add_price_edittext.setText(estate.price.toString())
+        fragment_add_sold_switch.isChecked = estate.isSold
+        if(estate.isSold) datePickerDialog.dismiss()
+        fragment_add_date_edittext.setText(estate.dateIn)
+        fragment_add_dateOut_textview.text = estate.dateOut
+        fragment_add_create_button.text = getString(R.string.update)
+        estateViewModel.getPictureListFromId(estateId).observe(this, Observer { pictureList -> updateList(pictureList) })
+    }
 
     /*
      * onActivityCreated
@@ -93,7 +131,6 @@ class AddFragment : BaseFragment() {
                 RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photo)
                 RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photo)
                 RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photo)
-
             }
         }
         fragment_add_picture_list_recycle_view.layoutManager =
@@ -141,7 +178,9 @@ class AddFragment : BaseFragment() {
         estateViewModel = parentActivity.estateViewModel
         binding.lifecycleOwner = this
         binding.estateViewModel = estateViewModel
-
+        if (this.sourceTag == ESTATE_SOURCE_EDIT) {
+            configureEstate()
+        }
     }
 
     /****************************
@@ -205,7 +244,7 @@ class AddFragment : BaseFragment() {
             }
 
         }
-        val datePickerDialog =
+        datePickerDialog =
             DatePickerDialog(
                 parentActivity, date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),

@@ -19,6 +19,10 @@ import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
 import ltd.kaizo.realestatemanager.model.UserHelper
+import ltd.kaizo.realestatemanager.utils.ESTATE_ID
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_ADD
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_EDIT
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -133,12 +137,21 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         return when (item.itemId) {
             R.id.menu_activity_list_add -> {
                 val addActivity = Intent(this, EstateActivity::class.java)
+                addActivity.putExtra(ESTATE_SOURCE, ESTATE_SOURCE_ADD)
                 startActivity(addActivity)
                 true
             }
             R.id.menu_activity_list_edit -> {
-                Toast.makeText(this, "wip for edit button", Toast.LENGTH_SHORT).show()
-                true
+                if (listViewModel.estateId.value != null) {
+
+                    val addActivity = Intent(this, EstateActivity::class.java)
+                    addActivity.putExtra(ESTATE_ID, listViewModel.estateId.value!!)
+                    addActivity.putExtra(ESTATE_SOURCE, ESTATE_SOURCE_EDIT)
+                    startActivity(addActivity)
+                    return true
+                }
+                showSnackBar(activity_list_coordinator_layout, "you need to select an estate to edit")
+                false
             }
             R.id.menu_activity_list_search -> {
                 Toast.makeText(this, "wip for search button", Toast.LENGTH_SHORT).show()

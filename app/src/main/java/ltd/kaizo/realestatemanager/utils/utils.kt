@@ -73,7 +73,7 @@ object Utils {
     //geocoding address
     //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
     fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String): String {
-        val zoom = 13
+        val zoom = 15
         val size = 200
         val type = "roadmap"
         val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"

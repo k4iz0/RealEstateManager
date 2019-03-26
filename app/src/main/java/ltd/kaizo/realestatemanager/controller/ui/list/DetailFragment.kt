@@ -13,7 +13,6 @@ import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.Photo
-import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
 import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
 import timber.log.Timber

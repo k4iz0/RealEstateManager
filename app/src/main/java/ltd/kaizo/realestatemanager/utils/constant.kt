@@ -5,7 +5,10 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 
 
 const val DATABASE_NAME = "ESTATE_DB"
+const val ESTATE_SOURCE = "ESTATE SOURCE"
 const val ESTATE_ID = "ESTATE ID"
+const val ESTATE_SOURCE_ADD = 40
+const val ESTATE_SOURCE_EDIT = 30
 const val WRITE_EXT_PERM = WRITE_EXTERNAL_STORAGE
 const val CAMERA_PERM = CAMERA
 const val RC_TAKE_PHOTO = 100
