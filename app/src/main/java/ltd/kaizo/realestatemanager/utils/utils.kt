@@ -7,8 +7,12 @@ import android.net.wifi.WifiManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.util.Assert
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -26,6 +30,13 @@ object Utils {
             "0$nb"
     } else {
         "" + nb
+    }
+
+    fun checkDateDifference(date1 :String, date2 :String):Boolean{
+        val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
+        val d1  = dtf.parseDateTime(date1)
+        val d2  = dtf.parseDateTime(date2)
+        return d2.isAfter(d1)
     }
 
     /**
