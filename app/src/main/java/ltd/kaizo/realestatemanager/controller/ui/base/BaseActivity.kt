@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.list_activity.*
+import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ abstract class BaseActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         this.setContentView(this.getFragmentLayout())
         Timber.plant(Timber.DebugTree())
+        JodaTimeAndroid.init(this)
         this.configureDesign()
     }
 

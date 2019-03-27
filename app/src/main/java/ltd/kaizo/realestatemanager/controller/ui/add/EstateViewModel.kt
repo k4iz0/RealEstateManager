@@ -29,6 +29,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val pictureList: MutableList<Photo> = mutableListOf()
     val pictureListTmp: MutableList<Photo> = mutableListOf()
     val pictureTmp = MutableLiveData<Photo>()
+    var estateId: Long = 0
     private var mainPicture = ""
 
     init {
@@ -43,12 +44,15 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         "Studio",
         "Other"
     )
+
     fun getEstateById(id: Long): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
     }
+
     fun getPictureListFromId(id: Long): LiveData<List<Photo>> {
         return estateDataSource.getPhotoListById(id)
     }
+
     private fun insertPhoto(photo: Photo) {
         executor.execute { estateDataSource.insertPhoto(photo) }
     }
@@ -82,17 +86,15 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
 
         if (checkFieldView()) {
             when {
-
                 (pictureList.size == 0) -> message.value = "You must add at least 1 picture"
-
                 !checkMainPicture() -> message.value = "You must choose a main picture"
-
                 else -> {
                     if (isSold.value == null) {
                         isSold.value = false
                     }
+
                     val estateToCreate = Estate(
-                        0,
+                        estateId,
                         "",
                         typeArray[type.value!!],
                         price.value?.toInt()!!,
@@ -144,8 +146,19 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     }
 
     private fun setMainPicture(estateId: Long) {
-              executor.execute {
+        executor.execute {
             estateDataSource.setMainPicture(estateId, mainPicture)
         }
+    }
+
+    fun updateUiWithData(estate: Estate) {
+        description.value = estate.description
+        surface.value = estate.surface.toString()
+        address.value = estate.address
+        postalCode.value = estate.postalCode
+        city.value = estate.city
+        price.value = estate.price.toString()
+        dateIn.value = estate.dateIn
+        dateOut.value = estate.dateOut
     }
 }
