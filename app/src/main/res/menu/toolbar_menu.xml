@@ -13,10 +13,12 @@
             app:showAsAction="ifRoom"
             android:title="@string/edit">
     </item>
+
+
     <item
             android:id="@+id/menu_activity_list_search"
             android:icon="@drawable/ic_search_white_24dp"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
             android:title="@string/search">
     </item>
 

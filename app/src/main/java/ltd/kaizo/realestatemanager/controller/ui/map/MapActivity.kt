@@ -1,7 +1,7 @@
 package ltd.kaizo.realestatemanager.controller.ui.map
 
 import android.content.Context
-import android.location.Location
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -10,21 +10,26 @@ import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.activity_map.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
+import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.utils.RC_ERROR_DIALOG_REQUEST
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import timber.log.Timber
 
 class MapActivity : BaseActivity() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var currentLocation: Location
-
+    lateinit var mapViewModel: MapViewModel
 
     override fun getFragmentLayout(): Int {
         return R.layout.activity_map
     }
 
     override fun configureDesign() {
+        this.configureViewModel()
         this.getCurrentLocation()
+    }
+    private fun configureViewModel() {
+        val viewModelFactory = Injection.provideViewModelFactory(this)
+        this.mapViewModel = ViewModelProviders.of(this, viewModelFactory).get(MapViewModel::class.java)
     }
 
     private fun getCurrentLocation() {
@@ -35,8 +40,8 @@ class MapActivity : BaseActivity() {
                     val location = this.fusedLocationProviderClient.lastLocation
                     location.addOnCompleteListener { task ->
                         if (task.isSuccessful && task.result != null) {
-                            currentLocation = task.result!!
-                            //TODO launch mapfragment
+                           mapViewModel.currentLocation.value = task.result
+                            this.configureAndShowMapFragment()
                         } else {
                             showSnackBar(activity_map_coordinator_layout, getString(R.string.unable_get_location))
                         }
@@ -47,6 +52,12 @@ class MapActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    private fun configureAndShowMapFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_detail_map_container, MapFragment())
+            .commit()
     }
 
     /**
