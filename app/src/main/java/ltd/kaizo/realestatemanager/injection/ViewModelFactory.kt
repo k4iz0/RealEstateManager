@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
 class ViewModelFactory(private val estateDataSource : EstateRepository, private val executor: Executor): ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-       
+
         if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
             return ListViewModel(estateDataSource, executor) as T
         }

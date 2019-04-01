@@ -1,12 +1,11 @@
 package ltd.kaizo.realestatemanager.controller.ui.map
 
-import android.content.Context
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import kotlinx.android.synthetic.main.activity_map.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
@@ -26,7 +25,16 @@ class MapActivity : BaseActivity() {
     override fun configureDesign() {
         this.configureViewModel()
         this.getCurrentLocation()
+        this.configureToolbar()
     }
+
+    private fun configureToolbar() {
+        val toolbar = findViewById<Toolbar>(R.id.activity_map_toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
     private fun configureViewModel() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
         this.mapViewModel = ViewModelProviders.of(this, viewModelFactory).get(MapViewModel::class.java)
@@ -34,15 +42,16 @@ class MapActivity : BaseActivity() {
 
     private fun getCurrentLocation() {
         if (isServiceOK()) {
-            runWithPermissions(Context.LOCATION_SERVICE) {
                 this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
                 try {
                     val location = this.fusedLocationProviderClient.lastLocation
                     location.addOnCompleteListener { task ->
                         if (task.isSuccessful && task.result != null) {
+                            Timber.i("tasksuccess = ${task.isSuccessful} et task = $task")
                            mapViewModel.currentLocation.value = task.result
                             this.configureAndShowMapFragment()
                         } else {
+                            Timber.e("location task unsuccessful")
                             showSnackBar(activity_map_coordinator_layout, getString(R.string.unable_get_location))
                         }
                     }
@@ -50,13 +59,12 @@ class MapActivity : BaseActivity() {
                     Timber.e("security exception : %s", e.message)
                     showSnackBar(activity_map_coordinator_layout, getString(R.string.unable_get_location))
                 }
-            }
         }
     }
 
     private fun configureAndShowMapFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_detail_map_container, MapFragment())
+            .replace(R.id.activity_map_fragment_container, MapFragment())
             .commit()
     }
 
