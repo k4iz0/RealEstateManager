@@ -43,8 +43,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-firestore:18.1.0'
-    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-beta01'
+    implementation 'com.google.firebase:firebase-firestore:18.2.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -61,6 +61,9 @@ dependencies {
     //FIREBASE
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1'
+    //GOOGLE
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
     //PICASSO
     implementation 'com.squareup.picasso:picasso:2.71828'
     //QUICKPERMISSION
