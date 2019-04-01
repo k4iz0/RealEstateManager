@@ -36,7 +36,7 @@ class MapActivity : BaseActivity() {
                     location.addOnCompleteListener { task ->
                         if (task.isSuccessful && task.result != null) {
                             currentLocation = task.result!!
-                            //TODO launch mapfragment 
+                            //TODO launch mapfragment
                         } else {
                             showSnackBar(activity_map_coordinator_layout, getString(R.string.unable_get_location))
                         }
