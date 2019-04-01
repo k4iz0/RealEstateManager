@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_list_nav_header.*
 import kotlinx.android.synthetic.main.list_activity.*
@@ -21,10 +22,7 @@ import ltd.kaizo.realestatemanager.controller.ui.settings.SettingActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
 import ltd.kaizo.realestatemanager.model.UserHelper
-import ltd.kaizo.realestatemanager.utils.ESTATE_ID
-import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
-import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_ADD
-import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_EDIT
+import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -97,7 +95,9 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 true
             }
             R.id.activity_main_drawer_map -> {
-                startActivity(Intent(this, MapActivity::class.java))
+                runWithPermissions(FINE_LOCATION) {
+                    startActivity(Intent(this, MapActivity::class.java))
+                }
                 true
             }
             R.id.activity_main_drawer_logout -> {

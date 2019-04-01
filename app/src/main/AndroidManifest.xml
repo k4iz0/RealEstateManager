@@ -15,7 +15,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".controller.ui.map.MapActivity">
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>
+        <activity android:name=".controller.ui.map.MapActivity"
+                  android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>
         <activity
                 android:name=".controller.ui.settings.SettingActivity"
