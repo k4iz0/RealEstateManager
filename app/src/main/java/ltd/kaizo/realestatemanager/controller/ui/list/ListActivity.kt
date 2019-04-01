@@ -16,6 +16,7 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
+import ltd.kaizo.realestatemanager.controller.ui.settings.SettingActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
 import ltd.kaizo.realestatemanager.model.UserHelper
@@ -91,7 +92,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 true
             }
             R.id.activity_main_drawer_settings -> {
-                showSnackBar(activity_list_coordinator_layout, "wip")
+                startActivity(Intent(this, SettingActivity::class.java))
                 true
             }
             R.id.activity_main_drawer_logout -> {
@@ -150,7 +151,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     startActivity(addActivity)
                     return true
                 }
-                showSnackBar(activity_list_coordinator_layout, "you need to select an estate to edit")
+                showSnackBar(activity_list_coordinator_layout, getString(R.string.select_estate_edit))
                 false
             }
             R.id.menu_activity_list_search -> {

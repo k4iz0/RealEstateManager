@@ -6,14 +6,12 @@ import android.content.Context
 import android.net.wifi.WifiManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.util.Assert
-import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import java.security.MessageDigest
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.regex.Pattern
 
 
 object Utils {
@@ -66,6 +64,43 @@ object Utils {
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    /****************************
+    ******* email check  ********
+    *****************************/
+    private val VALID_EMAIL_ADDRESS_REGEX =
+        Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE)
+    /**
+     * Validate email boolean.
+     *
+     * @param emailStr the email str
+     * @return the boolean
+     */
+    private fun validateEmail(emailStr: String): Boolean {
+        val matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr)
+        return matcher.find()
+    }
+    /**
+     * Is email valid boolean.
+     *
+     * @return the boolean
+     */
+     fun isEmailValid(emailEditText:EditText): Boolean {
+        return emailEditText.text.toString() != "" && validateEmail(emailEditText.text.toString())
+    }
+        /****************************
+        *****   username check   *****
+        *****************************/
+
+    /**
+     * return true if the username is bigger than 2 characters
+     * and different from previous username
+     *
+     * @return Boolean boolean
+     */
+     fun isUsernameValid(usernameEditText:EditText): Boolean {
+        return usernameEditText.text.length > 2
     }
 
     /****************************
