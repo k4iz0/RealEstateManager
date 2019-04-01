@@ -56,7 +56,9 @@
     <string name="enter_picture_name">you need to enter a picture name</string>
     <string name="select_estate_edit">you need to select an estate to edit</string>
     <string name="map_request_error">You can\'t make map request</string>
-    <string name="unable_get_location">Unable to get current location  have you enable localisation on your device ?</string>
+    <string name="unable_get_location">Unable to get current location have you enable localisation on your device ?
+    </string>
+    <string name="map">map</string>
 
 
 </resources>

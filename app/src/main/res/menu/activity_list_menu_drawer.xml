@@ -6,6 +6,11 @@
     <group android:checkableBehavior="single">
 
         <item
+                android:id="@+id/activity_main_drawer_map"
+                android:icon="@drawable/ic_map_blue"
+                android:title="@string/map" />
+
+        <item
                 android:id="@+id/activity_main_drawer_settings"
                 android:icon="@drawable/ic_setting_blue"
                 android:title="@string/settings" />

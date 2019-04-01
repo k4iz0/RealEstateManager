@@ -16,6 +16,7 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
+import ltd.kaizo.realestatemanager.controller.ui.map.MapActivity
 import ltd.kaizo.realestatemanager.controller.ui.settings.SettingActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
@@ -93,6 +94,10 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.activity_main_drawer_settings -> {
                 startActivity(Intent(this, SettingActivity::class.java))
+                true
+            }
+            R.id.activity_main_drawer_map -> {
+                startActivity(Intent(this, MapActivity::class.java))
                 true
             }
             R.id.activity_main_drawer_logout -> {

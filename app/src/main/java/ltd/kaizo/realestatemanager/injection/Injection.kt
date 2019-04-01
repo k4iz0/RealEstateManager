@@ -15,9 +15,9 @@ object Injection {
     private fun provideExecutor(): Executor = Executors.newSingleThreadExecutor()
 
     fun provideViewModelFactory(context: Context):ViewModelFactory {
-        val dataSourceKm = provideEstateDataSource(context)
+        val estateDataSource = provideEstateDataSource(context)
         val executor = provideExecutor()
-        return ViewModelFactory(dataSourceKm,executor)
+        return ViewModelFactory(estateDataSource,executor)
     }
 
 }
