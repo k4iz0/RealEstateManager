@@ -43,6 +43,18 @@
     <string name="no_email">no email found</string>
     <string name="sold_on">Sold on</string>
     <string name="update">update</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="update_username">update username</string>
+    <string name="new_username">new username</string>
+    <string name="update_username_success">username successfully updated to</string>
+    <string name="updateUsernameError">the new username should be bigger than 2 characters</string>
+    <string name="new_email">new email</string>
+    <string name="update_email">update email</string>
+    <string name="update_email_success">email successfully updated to</string>
+    <string name="updateEmailError">please enter a valid address email</string>
+    <string name="select_picture">you need select a picture</string>
+    <string name="enter_picture_name">you need to enter a picture name</string>
+    <string name="select_estate_edit">you need to select an estate to edit</string>
 
 
 </resources>

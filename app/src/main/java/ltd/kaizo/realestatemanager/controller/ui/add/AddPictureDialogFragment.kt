@@ -84,9 +84,9 @@ class AddPictureDialogFragment : DialogFragment() {
         when {
             pictureTmp.name == "" -> showSnackBar(
                 add_dialog_fragment_coordinator_layout,
-                "you need to enter a picture name"
+                getString(R.string.enter_picture_name)
             )
-            pictureTmp.uri == "" -> showSnackBar(add_dialog_fragment_coordinator_layout, "you need select a picture")
+            pictureTmp.uri == "" -> showSnackBar(add_dialog_fragment_coordinator_layout, getString(R.string.select_picture))
             else -> {
                 estateViewModel.pictureTmp.value = pictureTmp
                 closeDialog()
