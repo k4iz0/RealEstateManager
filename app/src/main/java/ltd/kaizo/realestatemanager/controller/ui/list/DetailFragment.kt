@@ -3,7 +3,11 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
@@ -11,17 +15,17 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
-import ltd.kaizo.realestatemanager.model.Estate
+import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
-import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
+import ltd.kaizo.realestatemanager.utils.Utils
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
     private lateinit var parentActivity: ListActivity
-
+    private lateinit var binding: FragmentDetailBinding
     companion object {
         fun newInstance() = DetailFragment()
     }
@@ -29,13 +33,18 @@ class DetailFragment : BaseFragment() {
     override val fragmentLayout: Int
         get() = R.layout.fragment_detail
 
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        return binding.root
+    }
     override fun configureDesign() {}
 
 
     private fun configureViewModel() {
         parentActivity = activity as ListActivity
         listViewModel = parentActivity.listViewModel
+        binding.lifecycleOwner = this
+        binding.listViewModel = listViewModel
     }
 
     private fun configureRecycleView() {
@@ -58,7 +67,11 @@ class DetailFragment : BaseFragment() {
 
     private fun configureObserver() {
         //get estate detail
-        listViewModel.getEstateById(listViewModel.estateId.value!!).observe(this, Observer { estate -> updateUi(estate) })
+        listViewModel.getEstateById(listViewModel.estateId.value!!).observe(this, Observer { estate ->
+            listViewModel.updateUiWithData(estate)
+            Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
+
+        })
         //get estate's picture's list
         listViewModel.getPictureListFromId(listViewModel.estateId.value!!).observe(this, Observer { list ->
             updateList(list)
@@ -73,23 +86,4 @@ class DetailFragment : BaseFragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun updateUi(estate: Estate) {
-        fragment_detail_description_textview.text = estate.description
-        fragment_detail_surface_textview.text = estate.surface.toString()
-        fragment_detail_nb_room_textview.text = estate.nbRoom.toString()
-        fragment_detail_nb_bedroom_textview.text = estate.nbBedroom.toString()
-        fragment_detail_nb_bathroom_textview.text = estate.nbBathroom.toString()
-        fragment_detail_address_textview.text = estate.address
-        fragment_detail_postal_code_textview.text = estate.postalCode
-        fragment_detail_city_textview.text = estate.city.toUpperCase()
-        fragment_detail_price.text = estate.price.toString()
-        fragment_add_manager_name_textview.text = estate.estateManager
-        fragment_add_date_in_textview.text = estate.dateIn
-        if (estate.isSold) {
-            fragment_detail_sold_on_textview.visibility = View.VISIBLE
-            fragment_detail_date_out_textview.text = estate.dateOut
-        }
-        updateList(pictureList)
-        Picasso.get().load(getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
-    }
 }
