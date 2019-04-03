@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ltd.kaizo.realestatemanager">
+          xmlns:tools="http://schemas.android.com/tools" package="ltd.kaizo.realestatemanager">
 
     <uses-permission android:name="android.Manifest.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -14,8 +14,16 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <provider
+                android:grantUriPermissions="true"
+                android:authorities="ltd.kaizo.realestatemanager.provider"
+                  android:name=".provider.EstateContentProvider"
+                  android:exported="true"/>
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>
         <activity android:name=".controller.ui.map.MapActivity"
                   android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>

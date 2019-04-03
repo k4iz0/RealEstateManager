@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
+
 @Entity(
     foreignKeys = [ForeignKey(
         entity = Estate::class,
@@ -14,12 +15,13 @@ import androidx.room.PrimaryKey
         onDelete = CASCADE
     )]
 )
-data class Photo(
+data class EstatePhoto(
     @PrimaryKey(autoGenerate = true)
-    val photoId:Long,
+    var photoId: Long,
     @ColumnInfo(index = true)
     var estateId: Long,
     var uri: String,
     var name: String = "",
-    var mainPicture:Boolean = false
+    var mainPicture: Boolean = false
 )
+

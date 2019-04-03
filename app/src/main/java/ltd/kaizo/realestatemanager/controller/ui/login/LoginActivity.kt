@@ -7,10 +7,11 @@ import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
-import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.model.UserHelper
 import java.util.*
+
+
 
 
 class LoginActivity : BaseActivity() {
@@ -22,7 +23,7 @@ class LoginActivity : BaseActivity() {
      *****************************/
 
     override fun getFragmentLayout(): Int {
-        return R.layout.activity_login
+        return ltd.kaizo.realestatemanager.R.layout.activity_login
     }
 
     override fun configureDesign() {
@@ -44,6 +45,7 @@ class LoginActivity : BaseActivity() {
 
     private fun startListActivity() {
         val listActivity = Intent(this, ltd.kaizo.realestatemanager.controller.ui.list.ListActivity::class.java)
+        listActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(listActivity)
     }
 

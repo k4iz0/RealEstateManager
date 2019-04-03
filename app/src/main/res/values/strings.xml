@@ -23,7 +23,7 @@
     <string name="address">address</string>
     <string name="create">create</string>
     <string name="no_picture_found">no picture found</string>
-    <string name="photo">photo</string>
+    <string name="estatePhoto">estatePhoto</string>
     <string name="price">Price :</string>
     <string name="type">Type :</string>
     <string name="dollar">$</string>

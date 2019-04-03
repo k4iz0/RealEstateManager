@@ -2,6 +2,7 @@ package ltd.kaizo.realestatemanager.utils
 
 import android.Manifest.permission.*
 
+
 /****************************
  *********     APP    ********
  *****************************/
@@ -12,7 +13,6 @@ const val ESTATE_SOURCE_ADD = 40
 const val ESTATE_SOURCE_EDIT = 30
 const val TAG_DIALOG = "AddPictureDialogFragment"
 const val COLLECTION_NAME = "users"
-
 /****************************
  *********   PERMS   ********
  *****************************/
@@ -33,4 +33,3 @@ const val RC_PICTURE_LISTENER_REMOVE = 700
 const val RC_PICTURE_LISTENER_VIEW = 800
 const val RC_PICTURE_LISTENER_FAVORITE = 900
 const val RC_ERROR_DIALOG_REQUEST = 9001
-const val RC_LOCATION_PERMISSION = 1234

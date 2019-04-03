@@ -12,15 +12,14 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
 import ltd.kaizo.realestatemanager.utils.Utils.getStaticMapUrlFromAddress
-import timber.log.Timber
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
     private lateinit var listViewModel: ListViewModel
-    private var pictureList: MutableList<Photo> = mutableListOf()
+    private var pictureList: MutableList<EstatePhoto> = mutableListOf()
     private lateinit var parentActivity: ListActivity
 
     companion object {
@@ -46,9 +45,9 @@ class DetailFragment : BaseFragment() {
         fragment_detail_picture_list_recycle_view.adapter = adapter
     }
 
-    private fun onPictureItemClicked(photo: Photo) {
+    private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
         //launch default image viewer on device to show the picture
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(photo.uri)))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(estatePhoto.uri)))
     }
 
     override fun updateDesign() {
@@ -68,7 +67,7 @@ class DetailFragment : BaseFragment() {
 
     }
 
-    private fun updateList(list: List<Photo>) {
+    private fun updateList(list: List<EstatePhoto>) {
         pictureList.clear()
         pictureList.addAll(list)
         adapter.notifyDataSetChanged()

@@ -38,7 +38,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
         this.googleMap = googleMap!!
-        this.setMapViewStyle()
+//        this.setMapViewStyle()
+        this.googleMap.isMyLocationEnabled = true
+
+
 //        this.configureGoogleMap()
     }
     override fun configureDesign() {

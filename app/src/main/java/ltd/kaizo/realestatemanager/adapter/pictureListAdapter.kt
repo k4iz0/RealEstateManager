@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
-import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_LISTENER_FAVORITE
 import ltd.kaizo.realestatemanager.utils.RC_PICTURE_LISTENER_REMOVE
@@ -18,9 +18,9 @@ import ltd.kaizo.realestatemanager.utils.RC_PICTURE_LISTENER_VIEW
 import timber.log.Timber
 
 class PictureListAdapter(
-    private val pictureList: List<Photo>,
+    private val pictureList: List<EstatePhoto>,
     private val sourceId:Int,
-    private val clickListener: (Photo, Int) -> Unit
+    private val clickListener: (EstatePhoto, Int) -> Unit
 ) :
     RecyclerView.Adapter<PictureListAdapter.PictureListViewHolder>() {
 

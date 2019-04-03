@@ -2,12 +2,14 @@ package ltd.kaizo.realestatemanager.utils
 
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import org.joda.time.format.DateTimeFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -134,5 +136,15 @@ object Utils {
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+    }
+    fun fromContentValuesToEstatePhoto(values: ContentValues?): EstatePhoto {
+        val photo = EstatePhoto(0, 0, "")
+        if (values!!.containsKey("photoId")) photo.photoId = values.getAsLong("photoId")
+        if (values.containsKey("estateId")) photo.estateId = values.getAsLong("estateId")
+        if (values.containsKey("uri")) photo.uri = values.getAsString("uri")
+        if (values.containsKey("name")) photo.name = values.getAsString("name")
+        if (values.containsKey("mainPicture")) photo.mainPicture = values.getAsBoolean("mainPicture")
+
+        return photo
     }
 }

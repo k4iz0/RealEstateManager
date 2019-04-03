@@ -17,13 +17,12 @@ import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import org.joda.time.DateTime
 import timber.log.Timber
 import java.util.*
 
@@ -75,14 +74,14 @@ class AddFragment : BaseFragment() {
 
     }
 
-    private fun configureMainPictureButton(photo: Photo) {
+    private fun configureMainPictureButton(estatePhoto: EstatePhoto) {
 
-        when (photo.mainPicture) {
-            true -> photo.mainPicture = false
+        when (estatePhoto.mainPicture) {
+            true -> estatePhoto.mainPicture = false
 
             false -> {
                 clearMainPictureInList()
-                photo.mainPicture = true
+                estatePhoto.mainPicture = true
             }
         }
         updateList(estateViewModel.pictureListTmp)
@@ -94,8 +93,8 @@ class AddFragment : BaseFragment() {
         }
     }
 
-    private fun configureRemovePictureButton(photo: Photo) {
-        estateViewModel.pictureListTmp.remove(photo)
+    private fun configureRemovePictureButton(estatePhoto: EstatePhoto) {
+        estateViewModel.pictureListTmp.remove(estatePhoto)
         updateList(estateViewModel.pictureListTmp)
     }
 
@@ -112,15 +111,15 @@ class AddFragment : BaseFragment() {
         fragment_add_picture_list_recycle_view.adapter = adapter
     }
 
-    private fun updateList(list: List<Photo>) {
+    private fun updateList(list: List<EstatePhoto>) {
         estateViewModel.pictureList.clear()
         estateViewModel.pictureList.addAll(list)
         adapter.notifyDataSetChanged()
     }
 
-    private fun onPictureItemClicked(photo: Photo) {
+    private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
         //launch default image viewer on device to show the picture
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(photo.uri)))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(estatePhoto.uri)))
     }
 
     private fun configureDateInOnClickListener() {

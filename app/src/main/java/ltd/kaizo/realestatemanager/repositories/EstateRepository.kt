@@ -3,8 +3,7 @@ package ltd.kaizo.realestatemanager.repositories
 import androidx.lifecycle.LiveData
 import ltd.kaizo.realestatemanager.database.EstateDao
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.model.Photo
-import timber.log.Timber
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 
 class EstateRepository(val estateDao: EstateDao) {
 
@@ -18,7 +17,7 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getEstateById(id)
     }
 
-    fun getPhotoListById(id: Long): LiveData<List<Photo>> {
+    fun getPhotoListById(id: Long): LiveData<List<EstatePhoto>> {
         return estateDao.getPhotoListById(id)
     }
     //INSERT
@@ -26,8 +25,8 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.insertEstate(estate)
     }
 
-    fun insertPhoto(photo: Photo) {
-        return estateDao.insertPhoto(photo)
+    fun insertPhoto(estatePhoto: EstatePhoto) :Long{
+        return estateDao.insertPhoto(estatePhoto)
     }
 
     fun setMainPicture(estateId: Long, uri: String) {

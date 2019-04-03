@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils
 import java.util.concurrent.Executor
@@ -26,9 +26,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val dateIn = MutableLiveData<String>()
     val dateOut = MutableLiveData<String>()
     val isFinish = MutableLiveData<Boolean>()
-    val pictureList: MutableList<Photo> = mutableListOf()
-    val pictureListTmp: MutableList<Photo> = mutableListOf()
-    val pictureTmp = MutableLiveData<Photo>()
+    val pictureList: MutableList<EstatePhoto> = mutableListOf()
+    val pictureListTmp: MutableList<EstatePhoto> = mutableListOf()
+    val pictureTmp = MutableLiveData<EstatePhoto>()
     var estateId: Long = 0
     private var mainPicture = ""
 
@@ -49,12 +49,12 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         return estateDataSource.getEstateById(id)
     }
 
-    fun getPictureListFromId(id: Long): LiveData<List<Photo>> {
+    fun getPictureListFromId(id: Long): LiveData<List<EstatePhoto>> {
         return estateDataSource.getPhotoListById(id)
     }
 
-    private fun insertPhoto(photo: Photo) {
-        executor.execute { estateDataSource.insertPhoto(photo) }
+    private fun insertPhoto(estatePhoto: EstatePhoto) {
+        executor.execute { estateDataSource.insertPhoto(estatePhoto) }
     }
 
     private fun checkFieldView() = (
@@ -75,7 +75,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     && price.value != null
                     && price.value != "")
 
-    private fun insertPhotoFromList(pictureList: List<Photo>, id: Long) {
+    private fun insertPhotoFromList(pictureList: List<EstatePhoto>, id: Long) {
         for (photo in pictureList) {
             photo.estateId = id
             insertPhoto(photo)
