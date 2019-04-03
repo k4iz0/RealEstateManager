@@ -17,7 +17,7 @@ import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_add_picture_dialog.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPictureDialogBinding
-import ltd.kaizo.realestatemanager.model.Photo
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
 import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
@@ -29,7 +29,7 @@ class AddPictureDialogFragment : DialogFragment() {
     private lateinit var uriImageSelected: Uri
     private lateinit var parent: EstateActivity
     private lateinit var estateViewModel: EstateViewModel
-    private var pictureTmp: Photo = Photo(0, 0, "")
+    private var pictureTmp: EstatePhoto = EstatePhoto(0, 0, "")
     val pictureName = MutableLiveData<String>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +66,7 @@ class AddPictureDialogFragment : DialogFragment() {
     }
 
     fun selectPictureFromDevice() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_CHOOSE_PHOTO)
     }
 
