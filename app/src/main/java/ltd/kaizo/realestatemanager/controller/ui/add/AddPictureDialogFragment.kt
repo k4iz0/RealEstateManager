@@ -66,7 +66,7 @@ class AddPictureDialogFragment : DialogFragment() {
     }
 
     fun selectPictureFromDevice() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_CHOOSE_PHOTO)
     }
 

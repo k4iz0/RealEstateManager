@@ -42,7 +42,7 @@
                         style="@style/titleTextView"
                         android:background="@drawable/border_line"
                         android:clickable="true"
-                        android:focusable="false"
+                        android:focusable="true"
                         app:layout_constraintTop_toTopOf="@+id/fragment_add_date_textview_title"
                         app:layout_constraintStart_toEndOf="@+id/fragment_add_date_textview_title"
                         android:layout_marginStart="16dp"
@@ -247,7 +247,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sold_out"
                         style="@style/titleTextView"
-
                         app:layout_constraintStart_toStartOf="@+id/guideline3"
                         android:layout_marginTop="8dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_city_edittext"
