@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
+import ltd.kaizo.realestatemanager.model.Estate
 import timber.log.Timber
 
 
@@ -20,8 +23,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
 
     private lateinit var parentActivity: MapActivity
     private lateinit var mapViewModel: MapViewModel
-    private lateinit var  googleMap :GoogleMap
-    private lateinit var mapView:MapView
+    private lateinit var googleMap: GoogleMap
+    private lateinit var mapView: MapView
+    private var currentLatitude: Double = 0.0
+    private var currentLongitude: Double = 0.0
     override val fragmentLayout: Int
         get() = ltd.kaizo.realestatemanager.R.layout.fragment_map
 
@@ -31,7 +36,30 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         this.initMap()
         mapView.onResume()
-        return rootView    }
+        return rootView
+    }
+
+    private fun configureViewModel() {
+        parentActivity = activity as MapActivity
+        mapViewModel = parentActivity.mapViewModel
+    }
+
+    override fun configureDesign() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun updateDesign() {
+        this.configureViewModel()
+        this.configureObserver()
+    }
+
+    private fun configureObserver() {
+        //currentLocation
+        mapViewModel.currentLocation.observe(this, Observer { currentLocation ->
+            currentLatitude = currentLocation.latitude
+            currentLongitude = currentLocation.longitude
+        })
+    }
 
     private fun initMap() {
         mapView.getMapAsync(this)
@@ -40,23 +68,30 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
         this.googleMap = googleMap!!
-        with(this.googleMap){
-           isMyLocationEnabled = true
-            moveCamera(CameraUpdateFactory.newLatLngZoom(
-                LatLng(mapViewModel.currentLocation.value!!.latitude,
-                mapViewModel.currentLocation.value!!.longitude),
-                14.0f))
+        with(this.googleMap) {
+            isMyLocationEnabled = true
+            moveCameraToLocation()
 //        this.setMapViewStyle()
         }
 
 
 //        this.configureGoogleMap()
     }
-    override fun configureDesign() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    private fun GoogleMap.moveCameraToLocation() {
+        moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(currentLatitude, currentLongitude), 14.0f
+            )
+        )
     }
-    override fun updateDesign() {
-       this.configureViewModel()
+
+    fun setMarker(estate:Estate) {
+        val markerOptions = MarkerOptions()
+        val latLng = LatLng(currentLatitude, currentLongitude)
+        // Position of Marker on Map
+        markerOptions.position(latLng)
+
     }
 
     /**
@@ -72,7 +107,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                         this.context, ltd.kaizo.realestatemanager.R.raw.style_json
                     )
                 )
-
                 if (!success) {
                     Timber.e("Style parsing failed.")
                 }
@@ -82,12 +116,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
 
     }
-
-    private fun configureViewModel() {
-        parentActivity = activity as MapActivity
-        mapViewModel = parentActivity.mapViewModel
-    }
-
 
 
 }

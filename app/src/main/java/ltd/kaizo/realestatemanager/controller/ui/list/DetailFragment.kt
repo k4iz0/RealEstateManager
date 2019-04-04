@@ -76,8 +76,6 @@ class DetailFragment : BaseFragment() {
         listViewModel.getPictureListFromId(listViewModel.estateId.value!!).observe(this, Observer { list ->
             updateList(list)
         })
-
-
     }
 
     private fun updateList(list: List<EstatePhoto>) {

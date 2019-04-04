@@ -47,6 +47,7 @@ class ListViewModel(val estateDataSource: EstateRepository, val executor: Execut
         dateOut.value = estate.dateOut
         dateIn.value = estate.dateIn
         dateOut.value = estate.dateOut
+        isSold.value = estate.isSold
     }
 
 
