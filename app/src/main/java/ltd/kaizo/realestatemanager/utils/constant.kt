@@ -33,3 +33,7 @@ const val RC_PICTURE_LISTENER_REMOVE = 700
 const val RC_PICTURE_LISTENER_VIEW = 800
 const val RC_PICTURE_LISTENER_FAVORITE = 900
 const val RC_ERROR_DIALOG_REQUEST = 9001
+/****************************
+ *********   KEYS   ********
+ *****************************/
+const val API_KEY = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
