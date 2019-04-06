@@ -13,9 +13,7 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
-import ltd.kaizo.realestatemanager.model.Estate
 import timber.log.Timber
 
 
@@ -59,6 +57,15 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             currentLatitude = currentLocation.latitude
             currentLongitude = currentLocation.longitude
         })
+        //estate list
+        mapViewModel.estateList.observe(this, Observer { estateList ->
+            Timber.i("fetch list $estateList")
+            mapViewModel.setGeoData(estateList)
+        })
+        // marker list
+        mapViewModel.marker.observe(this, Observer { marker ->
+            this.googleMap.addMarker(marker)
+        })
     }
 
     private fun initMap() {
@@ -84,14 +91,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
                 LatLng(currentLatitude, currentLongitude), 14.0f
             )
         )
-    }
-
-    fun setMarker(estate:Estate) {
-        val markerOptions = MarkerOptions()
-        val latLng = LatLng(currentLatitude, currentLongitude)
-        // Position of Marker on Map
-        markerOptions.position(latLng)
-
     }
 
     /**

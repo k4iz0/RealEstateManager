@@ -32,4 +32,7 @@ interface EstateDao {
 
     @Query("UPDATE estate SET mainPicture=:uri WHERE id=:estateId")
     fun setMainPicture(estateId: Long, uri: String)
+
+    @Query("UPDATE estate SET latitude=:latitude, longitude=:longitude WHERE id=:estateId")
+    fun updateLatLng(estateId: Long, latitude:Double, longitude:Double)
 }

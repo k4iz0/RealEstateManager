@@ -79,7 +79,7 @@ object Utils {
      * @param emailStr the email str
      * @return the boolean
      */
-    private fun validateEmail(emailStr: String): Boolean {
+     fun validateEmail(emailStr: String): Boolean {
         val matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr)
         return matcher.find()
     }
@@ -125,9 +125,12 @@ object Utils {
         val size = 200
         val type = "roadmap"
         val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
-        val location = "$address, $postalCode, $city"
-        return "https://maps.googleapis.com/maps/api/staticmap?center=$location&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
+        return "https://maps.googleapis.com/maps/api/staticmap?center=${getLocation(address, postalCode, city)}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
 
+    }
+
+     fun getLocation(address: String, postalCode: String, city: String): String {
+         return "$address, $postalCode, $city"
     }
 
     fun hideKeyboard(activity: Activity) {

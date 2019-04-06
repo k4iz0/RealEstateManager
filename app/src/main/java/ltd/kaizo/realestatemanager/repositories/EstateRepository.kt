@@ -32,4 +32,8 @@ class EstateRepository(val estateDao: EstateDao) {
     fun setMainPicture(estateId: Long, uri: String) {
         return estateDao.setMainPicture(estateId, uri)
     }
+
+    fun setLatLng(estateId: Long, latitude: Double, longitude: Double) {
+        return estateDao.updateLatLng(estateId, latitude, longitude)
+    }
 }
