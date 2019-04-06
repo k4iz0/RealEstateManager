@@ -47,7 +47,6 @@ class MapActivity : BaseActivity() {
                     val location = this.fusedLocationProviderClient.lastLocation
                     location.addOnCompleteListener { task ->
                         if (task.isSuccessful && task.result != null) {
-                            Timber.i("tasksuccess = ${task.isSuccessful} et task = $task")
                            mapViewModel.currentLocation.value = task.result
                             this.configureAndShowMapFragment()
                         } else {

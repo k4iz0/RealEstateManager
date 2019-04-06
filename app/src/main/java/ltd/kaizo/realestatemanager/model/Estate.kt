@@ -22,5 +22,7 @@ data class Estate(
     val isSold: Boolean,
     val dateIn: String,
     val dateOut: String?,
-    val estateManager: String
+    val estateManager: String,
+    val latitude:Double,
+    val longitude:Double
 )

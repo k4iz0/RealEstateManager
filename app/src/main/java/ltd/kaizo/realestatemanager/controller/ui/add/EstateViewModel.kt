@@ -109,7 +109,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                         isSold.value!!,
                         dateIn.value!!,
                         dateOut.value,
-                        managerName.value!!
+                        managerName.value!!,
+                        0.0,
+                        0.0
                     )
                     //ALL GREEN -> Insert Estate
                     insertEstate(estateToCreate)
