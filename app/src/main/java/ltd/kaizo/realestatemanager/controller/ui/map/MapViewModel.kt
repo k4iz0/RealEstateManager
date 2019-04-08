@@ -66,8 +66,9 @@ class MapViewModel(val estateDataSource: EstateRepository, val executor: Executo
         val markerOptions = MarkerOptions()
         val latLng = LatLng(estate.latitude, estate.longitude)
         markerOptions.position(latLng)
-         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
-        markerOptions.snippet("${estate.type}\n ${estate.city}")
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
+        markerOptions.title(estate.id.toString())
+        markerOptions.snippet("${estate.type}\n${estate.price}")
         marker.value = markerOptions
     }
 

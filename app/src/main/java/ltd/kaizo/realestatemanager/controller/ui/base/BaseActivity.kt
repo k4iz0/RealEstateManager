@@ -1,13 +1,12 @@
 package ltd.kaizo.realestatemanager.controller.ui.base
 
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.list_activity.*
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper
 import net.danlew.android.joda.JodaTimeAndroid
 import timber.log.Timber
 
@@ -17,6 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         this.setContentView(this.getFragmentLayout())
         Timber.plant(Timber.DebugTree())
+        DataRecordHelper.init(applicationContext)
         JodaTimeAndroid.init(this)
         this.configureDesign()
     }

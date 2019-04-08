@@ -5,6 +5,11 @@ import kotlinx.android.synthetic.main.activity_setting.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.model.UserHelper
+import ltd.kaizo.realestatemanager.utils.CURRENCY_DOLLAR
+import ltd.kaizo.realestatemanager.utils.CURRENCY_EURO
+import ltd.kaizo.realestatemanager.utils.CURRENT_CURRENCY
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.write
 import ltd.kaizo.realestatemanager.utils.Utils.isEmailValid
 import ltd.kaizo.realestatemanager.utils.Utils.isUsernameValid
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
@@ -18,6 +23,8 @@ class SettingActivity : BaseActivity() {
         this.configureToolbar()
         this.configureUpdateEmail()
         this.configureUpdateUsername()
+        this.configureRadioGroup()
+        this.onRadioButtonClicked()
     }
 
     private fun configureUpdateUsername() {
@@ -62,5 +69,25 @@ class SettingActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun configureRadioGroup() {
+        val currentCurrency = read(CURRENT_CURRENCY, CURRENCY_EURO)
+        when (currentCurrency) {
+           CURRENCY_EURO -> activity_setting_euro_radioButton.toggle()
+            CURRENCY_DOLLAR -> activity_setting_dollar_radioButton.toggle()
+        }
+    }
+
+    /**
+     * configure the onClick event for the radio buttons
+     */
+   private fun onRadioButtonClicked() {
+        activity_setting_radioGroup.setOnCheckedChangeListener{ group, checkedId ->
+            when (checkedId) {
+                R.id.activity_setting_euro_radioButton -> write(CURRENT_CURRENCY, CURRENCY_EURO)
+                R.id.activity_setting_dollar_radioButton -> write(CURRENT_CURRENCY, CURRENCY_DOLLAR)
+            }
+        }
     }
 }

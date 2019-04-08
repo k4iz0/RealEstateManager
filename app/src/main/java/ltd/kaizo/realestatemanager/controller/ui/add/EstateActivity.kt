@@ -7,8 +7,10 @@ import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.injection.Injection
-import ltd.kaizo.realestatemanager.utils.*
-import timber.log.Timber
+import ltd.kaizo.realestatemanager.utils.CAMERA_PERM
+import ltd.kaizo.realestatemanager.utils.ESTATE_ID
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
+import ltd.kaizo.realestatemanager.utils.WRITE_EXT_PERM
 
 class EstateActivity : BaseActivity() {
     lateinit var estateViewModel: EstateViewModel
@@ -54,6 +56,7 @@ class EstateActivity : BaseActivity() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
         estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
         estateViewModel.managerName.value = getCurrentUser()!!.displayName.toString()
+        estateViewModel.typeArray.value = resources.getStringArray(R.array.typeArray)
     }
 
 }

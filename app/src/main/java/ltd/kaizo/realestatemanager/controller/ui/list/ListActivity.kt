@@ -95,7 +95,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 true
             }
             R.id.activity_main_drawer_map -> {
-                runWithPermissions(FINE_LOCATION) {
+                runWithPermissions(FINE_LOCATION, COARSE_LOCATION) {
                     startActivity(Intent(this, MapActivity::class.java))
                 }
                 true
