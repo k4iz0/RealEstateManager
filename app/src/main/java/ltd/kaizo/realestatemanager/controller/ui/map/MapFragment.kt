@@ -1,7 +1,6 @@
 package ltd.kaizo.realestatemanager.controller.ui.map
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
+import ltd.kaizo.realestatemanager.R
+import ltd.kaizo.realestatemanager.adapter.CustomInfoWindowAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
+import ltd.kaizo.realestatemanager.controller.ui.list.DetailFragment
+import ltd.kaizo.realestatemanager.utils.ESTATE_ID
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_MAP
 import timber.log.Timber
 
 
@@ -64,7 +68,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         })
         // marker list
         mapViewModel.marker.observe(this, Observer { marker ->
-            this.googleMap.addMarker(marker)
+            if (::googleMap.isInitialized) {
+                this.googleMap.addMarker(marker)
+                this.configureOnMarkerClick()
+                this.configureOnMarkerInfoListener()
+            }
         })
     }
 
@@ -78,11 +86,40 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         with(this.googleMap) {
             isMyLocationEnabled = true
             moveCameraToLocation()
-//        this.setMapViewStyle()
+            setInfoWindowAdapter(CustomInfoWindowAdapter(parentActivity))
         }
 
+    }
 
-//        this.configureGoogleMap()
+    private fun configureOnMarkerClick() {
+        this.googleMap.setOnMarkerClickListener { marker ->
+            if (marker.isInfoWindowShown) {
+                marker.hideInfoWindow()
+                false
+            } else {
+                marker.showInfoWindow()
+                false
+            }
+
+        }
+    }
+
+    private fun configureOnMarkerInfoListener() {
+        this.googleMap.setOnInfoWindowClickListener { marker ->
+            this.configureAndShowDetailFragment(marker.title)
+        }
+    }
+
+    private fun configureAndShowDetailFragment(title: String) {
+        val detailFragment = DetailFragment.newInstance()
+        val args = Bundle()
+        args.putLong(ESTATE_ID, title.toLong())
+        args.putInt(ESTATE_SOURCE, ESTATE_SOURCE_MAP)
+        detailFragment.arguments = args
+        parentActivity.supportFragmentManager.beginTransaction()
+            .replace(R.id.activity_map_fragment_container, detailFragment)
+            .commit()
+
     }
 
     private fun GoogleMap.moveCameraToLocation() {
@@ -92,29 +129,5 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
             )
         )
     }
-
-    /**
-     * Sets map view style.
-     */
-    private fun setMapViewStyle() {
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
-            if (context != null) {
-                val success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                        this.context, ltd.kaizo.realestatemanager.R.raw.style_json
-                    )
-                )
-                if (!success) {
-                    Timber.e("Style parsing failed.")
-                }
-            }
-        } catch (e: Resources.NotFoundException) {
-            Timber.e(e, "Can't find style. Error: ")
-        }
-
-    }
-
 
 }

@@ -59,6 +59,17 @@
     <string name="unable_get_location">Unable to get current location have you enable localisation on your device ?
     </string>
     <string name="map">map</string>
-
+    <string name="currency">currency : </string>
+    <string name="euro">euro €</string>
+    <string name="dollar_title">dollar $</string>
+    <string name="euro_title">euro €</string>
+    <string-array name="typeArray">
+        <item>"Apt"</item>
+        <item>"Loft"</item>
+        <item>"House"</item>
+        <item>"Flat"</item>
+        <item>"Studio"</item>
+        <item>"Other"</item>
+    </string-array>
 
 </resources>

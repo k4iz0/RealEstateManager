@@ -141,7 +141,7 @@ class AddFragment : BaseFragment() {
         fragment_add_constraint_layout.setOnClickListener { hideKeyboard(parentActivity) }
 
         val typeAdapter =
-            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray)
+            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray.value!!)
         fragment_add_type_spinner.adapter = typeAdapter
 
     }

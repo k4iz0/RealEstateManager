@@ -30,20 +30,12 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val pictureListTmp: MutableList<EstatePhoto> = mutableListOf()
     val pictureTmp = MutableLiveData<EstatePhoto>()
     var estateId: Long = 0
+    val typeArray = MutableLiveData<Array<String>>()
     private var mainPicture = ""
 
     init {
         dateIn.value = Utils.todayDate
     }
-
-    val typeArray = listOf(
-        "Apt",
-        "Loft",
-        "House",
-        "Flat",
-        "Studio",
-        "Other"
-    )
 
     fun getEstateById(id: Long): LiveData<Estate> {
         return estateDataSource.getEstateById(id)
@@ -96,7 +88,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     val estateToCreate = Estate(
                         estateId,
                         "",
-                        typeArray[type.value!!],
+                        typeArray.value!![type.value!!],
                         price.value?.toInt()!!,
                         surface.value?.toInt()!!,
                         nbRoom.value!!,

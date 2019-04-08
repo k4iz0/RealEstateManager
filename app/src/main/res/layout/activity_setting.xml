@@ -64,16 +64,15 @@
                 android:textCursorDrawable="@null"
                 app:layout_constraintTop_toTopOf="@+id/activity_setting_update_email_btn"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_setting_update_email_btn"
-                android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="@+id/activity_setting_username_edit_text"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toEndOf="@+id/activity_setting_username_edit_text"
-               />
+        />
 
         <Button
                 android:id="@+id/activity_setting_update_email_btn"
                 style="@style/ButtonMaterialStyleBlue"
-                android:layout_width="150dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/update_email"
@@ -83,6 +82,46 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/activity_setting_update_username_btn"
                 app:layout_constraintStart_toStartOf="@+id/activity_setting_update_username_btn"/>
+        <TextView
+                android:text="@string/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activity_setting_currency_textView"
+                style="@style/titleTextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_setting_update_email_btn"/>
+        <RadioGroup
+                android:id="@+id/activity_setting_radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/activity_setting_currency_textView">
+            <RadioButton
+                    android:text="@string/euro_title"
+                    android:layout_width="wrap_content"
+                    style="@style/titleTextView"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:layout_height="wrap_content" tools:layout_editor_absoluteY="301dp"
+                    tools:layout_editor_absoluteX="233dp"
+                    android:padding="8dp"
+                    android:id="@+id/activity_setting_euro_radioButton"/>
+            <RadioButton
+                    android:text="@string/dollar_title"
+                    style="@style/titleTextView"
+                    android:layout_width="wrap_content"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content" tools:layout_editor_absoluteY="301dp"
+                    tools:layout_editor_absoluteX="90dp"
+                    android:id="@+id/activity_setting_dollar_radioButton"/>
+        </RadioGroup>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

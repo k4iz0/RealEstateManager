@@ -9,16 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
+import ltd.kaizo.realestatemanager.controller.ui.map.MapActivity
 import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
+import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
-import ltd.kaizo.realestatemanager.utils.RC_PICTURE_ITEM_DETAIL
-import ltd.kaizo.realestatemanager.utils.Utils
+import ltd.kaizo.realestatemanager.utils.*
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
@@ -26,6 +28,8 @@ class DetailFragment : BaseFragment() {
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
     private lateinit var parentActivity: ListActivity
     private lateinit var binding: FragmentDetailBinding
+    private var sourceTag = 0
+    private var estateId :Long = -1
     companion object {
         fun newInstance() = DetailFragment()
     }
@@ -35,14 +39,26 @@ class DetailFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        if (arguments != null) {
+            this.estateId = this.arguments!!.getLong(ESTATE_ID)
+            this.sourceTag = this.arguments!!.getInt(ESTATE_SOURCE)
+        }
         return binding.root
     }
     override fun configureDesign() {}
 
 
     private fun configureViewModel() {
-        parentActivity = activity as ListActivity
-        listViewModel = parentActivity.listViewModel
+        when (sourceTag) {
+            0 -> {
+                parentActivity = activity as ListActivity
+                listViewModel = parentActivity.listViewModel
+            }
+            ESTATE_SOURCE_MAP -> {
+                val viewModelFactory = Injection.provideViewModelFactory(activity as MapActivity)
+                listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+            }
+        }
         binding.lifecycleOwner = this
         binding.listViewModel = listViewModel
     }
@@ -67,13 +83,15 @@ class DetailFragment : BaseFragment() {
 
     private fun configureObserver() {
         //get estate detail
-        listViewModel.getEstateById(listViewModel.estateId.value!!).observe(this, Observer { estate ->
+        if (this.estateId.toInt() == -1) this.estateId = listViewModel.estateId.value!!
+
+        listViewModel.getEstateById(this.estateId).observe(this, Observer { estate ->
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
 
         })
         //get estate's picture's list
-        listViewModel.getPictureListFromId(listViewModel.estateId.value!!).observe(this, Observer { list ->
+        listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->
             updateList(list)
         })
     }
