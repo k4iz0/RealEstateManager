@@ -6,6 +6,11 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.CURRENCY_EURO
+import ltd.kaizo.realestatemanager.utils.CURRENT_CURRENCY
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
+import ltd.kaizo.realestatemanager.utils.Utils.convertEuroToDollar
+import ltd.kaizo.realestatemanager.utils.Utils.formatNumberToString
 import java.util.concurrent.Executor
 
 class ListViewModel(val estateDataSource: EstateRepository, val executor: Executor) : ViewModel() {
@@ -34,6 +39,13 @@ class ListViewModel(val estateDataSource: EstateRepository, val executor: Execut
     }
 
     fun updateUiWithData(estate: Estate) {
+        val convertPrice = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
+            formatNumberToString(estate.price)
+        } else {
+            formatNumberToString(convertEuroToDollar(estate.price))
+        }
+
+
         description.value = estate.description
         surface.value = estate.surface.toString()
         nbRoom.value = estate.nbRoom.toString()
@@ -42,7 +54,7 @@ class ListViewModel(val estateDataSource: EstateRepository, val executor: Execut
         address.value = estate.address
         postalCode.value = estate.postalCode
         city.value = estate.city
-        price.value = estate.price.toString()
+        price.value = convertPrice
         managerName.value = estate.estateManager
         dateOut.value = estate.dateOut
         dateIn.value = estate.dateIn

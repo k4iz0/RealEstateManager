@@ -21,6 +21,7 @@ import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 
 class DetailFragment : BaseFragment() {
     private lateinit var adapter: PictureListAdapter
@@ -88,12 +89,23 @@ class DetailFragment : BaseFragment() {
         listViewModel.getEstateById(this.estateId).observe(this, Observer { estate ->
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
+            this.configureCurrency()
 
         })
         //get estate's picture's list
         listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->
             updateList(list)
         })
+    }
+
+    private fun configureCurrency() {
+        if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
+            fragment_detail_currency_euro.visibility = View.VISIBLE
+            fragment_detail_currency_dollar.visibility = View.GONE
+        } else {
+            fragment_detail_currency_euro.visibility = View.GONE
+            fragment_detail_currency_dollar.visibility = View.VISIBLE
+        }
     }
 
     private fun updateList(list: List<EstatePhoto>) {
