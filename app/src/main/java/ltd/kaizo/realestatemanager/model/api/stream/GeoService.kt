@@ -16,25 +16,6 @@ interface GeoService {
     @GET("geocode/json?&key=$API_KEY")
  fun getGeoCodingInfo(@Query("address") address:String): Observable<GeoData>
 
-/**
- * Gets the place's détails
- *
- * @param placeid the placeid
- * @return the place details
- */
-//    @GET(
-//        "details/json?fields=name," +
-//    "rating," +
-//    "geometry," +
-//    "photo," +
-//    "website," +
-//    "formatted_phone_number," +
-//    "vicinity," +
-//    "opening_hours" +
-//    "&key=" + apiKey
-//    )
-// fun getPlaceDetails(@Query("placeid") placeid:String):Observable<PlaceDetailApiData>
-
 companion object {
 /*
  * The constant url.

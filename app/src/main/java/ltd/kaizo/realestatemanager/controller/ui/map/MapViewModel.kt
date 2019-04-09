@@ -25,10 +25,8 @@ class MapViewModel(val estateDataSource: EstateRepository, val executor: Executo
     fun setGeoData(estateList: List<Estate>) {
         for (estate in estateList) {
             if (estate.latitude == 0.0 || estate.longitude == 0.0) {
-                Timber.i("go stream estate = $estate")
                 streamFetchGeoDataFromAddress(estate)
             } else {
-                Timber.i("set marker $estate")
                 setMarker(estate)
             }
         }

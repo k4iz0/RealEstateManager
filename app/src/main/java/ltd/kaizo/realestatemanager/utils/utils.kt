@@ -4,7 +4,8 @@ package ltd.kaizo.realestatemanager.utils
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
-import android.net.wifi.WifiManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -31,14 +32,14 @@ object Utils {
     fun add0ToDate(nb: Int) =
         if (nb < 10) {
             "0$nb"
-    } else {
-        "" + nb
-    }
+        } else {
+            "" + nb
+        }
 
-    fun checkDateDifference(date1 :String, date2 :String):Boolean{
+    fun checkDateDifference(date1: String, date2: String): Boolean {
         val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
-        val d1  = dtf.parseDateTime(date1)
-        val d2  = dtf.parseDateTime(date2)
+        val d1 = dtf.parseDateTime(date1)
+        val d2 = dtf.parseDateTime(date2)
         return d2.isAfter(d1)
     }
 
@@ -59,9 +60,14 @@ object Utils {
     fun formatNumberToString(number: Int): String {
         val separator = DecimalFormatSymbols()
         separator.groupingSeparator = ','
-        val formatter = if  (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) DecimalFormat("#,###") else DecimalFormat("#,###",separator)
+        val formatter = if (read(
+                CURRENT_CURRENCY,
+                CURRENCY_EURO
+            ) == CURRENCY_EURO
+        ) DecimalFormat("#,###") else DecimalFormat("#,###", separator)
         return formatter.format(number)
     }
+
     /**
      * Vérification de la connexion réseau
      * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
@@ -69,8 +75,9 @@ object Utils {
      * @return
      */
     fun isInternetAvailable(context: Context): Boolean {
-        val wifi = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        return wifi.isWifiEnabled
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val networkInfo: NetworkInfo? = connectivityManager?.activeNetworkInfo
+        return networkInfo?.isConnected ?: false
     }
 
     fun showSnackBar(view: View, message: String) {
@@ -78,31 +85,33 @@ object Utils {
     }
 
     /****************************
-    ******* email check  ********
-    *****************************/
+     ******* email check  ********
+     *****************************/
     private val VALID_EMAIL_ADDRESS_REGEX =
         Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE)
+
     /**
      * Validate email boolean.
      *
      * @param emailStr the email str
      * @return the boolean
      */
-     fun validateEmail(emailStr: String): Boolean {
+    fun validateEmail(emailStr: String): Boolean {
         val matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr)
         return matcher.find()
     }
+
     /**
      * Is email valid boolean.
      *
      * @return the boolean
      */
-     fun isEmailValid(emailEditText:EditText): Boolean {
+    fun isEmailValid(emailEditText: EditText): Boolean {
         return emailEditText.text.toString() != "" && validateEmail(emailEditText.text.toString())
     }
-        /****************************
-        *****   username check   *****
-        *****************************/
+    /****************************
+     *****   username check   *****
+     *****************************/
 
     /**
      * return true if the username is bigger than 2 characters
@@ -110,7 +119,7 @@ object Utils {
      *
      * @return Boolean boolean
      */
-     fun isUsernameValid(usernameEditText:EditText): Boolean {
+    fun isUsernameValid(usernameEditText: EditText): Boolean {
         return usernameEditText.text.length > 2
     }
 
@@ -134,12 +143,16 @@ object Utils {
         val size = 200
         val type = "roadmap"
         val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
-        return "https://maps.googleapis.com/maps/api/staticmap?center=${getLocation(address, postalCode, city)}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
+        return "https://maps.googleapis.com/maps/api/staticmap?center=${getLocation(
+            address,
+            postalCode,
+            city
+        )}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
 
     }
 
-     fun getLocation(address: String, postalCode: String, city: String): String {
-         return "$address, $postalCode, $city"
+    fun getLocation(address: String, postalCode: String, city: String): String {
+        return "$address, $postalCode, $city"
     }
 
     fun hideKeyboard(activity: Activity) {
@@ -149,6 +162,7 @@ object Utils {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
     fun fromContentValuesToEstatePhoto(values: ContentValues?): EstatePhoto {
         val photo = EstatePhoto(0, 0, "")
         if (values!!.containsKey("photoId")) photo.photoId = values.getAsLong("photoId")
