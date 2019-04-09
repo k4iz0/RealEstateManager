@@ -24,7 +24,7 @@ import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 
 class DetailFragment : BaseFragment() {
-    private lateinit var adapter: PictureListAdapter
+    private lateinit var pictureListAdapter: PictureListAdapter
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
     private lateinit var parentActivity: ListActivity
@@ -65,10 +65,10 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        adapter = PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
+        pictureListAdapter = PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
         fragment_detail_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        fragment_detail_picture_list_recycle_view.adapter = adapter
+        fragment_detail_picture_list_recycle_view.adapter = pictureListAdapter
     }
 
     private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
@@ -111,7 +111,7 @@ class DetailFragment : BaseFragment() {
     private fun updateList(list: List<EstatePhoto>) {
         pictureList.clear()
         pictureList.addAll(list)
-        adapter.notifyDataSetChanged()
+        pictureListAdapter.notifyDataSetChanged()
     }
 
 }

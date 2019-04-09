@@ -82,6 +82,14 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_add_manager_title_textview">
 
     </androidx.recyclerview.widget.RecyclerView>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_detail_poi_list_recycle_view"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline" android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/fragment_detail_price"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/fragment_detail_map_container"/>
     <TextView
             android:id="@+id/fragment_detail_description_title_textview"
             android:layout_width="wrap_content"
@@ -296,7 +304,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintStart_toStartOf="@+id/fragment_detail_nb_bedroom_title_textview"
             app:layout_constraintEnd_toEndOf="@+id/fragment_detail_nb_bedroom_title_textview"
-            app:layout_constraintTop_toTopOf="@+id/fragment_detail_map_container"
             app:layout_constraintBottom_toBottomOf="@+id/fragment_detail_map_container"/>
     <TextView
             android:text="@string/euro"
