@@ -18,7 +18,6 @@ import ltd.kaizo.realestatemanager.controller.ui.list.DetailFragment
 import ltd.kaizo.realestatemanager.utils.ESTATE_ID
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_MAP
-import timber.log.Timber
 
 
 class MapFragment : BaseFragment(), OnMapReadyCallback {
@@ -63,7 +62,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         })
         //estate list
         mapViewModel.estateList.observe(this, Observer { estateList ->
-            Timber.i("fetch list $estateList")
             mapViewModel.setGeoData(estateList)
         })
         // marker list
