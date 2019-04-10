@@ -24,7 +24,7 @@ class MapViewModel(val estateDataSource: EstateRepository, val executor: Executo
 
     fun setGeoData(estateList: List<Estate>) {
         for (estate in estateList) {
-            if (estate.latitude == 0.0 || estate.longitude == 0.0) {
+            if (estate.latitude == 95.0 || estate.longitude == 195.0) {
                 streamFetchGeoDataFromAddress(estate)
             } else {
                 setMarker(estate)

@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
+import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.controller.ui.map.MapActivity
 import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
@@ -22,15 +23,20 @@ import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
+import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
+import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
 
 class DetailFragment : BaseFragment() {
     private lateinit var pictureListAdapter: PictureListAdapter
+    private lateinit var poiListAdapter: PoiListAdapter
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
+    private var poiList: List<String> = mutableListOf()
     private lateinit var parentActivity: ListActivity
     private lateinit var binding: FragmentDetailBinding
     private var sourceTag = 0
-    private var estateId :Long = -1
+    private var estateId: Long = -1
+
     companion object {
         fun newInstance() = DetailFragment()
     }
@@ -46,8 +52,15 @@ class DetailFragment : BaseFragment() {
         }
         return binding.root
     }
+
     override fun configureDesign() {}
 
+    override fun updateDesign() {
+        this.configureViewModel()
+        this.configurePictureListRecycleView()
+        this.configurePoiListRecycleView()
+        this.configureObserver()
+    }
 
     private fun configureViewModel() {
         when (sourceTag) {
@@ -64,11 +77,20 @@ class DetailFragment : BaseFragment() {
         binding.listViewModel = listViewModel
     }
 
-    private fun configureRecycleView() {
-        pictureListAdapter = PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
+    private fun configurePictureListRecycleView() {
+        pictureListAdapter =
+            PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
         fragment_detail_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_detail_picture_list_recycle_view.adapter = pictureListAdapter
+    }
+
+    private fun configurePoiListRecycleView() {
+        poiListAdapter =
+            PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext),RC_PICTURE_ITEM_DETAIL)
+        fragment_detail_poi_list_recycle_view.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        fragment_detail_poi_list_recycle_view.adapter = poiListAdapter
     }
 
     private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
@@ -76,21 +98,18 @@ class DetailFragment : BaseFragment() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(estatePhoto.uri)))
     }
 
-    override fun updateDesign() {
-        this.configureViewModel()
-        this.configureRecycleView()
-        this.configureObserver()
-    }
 
     private fun configureObserver() {
         //get estate detail
         if (this.estateId.toInt() == -1) this.estateId = listViewModel.estateId.value!!
 
         listViewModel.getEstateById(this.estateId).observe(this, Observer { estate ->
-            listViewModel.updateUiWithData(estate)
-            Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city)).into(fragment_detail_map_container)
             this.configureCurrency()
-
+            listViewModel.updateUiWithData(estate)
+            Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city))
+                .into(fragment_detail_map_container)
+            poiList = getPoiListFromString(estate.poi)
+            poiListAdapter.notifyDataSetChanged()
         })
         //get estate's picture's list
         listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->

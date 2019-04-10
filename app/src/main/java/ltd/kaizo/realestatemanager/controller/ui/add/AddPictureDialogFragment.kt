@@ -20,7 +20,7 @@ import ltd.kaizo.realestatemanager.databinding.FragmentAddPictureDialogBinding
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
-import ltd.kaizo.realestatemanager.utils.TAG_DIALOG
+import ltd.kaizo.realestatemanager.utils.TAG_ADD_PICTURE_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class AddPictureDialogFragment : DialogFragment() {
@@ -121,7 +121,7 @@ class AddPictureDialogFragment : DialogFragment() {
     }
 
     fun closeDialog() {
-        fragmentManager?.findFragmentByTag(TAG_DIALOG)?.let {
+        fragmentManager?.findFragmentByTag(TAG_ADD_PICTURE_DIALOG)?.let {
             (it as DialogFragment).dismiss()
         }
     }

@@ -8,35 +8,55 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import ltd.kaizo.realestatemanager.R
+import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 
-class PoiListAdapter(private val poiList: List<String>,  private val sourceId:Int
-    ):RecyclerView.Adapter<PoiListAdapter.PoiListViewHolder>() {
+class PoiListAdapter(
+    private val poiList: List<String>, private var poiStringArray: Array<String>,  val sourceId: Int
+) : RecyclerView.Adapter<PoiListAdapter.PoiListViewHolder>() {
 
-private lateinit var poiStringArray:Array<String>
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoiListViewHolder {
         val viewItem = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_poi_list, parent, false)
-        poiStringArray = parent.context.resources.getStringArray(R.array.typeArray)
         return PoiListViewHolder(viewItem)
     }
 
     override fun getItemCount(): Int {
-        return poiList.size
+
+        return if (sourceId == RC_POI_ADD_ITEM) {
+             poiStringArray.size
+         } else {
+             poiList.size
+         }
     }
 
     override fun onBindViewHolder(holder: PoiListViewHolder, position: Int) {
+        if (sourceId == RC_POI_ADD_ITEM) {
+            updateDataForPoiDialogFragment(position, holder)
+        } else {
+            updateUiForDetailFragment(position, holder)
+        }
+    }
+
+    private fun updateDataForPoiDialogFragment(position: Int, holder: PoiListViewHolder) {
+        val poi = poiStringArray[position]
+        with(holder) {
+            nameItem.text = poi
+            pictureItem.setImageResource(getDrawableFromName(poi))
+        }
+    }
+
+    private fun updateUiForDetailFragment(position: Int, holder: PoiListViewHolder) {
         val poi = poiList[position]
         for (poiString in poiStringArray) {
             if (poi == poiString) {
                 with(holder) {
                     nameItem.text = poi
                     pictureItem.setImageResource(getDrawableFromName(poi))
-
                 }
             }
         }
-
     }
 
     private fun getDrawableFromName(poi: String): Int {
@@ -50,6 +70,10 @@ private lateinit var poiStringArray:Array<String>
             else -> R.drawable.ic_cross_24dp_white
         }
     }
+
+    /****************************
+     *******   VIEWHOLDER   ******
+     *****************************/
 
     class PoiListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardView = itemView.findViewById<CardView>(R.id.poi_list_cardview)!!

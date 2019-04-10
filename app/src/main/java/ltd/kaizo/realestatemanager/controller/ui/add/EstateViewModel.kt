@@ -20,6 +20,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val nbBedroom = MutableLiveData<Int>()
     val nbBathroom = MutableLiveData<Int>()
     val price = MutableLiveData<String>()
+    val poiList = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
     val managerName = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
@@ -98,12 +99,13 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                         address.value!!,
                         postalCode.value!!,
                         city.value!!,
+                        poiList.value!!,
                         isSold.value!!,
                         dateIn.value!!,
                         dateOut.value,
                         managerName.value!!,
-                        0.0,
-                        0.0
+                        95.0,
+                        195.0
                     )
                     //ALL GREEN -> Insert Estate
                     insertEstate(estateToCreate)

@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-<!--TOOLBAR-->
+<!--DIALOG-->
     <style name="customDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="android:padding">8dp</item>
     </style>

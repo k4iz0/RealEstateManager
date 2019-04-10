@@ -10,6 +10,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import org.joda.time.format.DateTimeFormat
@@ -172,5 +173,11 @@ object Utils {
         if (values.containsKey("mainPicture")) photo.mainPicture = values.getAsBoolean("mainPicture")
 
         return photo
+    }
+
+    fun getPoiSourceList(context : Context): Array<String> = context.resources.getStringArray(R.array.poiArray)
+
+    fun getPoiListFromString(poi: String): List<String> {
+        return poi.split(',')
     }
 }
