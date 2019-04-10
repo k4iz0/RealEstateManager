@@ -11,7 +11,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DATABASE_NAME
 
-@Database(entities = [Estate::class, EstatePhoto::class], version = 2, exportSchema = false)
+@Database(entities = [Estate::class, EstatePhoto::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun estateDao(): EstateDao
 

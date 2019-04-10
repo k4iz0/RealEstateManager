@@ -1,0 +1,43 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="estateViewModel" type="ltd.kaizo.realestatemanager.controller.ui.add.EstateViewModel"/>
+        <variable name="AddPoiDialogFragment"
+                  type="ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment"/>
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/add_poi_dialog_fragment_coordinator_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <TextView
+                android:id="@+id/add_poi_dialog_fragment_title_textview"
+                style="@style/bigTitleTextView"
+                android:text="select your POI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+        android:padding="16dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/add_poi_dialog_fragment_recycleview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.button.MaterialButton
+                android:text="@string/add"
+                android:id="@+id/add_poi_dialog_fragment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/ButtonMaterialStyleBlue"
+                android:padding="8dp"
+                android:layout_gravity="center"
+        />
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

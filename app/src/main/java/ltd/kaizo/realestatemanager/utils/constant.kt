@@ -12,7 +12,8 @@ const val ESTATE_ID = "ESTATE ID"
 const val ESTATE_SOURCE_ADD = 40
 const val ESTATE_SOURCE_EDIT = 30
 const val ESTATE_SOURCE_MAP = 50
-const val TAG_DIALOG = "AddPictureDialogFragment"
+const val TAG_ADD_PICTURE_DIALOG = "AddPictureDialogFragment"
+const val TAG_ADD_POI_DIALOG = "AddPoiDialogFragment"
 const val COLLECTION_NAME = "users"
 const val CURRENCY_DOLLAR  = "$"
 const val CURRENCY_EURO = "€"
@@ -38,6 +39,7 @@ const val RC_PICTURE_LISTENER_REMOVE = 700
 const val RC_PICTURE_LISTENER_VIEW = 800
 const val RC_PICTURE_LISTENER_FAVORITE = 900
 const val RC_ERROR_DIALOG_REQUEST = 9001
+const val RC_POI_ADD_ITEM = 9001
 
 /****************************
  *********   KEYS   ********

@@ -24,7 +24,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/colorPrimary"
                 android:contentDescription="@string/logo"
-                tools:src="@drawable/outline_school_black_48"/>
+                tools:src="@drawable/outline_school_black_48" android:layout_marginTop="8dp"/>
         <TextView
                 android:id="@+id/poi_item_name_textview"
                 android:layout_width="wrap_content"
@@ -33,9 +33,10 @@
                 app:layout_constraintEnd_toEndOf="@+id/poi_item_imageview"
                 android:gravity="center"
                 style="@style/titleTextView"
-                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/poi_item_imageview"
+                app:layout_constraintStart_toStartOf="@+id/poi_item_imageview"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

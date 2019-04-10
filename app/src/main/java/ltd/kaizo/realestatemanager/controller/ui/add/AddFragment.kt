@@ -70,6 +70,7 @@ class AddFragment : BaseFragment() {
     private fun configureButtonAndEvent() {
         this.configureSpinner()
         this.configureFab()
+        this.configureAddPoiBtn()
         this.configureDateInOnClickListener()
 
     }
@@ -132,6 +133,9 @@ class AddFragment : BaseFragment() {
         }
     }
 
+    private fun configureAddPoiBtn() {
+       fragment_add_add_poi_btn.setOnClickListener { this.showAddPoiAlertDialog() }
+    }
     private fun configureSpinner() {
         val items = (0..15).toList()
         val adapter = ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, items)
@@ -230,7 +234,7 @@ class AddFragment : BaseFragment() {
         })
     }
 
-    /****************************
+     /****************************
      *********   DIALOG   ********
      *****************************/
 
@@ -272,6 +276,10 @@ class AddFragment : BaseFragment() {
 
     private fun showAddPictureAlertDialog() {
         val dialog = AddPictureDialogFragment()
-        fragmentManager?.let { dialog.show(it, TAG_DIALOG) }
+        fragmentManager?.let { dialog.show(it, TAG_ADD_PICTURE_DIALOG) }
+    }
+    private fun showAddPoiAlertDialog() {
+        val dialog = AddPoiDialogFragment()
+        fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
     }
 }
