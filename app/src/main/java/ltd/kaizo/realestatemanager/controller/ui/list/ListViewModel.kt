@@ -45,7 +45,6 @@ class ListViewModel(val estateDataSource: EstateRepository, val executor: Execut
             formatNumberToString(convertEuroToDollar(estate.price))
         }
 
-
         description.value = estate.description
         surface.value = estate.surface.toString()
         nbRoom.value = estate.nbRoom.toString()

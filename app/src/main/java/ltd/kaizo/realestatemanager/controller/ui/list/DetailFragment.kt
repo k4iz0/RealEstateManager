@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import ltd.kaizo.realestatemanager.R
@@ -61,6 +62,15 @@ class DetailFragment : BaseFragment() {
         this.configurePictureListRecycleView()
         this.configurePoiListRecycleView()
         this.configureObserver()
+        this.configureOnMapClicked()
+    }
+
+    private fun configureOnMapClicked() {
+        fragment_detail_map_container.setOnClickListener {
+            runWithPermissions(FINE_LOCATION, COARSE_LOCATION) {
+                startActivity(Intent(parentActivity, MapActivity::class.java))
+            }
+        }
     }
 
     private fun configureViewModel() {
@@ -88,7 +98,7 @@ class DetailFragment : BaseFragment() {
 
     private fun configurePoiListRecycleView() {
         poiListAdapter =
-            PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext),RC_PICTURE_ITEM_DETAIL) {}
+            PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext), RC_PICTURE_ITEM_DETAIL) {}
         fragment_detail_poi_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_detail_poi_list_recycle_view.adapter = poiListAdapter
@@ -109,7 +119,7 @@ class DetailFragment : BaseFragment() {
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city))
                 .into(fragment_detail_map_container)
-                updatePoiList(getPoiListFromString(estate.poi))
+            updatePoiList(getPoiListFromString(estate.poi))
 
         })
         //get estate's picture's list
@@ -134,6 +144,7 @@ class DetailFragment : BaseFragment() {
         pictureList.addAll(list)
         pictureListAdapter.notifyDataSetChanged()
     }
+
     private fun updatePoiList(list: List<String>) {
         Timber.i("list = $list")
         poiList.clear()
