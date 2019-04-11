@@ -178,14 +178,14 @@ object Utils {
     fun getPoiSourceList(context : Context): Array<String> = context.resources.getStringArray(R.array.poiArray)
 
     fun getPoiListFromString(poi: String): MutableList<String> {
-        return poi.split(',').toMutableList()
+        return poi.split(',').map { it.trim() }.toMutableList()
     }
 
     fun getStringFromPoiList(list: MutableList<String>) :String{
-        var result =""
+        val result = StringBuilder()
         for (str in list) {
-            result+= "$str,"
+            result.append("$str ,")
         }
-        return result
+        return result.toString().removeSuffix(",").trim()
     }
 }

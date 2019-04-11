@@ -25,6 +25,7 @@ import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
+import timber.log.Timber
 
 class DetailFragment : BaseFragment() {
     private lateinit var pictureListAdapter: PictureListAdapter
@@ -108,13 +109,14 @@ class DetailFragment : BaseFragment() {
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city))
                 .into(fragment_detail_map_container)
-            poiList = getPoiListFromString(estate.poi)
-            poiListAdapter.notifyDataSetChanged()
+                updatePoiList(getPoiListFromString(estate.poi))
+
         })
         //get estate's picture's list
         listViewModel.getPictureListFromId(this.estateId).observe(this, Observer { list ->
-            updateList(list)
+            updatePictureList(list)
         })
+
     }
 
     private fun configureCurrency() {
@@ -127,10 +129,16 @@ class DetailFragment : BaseFragment() {
         }
     }
 
-    private fun updateList(list: List<EstatePhoto>) {
+    private fun updatePictureList(list: List<EstatePhoto>) {
         pictureList.clear()
         pictureList.addAll(list)
         pictureListAdapter.notifyDataSetChanged()
+    }
+    private fun updatePoiList(list: List<String>) {
+        Timber.i("list = $list")
+        poiList.clear()
+        poiList.addAll(list)
+        poiListAdapter.notifyDataSetChanged()
     }
 
 }

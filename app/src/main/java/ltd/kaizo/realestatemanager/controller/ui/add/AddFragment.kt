@@ -21,7 +21,6 @@ import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
-import ltd.kaizo.realestatemanager.utils.Utils.getStringFromPoiList
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import timber.log.Timber
@@ -198,10 +197,6 @@ class AddFragment : BaseFragment() {
                 estateViewModel.dateOut.value = ""
             }
         })
-        //poi list
-        estateViewModel.poiListTmp.observe(this, Observer { poiTmpList ->
-            estateViewModel.poiList.value = getStringFromPoiList(poiTmpList)
-        })
     }
 
     /****************************
@@ -212,7 +207,6 @@ class AddFragment : BaseFragment() {
         val tmpEstate = estateViewModel.getEstateById(this.estateId)
         tmpEstate.observe(this, Observer { estate ->
             if (estate != null) {
-                Timber.i("$estate")
                 updateUi(estate)
                 estateViewModel.estateId = estateId
             }
@@ -235,6 +229,7 @@ class AddFragment : BaseFragment() {
         estateViewModel.getPictureListFromId(estateId).observe(this, Observer { pictureList ->
             estateViewModel.pictureListTmp.addAll(pictureList)
             updateList(estateViewModel.pictureListTmp)
+
         })
     }
 

@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
+import timber.log.Timber
 
 class PoiListAdapter(
     private val poiList: MutableList<String>,
@@ -53,13 +54,11 @@ class PoiListAdapter(
 
     private fun updateUiForDetailFragment(position: Int, holder: PoiListViewHolder) {
         val poi = poiList[position]
-        for (poiString in poiStringArray) {
-            if (poi == poiString) {
-                with(holder) {
-                    cardView.setOnClickListener { clickListener(poi) }
-                    nameItem.text = poi
-                    pictureItem.setImageResource(getDrawableFromName(poi))
-                }
+        if (poiList.contains(poi)) {
+            Timber.i("poi = $poi et poiList = $poiList")
+            with(holder) {
+                nameItem.text = poi
+                pictureItem.setImageResource(getDrawableFromName(poi))
             }
         }
     }
