@@ -7,6 +7,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils
+import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -86,6 +87,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     if (isSold.value == null) {
                         isSold.value = false
                     }
+                    if(poiList.value == null) poiList.value=""
 
                     val estateToCreate = Estate(
                         estateId,
@@ -157,5 +159,6 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         price.value = estate.price.toString()
         dateIn.value = estate.dateIn
         dateOut.value = estate.dateOut
+        poiListTmp.value = getPoiListFromString(estate.poi)
     }
 }
