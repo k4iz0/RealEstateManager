@@ -31,7 +31,7 @@ class DetailFragment : BaseFragment() {
     private lateinit var poiListAdapter: PoiListAdapter
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
-    private var poiList: List<String> = mutableListOf()
+    private var poiList: MutableList<String> = mutableListOf()
     private lateinit var parentActivity: ListActivity
     private lateinit var binding: FragmentDetailBinding
     private var sourceTag = 0
@@ -87,7 +87,7 @@ class DetailFragment : BaseFragment() {
 
     private fun configurePoiListRecycleView() {
         poiListAdapter =
-            PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext),RC_PICTURE_ITEM_DETAIL)
+            PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext),RC_PICTURE_ITEM_DETAIL) {}
         fragment_detail_poi_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_detail_poi_list_recycle_view.adapter = poiListAdapter

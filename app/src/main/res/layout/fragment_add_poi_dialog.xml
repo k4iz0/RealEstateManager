@@ -37,6 +37,7 @@
                 style="@style/ButtonMaterialStyleBlue"
                 android:padding="8dp"
                 android:layout_gravity="center"
+                android:onClick="@{()-> AddPoiDialogFragment.saveData()}"
         />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

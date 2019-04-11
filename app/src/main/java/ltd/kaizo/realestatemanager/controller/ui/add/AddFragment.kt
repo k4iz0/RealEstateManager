@@ -21,6 +21,7 @@ import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
+import ltd.kaizo.realestatemanager.utils.Utils.getStringFromPoiList
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import timber.log.Timber
@@ -197,7 +198,10 @@ class AddFragment : BaseFragment() {
                 estateViewModel.dateOut.value = ""
             }
         })
-
+        //poi list
+        estateViewModel.poiListTmp.observe(this, Observer { poiTmpList ->
+            estateViewModel.poiList.value = getStringFromPoiList(poiTmpList)
+        })
     }
 
     /****************************

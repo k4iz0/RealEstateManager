@@ -11,9 +11,11 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 
 class PoiListAdapter(
-    private val poiList: List<String>, private var poiStringArray: Array<String>,  val sourceId: Int
+    private val poiList: MutableList<String>,
+    private var poiStringArray: Array<String>,
+    private val sourceId: Int,
+    private val clickListener: (String) -> Unit
 ) : RecyclerView.Adapter<PoiListAdapter.PoiListViewHolder>() {
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PoiListViewHolder {
@@ -23,12 +25,11 @@ class PoiListAdapter(
     }
 
     override fun getItemCount(): Int {
-
         return if (sourceId == RC_POI_ADD_ITEM) {
-             poiStringArray.size
-         } else {
-             poiList.size
-         }
+            poiStringArray.size
+        } else {
+            poiList.size
+        }
     }
 
     override fun onBindViewHolder(holder: PoiListViewHolder, position: Int) {
@@ -42,8 +43,11 @@ class PoiListAdapter(
     private fun updateDataForPoiDialogFragment(position: Int, holder: PoiListViewHolder) {
         val poi = poiStringArray[position]
         with(holder) {
+            cardView.setOnClickListener { clickListener(poi) }
             nameItem.text = poi
             pictureItem.setImageResource(getDrawableFromName(poi))
+            if (poiList.contains(poi))   pictureItem.alpha = 1f else   pictureItem.alpha = 0.5f
+
         }
     }
 
@@ -52,6 +56,7 @@ class PoiListAdapter(
         for (poiString in poiStringArray) {
             if (poi == poiString) {
                 with(holder) {
+                    cardView.setOnClickListener { clickListener(poi) }
                     nameItem.text = poi
                     pictureItem.setImageResource(getDrawableFromName(poi))
                 }
