@@ -177,7 +177,15 @@ object Utils {
 
     fun getPoiSourceList(context : Context): Array<String> = context.resources.getStringArray(R.array.poiArray)
 
-    fun getPoiListFromString(poi: String): List<String> {
-        return poi.split(',')
+    fun getPoiListFromString(poi: String): MutableList<String> {
+        return poi.split(',').toMutableList()
+    }
+
+    fun getStringFromPoiList(list: MutableList<String>) :String{
+        var result =""
+        for (str in list) {
+            result+= "$str,"
+        }
+        return result
     }
 }

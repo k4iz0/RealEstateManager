@@ -30,6 +30,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val pictureList: MutableList<EstatePhoto> = mutableListOf()
     val pictureListTmp: MutableList<EstatePhoto> = mutableListOf()
     val pictureTmp = MutableLiveData<EstatePhoto>()
+    val poiListTmp = MutableLiveData<MutableList<String>>()
     var estateId: Long = 0
     val typeArray = MutableLiveData<Array<String>>()
     private var mainPicture = ""

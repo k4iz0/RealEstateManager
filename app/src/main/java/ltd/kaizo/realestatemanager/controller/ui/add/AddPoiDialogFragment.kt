@@ -14,14 +14,17 @@ import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPoiDialogBinding
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 import ltd.kaizo.realestatemanager.utils.TAG_ADD_POI_DIALOG
+import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
+import timber.log.Timber
 
 class AddPoiDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddPoiDialogBinding
     private lateinit var parent: EstateActivity
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var poiListAdapter: PoiListAdapter
-    private val poiList = mutableListOf<String>()
+    private var poiList = mutableListOf<String>()
+    private var poiListTmp = mutableListOf<String>()
 
     private lateinit var poiSourceList: Array<String>
     override fun onCreateView(
@@ -40,10 +43,20 @@ class AddPoiDialogFragment : DialogFragment() {
     private fun configureDesign() {
         this.configureViewModel()
         this.configureRecycleView()
+        this.configureObserver()
     }
 
     private fun configureRecycleView() {
-        poiListAdapter = PoiListAdapter(poiList, getPoiSourceList(parent.applicationContext), RC_POI_ADD_ITEM)
+        estateViewModel.poiListTmp.value  = mutableListOf()
+        poiListAdapter = PoiListAdapter(poiList, this.poiSourceList, RC_POI_ADD_ITEM) { poi ->
+            if (!poiListTmp.contains(poi)) {
+                poiListTmp.add(poi)
+            } else {
+                poiListTmp.remove(poi)
+            }
+            Timber.i("$poiListTmp")
+            updateList(poiListTmp)
+        }
         add_poi_dialog_fragment_recycleview.layoutManager = GridLayoutManager(context, 3)
         add_poi_dialog_fragment_recycleview.adapter = poiListAdapter
     }
@@ -51,12 +64,14 @@ class AddPoiDialogFragment : DialogFragment() {
     private fun configureViewModel() {
         parent = activity as EstateActivity
         estateViewModel = parent.estateViewModel
-        binding.lifecycleOwner = this
         binding.addPoiDialogFragment = this
         this.poiSourceList = getPoiSourceList(parent.applicationContext)
-        this.configureObserver()
     }
 
+     fun saveData() {
+       estateViewModel.poiListTmp.value = this.poiListTmp
+                 closeDialog()
+    }
 
     /****************************
      *******   OBSERVERS  ********
@@ -65,11 +80,18 @@ class AddPoiDialogFragment : DialogFragment() {
 
     private fun configureObserver() {
         // POI list
-        estateViewModel.poiList.observe(this, Observer { poiList ->
-
+        estateViewModel.poiList.observe(this, Observer { list ->
+            this.poiList = getPoiListFromString(list)
+            poiListAdapter.notifyDataSetChanged()
         })
+
     }
 
+    private fun updateList(list: List<String>) {
+        this.poiList.clear()
+        this.poiList.addAll(list)
+        poiListAdapter.notifyDataSetChanged()
+    }
 
     fun closeDialog() {
         fragmentManager?.findFragmentByTag(TAG_ADD_POI_DIALOG)?.let {
