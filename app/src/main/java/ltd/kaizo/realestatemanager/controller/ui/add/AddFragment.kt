@@ -217,9 +217,9 @@ class AddFragment : BaseFragment() {
         //data
         estateViewModel.updateUiWithData(estate)
         //spinner
-        fragment_add_nb_room_spinner.setSelection(estate.nbRoom + 1)
-        fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom + 1)
-        fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom + 1)
+        fragment_add_nb_room_spinner.setSelection(estate.nbRoom)
+        fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom )
+        fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom )
         //sold switch
         fragment_add_sold_switch.isChecked = estate.isSold
         if (estate.isSold) datePickerDialog.dismiss()
@@ -227,8 +227,10 @@ class AddFragment : BaseFragment() {
         fragment_add_create_button.text = getString(R.string.update)
         //picture list
         estateViewModel.getPictureListFromId(estateId).observe(this, Observer { pictureList ->
-            estateViewModel.pictureListTmp.addAll(pictureList)
-            updateList(estateViewModel.pictureListTmp)
+            if (estateViewModel.pictureListTmp.isEmpty()) {
+                estateViewModel.pictureListTmp.addAll(pictureList)
+                updateList(estateViewModel.pictureListTmp)
+            }
 
         })
     }
