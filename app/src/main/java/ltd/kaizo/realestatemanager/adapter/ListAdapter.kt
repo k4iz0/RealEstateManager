@@ -62,7 +62,9 @@ class ListAdapter(
                 currencyEuro.visibility = View.GONE
                 currencyDollar.visibility = View.VISIBLE
             }
-            Picasso.get().load(estate.mainPicture).into(picture)
+            if (estate.mainPicture != "") {
+                Picasso.get().load(estate.mainPicture).into(picture)
+            }
             if (estate.isSold) {
                 soldState.visibility = View.VISIBLE
             } else {

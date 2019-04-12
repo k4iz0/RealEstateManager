@@ -3,6 +3,8 @@ package ltd.kaizo.realestatemanager.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 object DataRecordHelper {
     /**
@@ -111,4 +113,13 @@ object DataRecordHelper {
         val prefsEditor = sharedPreferences!!.edit()
         prefsEditor.putLong(key, java.lang.Double.doubleToLongBits(value)).apply()
     }
+
+    fun getListFromGson(gsonStr: String): List<String> {
+        return Gson().fromJson(gsonStr, object : TypeToken<List<String>>() {}.type)
+    }
+
+    fun getGsonFromList(list: List<String>): String {
+        return Gson().toJson(list)
+    }
+
 }

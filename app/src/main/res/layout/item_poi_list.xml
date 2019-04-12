@@ -22,7 +22,8 @@
                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="28dp"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/border_line"
+                android:tint="@color/colorPrimary"
                 android:contentDescription="@string/logo"
                 tools:src="@drawable/outline_school_black_48" android:layout_marginTop="8dp"/>
         <TextView
