@@ -12,11 +12,11 @@ import kotlinx.android.synthetic.main.fragment_add_poi_dialog.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPoiDialogBinding
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromList
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 import ltd.kaizo.realestatemanager.utils.TAG_ADD_POI_DIALOG
-import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
-import ltd.kaizo.realestatemanager.utils.Utils.getStringFromPoiList
 import timber.log.Timber
 
 class AddPoiDialogFragment : DialogFragment() {
@@ -79,7 +79,7 @@ class AddPoiDialogFragment : DialogFragment() {
     }
 
     fun saveData() {
-        estateViewModel.poiList.value = getStringFromPoiList(this.poiListTmp)
+        estateViewModel.poiList.value = getGsonFromList(this.poiListTmp)
         estateViewModel.poiListTmp.value = this.poiListTmp
         closeDialog()
     }
@@ -93,7 +93,7 @@ class AddPoiDialogFragment : DialogFragment() {
         // POI list
         estateViewModel.poiList.observe(this, Observer { list ->
             if (list.length > 1) {
-                this.poiList = getPoiListFromString(list)
+                this.poiList = getListFromGson(list).toMutableList()
                 poiListAdapter.notifyDataSetChanged()
             }
         })
