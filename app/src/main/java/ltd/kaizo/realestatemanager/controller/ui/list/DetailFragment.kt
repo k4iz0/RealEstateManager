@@ -23,8 +23,8 @@ import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
-import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
 import timber.log.Timber
 
@@ -119,7 +119,9 @@ class DetailFragment : BaseFragment() {
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city))
                 .into(fragment_detail_map_container)
-            updatePoiList(getPoiListFromString(estate.poi))
+            if (estate.poi != "") {
+                updatePoiList(getListFromGson(estate.poi).toMutableList())
+            }
 
         })
         //get estate's picture's list
