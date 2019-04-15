@@ -15,13 +15,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_add_picture_dialog.*
-import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPictureDialogBinding
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.RC_CHOOSE_PHOTO
 import ltd.kaizo.realestatemanager.utils.RC_TAKE_PHOTO
 import ltd.kaizo.realestatemanager.utils.TAG_ADD_PICTURE_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
+
 
 class AddPictureDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddPictureDialogBinding
@@ -35,7 +35,12 @@ class AddPictureDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_picture_dialog, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            ltd.kaizo.realestatemanager.R.layout.fragment_add_picture_dialog,
+            container,
+            false
+        )
         return binding.root
     }
 
@@ -55,9 +60,10 @@ class AddPictureDialogFragment : DialogFragment() {
         binding.addPictureDialogFragment = this
         this.configureObserver()
     }
+
     /****************************
-    *******   OBSERVERS  ********
-    *****************************/
+     *******   OBSERVERS  ********
+     *****************************/
 
 
     private fun configureObserver() {
@@ -66,7 +72,7 @@ class AddPictureDialogFragment : DialogFragment() {
     }
 
     fun selectPictureFromDevice() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_CHOOSE_PHOTO)
     }
 
@@ -84,9 +90,12 @@ class AddPictureDialogFragment : DialogFragment() {
         when {
             pictureTmp.name == "" -> showSnackBar(
                 add_dialog_fragment_coordinator_layout,
-                getString(R.string.enter_picture_name)
+                getString(ltd.kaizo.realestatemanager.R.string.enter_picture_name)
             )
-            pictureTmp.uri == "" -> showSnackBar(add_dialog_fragment_coordinator_layout, getString(R.string.select_picture))
+            pictureTmp.uri == "" -> showSnackBar(
+                add_dialog_fragment_coordinator_layout,
+                getString(ltd.kaizo.realestatemanager.R.string.select_picture)
+            )
             else -> {
                 estateViewModel.pictureTmp.value = pictureTmp
                 closeDialog()
@@ -103,9 +112,10 @@ class AddPictureDialogFragment : DialogFragment() {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
                         this.pictureTmp.uri = uriImageSelected.toString()
+
                     }
                 } else {
-                    estateViewModel.message.value = getString(R.string.no_picture_found)
+                    estateViewModel.message.value = getString(ltd.kaizo.realestatemanager.R.string.no_picture_found)
                 }
             }
             RC_TAKE_PHOTO -> if (resultCode == Activity.RESULT_OK) {
@@ -114,7 +124,7 @@ class AddPictureDialogFragment : DialogFragment() {
                     this.pictureTmp.uri = uriImageSelected.toString()
                 }
             } else {
-                estateViewModel.message.value = getString(R.string.error_unknown_error)
+                estateViewModel.message.value = getString(ltd.kaizo.realestatemanager.R.string.error_unknown_error)
             }
         }
 
