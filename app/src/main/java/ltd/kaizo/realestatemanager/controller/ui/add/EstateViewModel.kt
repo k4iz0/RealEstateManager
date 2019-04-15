@@ -6,8 +6,13 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.CURRENCY_DOLLAR
+import ltd.kaizo.realestatemanager.utils.CURRENCY_EURO
+import ltd.kaizo.realestatemanager.utils.CURRENT_CURRENCY
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils
+import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -84,11 +89,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 (pictureList.size == 0) -> message.value = "You must add at least 1 picture"
                 !checkMainPicture() -> message.value = "You must choose a main picture"
                 else -> {
-                    if (isSold.value == null) {
-                        isSold.value = false
-                    }
-                    if(poiList.value == null) poiList.value=""
-
+                    this.configureDefaultValue()
                     val estateToCreate = Estate(
                         estateId,
                         "",
@@ -118,6 +119,16 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
             message.value = "verify your data"
         }
 
+    }
+
+    private fun configureDefaultValue() {
+        if (isSold.value == null) {
+            isSold.value = false
+        }
+        if (poiList.value == null) poiList.value = ""
+        if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_DOLLAR) {
+            price.value = convertDollarToEuro(price.value!!.toInt()).toString()
+        }
     }
 
     private fun checkMainPicture(): Boolean {

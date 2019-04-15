@@ -2,8 +2,6 @@ package ltd.kaizo.realestatemanager.utils
 
 import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
 import ltd.kaizo.realestatemanager.utils.Utils.convertEuroToDollar
-import ltd.kaizo.realestatemanager.utils.Utils.getPoiListFromString
-import ltd.kaizo.realestatemanager.utils.Utils.getStringFromPoiList
 import ltd.kaizo.realestatemanager.utils.Utils.todayDate
 import ltd.kaizo.realestatemanager.utils.Utils.validateEmail
 import org.junit.Assert.assertEquals
@@ -49,18 +47,4 @@ class UtilsTest {
         assertEquals(false, validateEmail(username))
     }
 
-    @Test
-    fun givenAStringWithComaShouldReturnListOfString() {
-        val str = "toto, tata, titi ,tutu"
-        val strList = getPoiListFromString(str)
-        assertEquals("titi", strList[2])
-    }
-
-    @Test
-    fun givenAListOfStringShouldReturnAStringWithComa() {
-        val result = "toto,tata,titi,tutu"
-        val strList = mutableListOf(result)
-
-        assertEquals(result, getStringFromPoiList(strList))
-    }
 }

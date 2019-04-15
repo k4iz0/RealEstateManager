@@ -1,6 +1,7 @@
 package ltd.kaizo.realestatemanager.controller.ui.list
 
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -27,6 +28,7 @@ import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
 import timber.log.Timber
+import java.io.File
 
 class DetailFragment : BaseFragment() {
     private lateinit var pictureListAdapter: PictureListAdapter
@@ -34,7 +36,7 @@ class DetailFragment : BaseFragment() {
     private lateinit var listViewModel: ListViewModel
     private var pictureList: MutableList<EstatePhoto> = mutableListOf()
     private var poiList: MutableList<String> = mutableListOf()
-    private lateinit var parentActivity: ListActivity
+    private lateinit var parentActivity: Activity
     private lateinit var binding: FragmentDetailBinding
     private var sourceTag = 0
     private var estateId: Long = -1
@@ -77,9 +79,10 @@ class DetailFragment : BaseFragment() {
         when (sourceTag) {
             0 -> {
                 parentActivity = activity as ListActivity
-                listViewModel = parentActivity.listViewModel
+                listViewModel = (parentActivity as ListActivity).listViewModel
             }
             ESTATE_SOURCE_MAP -> {
+                parentActivity = activity as MapActivity
                 val viewModelFactory = Injection.provideViewModelFactory(activity as MapActivity)
                 listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
             }
@@ -106,7 +109,7 @@ class DetailFragment : BaseFragment() {
 
     private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
         //launch default image viewer on device to show the picture
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(estatePhoto.uri)))
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.fromFile(File(estatePhoto.uri))))
     }
 
 
