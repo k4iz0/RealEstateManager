@@ -7,7 +7,7 @@ import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 
 class SearchActivity : BaseActivity() {
-    private lateinit var searchViewModel: SearchViewModel
+    lateinit var searchViewModel: SearchViewModel
     override fun getFragmentLayout(): Int {
         return R.layout.activity_search
     }
@@ -15,6 +15,7 @@ class SearchActivity : BaseActivity() {
     override fun configureDesign() {
         this.configureToolbar()
         this.configureViewModel()
+        this.configureAndShowSearchFragment()
     }
 
     private fun configureViewModel() {
@@ -24,10 +25,14 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun configureToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.activity_estate_toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.activity_search_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
-
+    private fun configureAndShowSearchFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.activity_search_container, SearchFragment())
+            .commit()
+    }
 }
