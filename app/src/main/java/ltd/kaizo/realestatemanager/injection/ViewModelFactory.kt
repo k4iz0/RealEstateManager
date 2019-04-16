@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateViewModel
 import ltd.kaizo.realestatemanager.controller.ui.list.ListViewModel
 import ltd.kaizo.realestatemanager.controller.ui.map.MapViewModel
+import ltd.kaizo.realestatemanager.controller.ui.search.SearchViewModel
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import java.util.concurrent.Executor
 
@@ -20,6 +21,9 @@ class ViewModelFactory(private val estateDataSource : EstateRepository, private 
         }
         if (modelClass.isAssignableFrom(MapViewModel::class.java)) {
             return MapViewModel(estateDataSource, executor) as T
+        }
+        if (modelClass.isAssignableFrom(SearchViewModel::class.java)) {
+            return SearchViewModel(estateDataSource, executor) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")

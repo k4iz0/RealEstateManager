@@ -3,7 +3,6 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +17,7 @@ import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.controller.ui.map.MapActivity
+import ltd.kaizo.realestatemanager.controller.ui.search.SearchActivity
 import ltd.kaizo.realestatemanager.controller.ui.settings.SettingActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
@@ -160,7 +160,8 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 false
             }
             R.id.menu_activity_list_search -> {
-                Toast.makeText(this, "wip for search button", Toast.LENGTH_SHORT).show()
+                val searchActivity = Intent(this, SearchActivity::class.java)
+                startActivity(searchActivity)
                 true
             }
             else -> super.onOptionsItemSelected(item)
