@@ -10,12 +10,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
-import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import org.joda.time.format.DateTimeFormat
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -58,15 +56,17 @@ object Utils {
         return Math.round(euros / 0.812).toInt()
     }
 
-    fun formatNumberToString(number: Int): String {
-        val separator = DecimalFormatSymbols()
-        separator.groupingSeparator = ','
-        val formatter = if (read(
-                CURRENT_CURRENCY,
-                CURRENCY_EURO
-            ) == CURRENCY_EURO
-        ) DecimalFormat("#,###") else DecimalFormat("#,###", separator)
-        return formatter.format(number)
+    fun formatNumberFromCurrency(number: Int): String {
+        var nb = number
+        val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
+            Locale.FRANCE
+        } else {
+            nb = convertEuroToDollar(number)
+            Locale.US
+        }
+        val result = NumberFormat.getCurrencyInstance(currentLocale)
+        result.maximumFractionDigits = 0
+        return result.format(nb)
     }
 
     /**
@@ -175,6 +175,7 @@ object Utils {
         return photo
     }
 
-    fun getPoiSourceList(context : Context): Array<String> = context.resources.getStringArray(R.array.poiArray)
+    fun getPoiSourceList(context: Context): Array<String> =
+        context.resources.getStringArray(ltd.kaizo.realestatemanager.R.array.poiArray)
 
 }

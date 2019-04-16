@@ -25,7 +25,6 @@ import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
-import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
 import timber.log.Timber
 import java.io.File
@@ -118,7 +117,6 @@ class DetailFragment : BaseFragment() {
         if (this.estateId.toInt() == -1) this.estateId = listViewModel.estateId.value!!
 
         listViewModel.getEstateById(this.estateId).observe(this, Observer { estate ->
-            this.configureCurrency()
             listViewModel.updateUiWithData(estate)
             Picasso.get().load(Utils.getStaticMapUrlFromAddress(estate.address, estate.postalCode, estate.city))
                 .into(fragment_detail_map_container)
@@ -134,15 +132,6 @@ class DetailFragment : BaseFragment() {
 
     }
 
-    private fun configureCurrency() {
-        if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
-            fragment_detail_currency_euro.visibility = View.VISIBLE
-            fragment_detail_currency_dollar.visibility = View.GONE
-        } else {
-            fragment_detail_currency_euro.visibility = View.GONE
-            fragment_detail_currency_dollar.visibility = View.VISIBLE
-        }
-    }
 
     private fun updatePictureList(list: List<EstatePhoto>) {
         pictureList.clear()

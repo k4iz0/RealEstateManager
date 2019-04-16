@@ -46,5 +46,15 @@ class UtilsTest {
         val username = "to"
         assertEquals(false, validateEmail(username))
     }
+//
+//    @Test
+//    fun givenANumberShouldReturnAFormatedString() {
+//        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
+//       val context = Mockito.mock(Context::class.java)
+//        Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
+//        val number = 1000000
+//        val str = "1 000 000"
+//        assertEquals(str,formatNumberFromCurrency(number))
+//    }
 
 }

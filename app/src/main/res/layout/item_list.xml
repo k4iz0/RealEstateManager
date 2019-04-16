@@ -58,28 +58,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/bigTitleTextView"
-                app:layout_constraintStart_toStartOf="@+id/item_location_textview" android:layout_marginStart="8dp"/>
-        <TextView
-                android:id="@+id/item_price_currency_euro_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/euro"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                style="@style/bigTitleTextView"
-                app:layout_constraintStart_toEndOf="@+id/item_price_textview"
-                android:layout_marginStart="8dp"/>
-        <TextView
-                android:id="@+id/item_price_currency_dollar_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dollar"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                style="@style/bigTitleTextView"
-                app:layout_constraintEnd_toStartOf="@+id/item_price_textview"
-                android:visibility="visible" app:layout_constraintStart_toStartOf="@+id/item_location_textview"
-                android:layout_marginEnd="8dp"/>
+                app:layout_constraintStart_toStartOf="@+id/item_location_textview"/>
         <TextView
                 android:id="@+id/item_location_textview"
                 android:layout_width="wrap_content"

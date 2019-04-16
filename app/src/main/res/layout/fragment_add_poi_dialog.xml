@@ -13,15 +13,7 @@
                 android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center">
-        <TextView
-                android:id="@+id/add_poi_dialog_fragment_title_textview"
-                style="@style/bigTitleTextView"
-                android:text="select your POI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-        android:padding="16dp"/>
-        <androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/add_poi_dialog_fragment_recycleview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

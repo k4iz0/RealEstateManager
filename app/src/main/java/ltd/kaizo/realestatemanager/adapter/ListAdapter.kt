@@ -11,11 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.utils.CURRENCY_EURO
-import ltd.kaizo.realestatemanager.utils.CURRENT_CURRENCY
-import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
-import ltd.kaizo.realestatemanager.utils.Utils.convertEuroToDollar
-import ltd.kaizo.realestatemanager.utils.Utils.formatNumberToString
+import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
 
 class ListAdapter(
     private val estateList: List<Estate>,
@@ -52,16 +48,16 @@ class ListAdapter(
             type.text = estate.type
             cardView.setBackgroundColor(getColor(cardView.context,android.R.color.white))
             location.text = estate.city.toUpperCase()
-
-            if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
-                price.text = formatNumberToString(estate.price)
-                currencyEuro.visibility = View.VISIBLE
-                currencyDollar.visibility = View.GONE
-            } else {
-                price.text = formatNumberToString(convertEuroToDollar(estate.price))
-                currencyEuro.visibility = View.GONE
-                currencyDollar.visibility = View.VISIBLE
-            }
+            price.text = formatNumberFromCurrency(estate.price)
+//            if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
+//                price.text = formatNumberToString(estate.price))
+//                currencyEuro.visibility = View.VISIBLE
+//                currencyDollar.visibility = View.GONE
+//            } else {
+//                price.text = formatNumberToString(convertEuroToDollar(estate.price))
+//                currencyEuro.visibility = View.GONE
+//                currencyDollar.visibility = View.VISIBLE
+//            }
             if (estate.mainPicture != "") {
                 Picasso.get().load(estate.mainPicture).into(picture)
             }
@@ -80,8 +76,6 @@ class ListAdapter(
         val location = itemView.findViewById<TextView>(R.id.item_location_textview)!!
         val price = itemView.findViewById<TextView>(R.id.item_price_textview)!!
         val soldState = itemView.findViewById<TextView>(R.id.picture_item_sold_textview)!!
-        val currencyEuro = itemView.findViewById<TextView>(R.id.item_price_currency_euro_textview)!!
-        val currencyDollar = itemView.findViewById<TextView>(R.id.item_price_currency_dollar_textview)!!
     }
 //    interface EstateListListener {
 //        fun onEstateSelected(estate: Estate)

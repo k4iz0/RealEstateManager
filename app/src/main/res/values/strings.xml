@@ -59,7 +59,7 @@
     <string name="unable_get_location">Unable to get current location have you enable localisation on your device ?
     </string>
     <string name="map">map</string>
-    <string name="currency">currency : </string>
+    <string name="currency">currency :</string>
     <string name="euro">€</string>
     <string name="dollar_title">dollar $</string>
     <string name="euro_title">euro €</string>
