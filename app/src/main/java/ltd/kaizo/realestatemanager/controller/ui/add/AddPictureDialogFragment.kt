@@ -73,6 +73,10 @@ class AddPictureDialogFragment : DialogFragment() {
 
     fun selectPictureFromDevice() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        val takeFlags: Int = intent.flags and
+                (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         startActivityForResult(intent, RC_CHOOSE_PHOTO)
     }
 
@@ -111,6 +115,8 @@ class AddPictureDialogFragment : DialogFragment() {
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
                         uriImageSelected = data.data as Uri
+                        val takeFlags = data.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                        activity?.contentResolver?.takePersistableUriPermission(uriImageSelected, takeFlags)
                         this.pictureTmp.uri = uriImageSelected.toString()
 
                     }

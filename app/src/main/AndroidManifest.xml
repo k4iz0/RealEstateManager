@@ -4,34 +4,39 @@
 
     <uses-permission android:name="android.Manifest.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
             android:allowBackup="false"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_home_for_sale"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-           >
+            android:theme="@style/AppTheme">
+        <activity android:name=".controller.ui.search.SearchActivity"
+                  android:parentActivityName=".controller.ui.list.ListActivity">
+        </activity>
+
         <provider
-                android:grantUriPermissions="true"
+                android:name=".provider.EstateContentProvider"
                 android:authorities="ltd.kaizo.realestatemanager.provider"
-                  android:name=".provider.EstateContentProvider"
-                android:exported="true">
+                android:exported="true"
+                android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/file_paths"/>
-
         </provider>
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>
-        <activity android:name=".controller.ui.map.MapActivity"
-                  android:parentActivityName=".controller.ui.list.ListActivity">
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>
+
+        <activity
+                android:name=".controller.ui.map.MapActivity"
+                android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>
         <activity
                 android:name=".controller.ui.settings.SettingActivity"
