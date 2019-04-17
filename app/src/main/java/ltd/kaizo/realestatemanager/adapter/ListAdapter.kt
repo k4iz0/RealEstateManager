@@ -61,6 +61,12 @@ class ListAdapter(
             if (estate.mainPicture != "") {
                 Picasso.get().load(estate.mainPicture).into(picture)
             }
+<<<<<<< HEAD
+=======
+            if (estate.mainPicture != "") {
+                Picasso.get().load(estate.mainPicture).into(picture)
+            }
+>>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
             if (estate.isSold) {
                 soldState.visibility = View.VISIBLE
             } else {

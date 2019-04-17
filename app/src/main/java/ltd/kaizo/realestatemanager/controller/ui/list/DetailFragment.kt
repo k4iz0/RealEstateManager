@@ -25,6 +25,10 @@ import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
+<<<<<<< HEAD
+=======
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
+>>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
 import timber.log.Timber
 import java.io.File
