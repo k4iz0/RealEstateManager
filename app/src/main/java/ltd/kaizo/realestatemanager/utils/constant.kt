@@ -12,6 +12,7 @@ const val ESTATE_ID = "ESTATE ID"
 const val ESTATE_SOURCE_ADD = 40
 const val ESTATE_SOURCE_EDIT = 30
 const val ESTATE_SOURCE_MAP = 50
+const val ESTATE_SOURCE_SEARCH = 60
 const val TAG_ADD_PICTURE_DIALOG = "AddPictureDialogFragment"
 const val TAG_ADD_POI_DIALOG = "AddPoiDialogFragment"
 const val COLLECTION_NAME = "users"

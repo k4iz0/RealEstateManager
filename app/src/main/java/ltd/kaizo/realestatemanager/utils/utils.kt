@@ -6,10 +6,13 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import org.joda.time.format.DateTimeFormat
@@ -68,7 +71,13 @@ object Utils {
         result.maximumFractionDigits = 0
         return result.format(nb)
     }
-
+     fun showAddPoiAlertDialog(fragmentManager: FragmentManager?, source: Int) {
+        val args = Bundle()
+        args.putInt(ESTATE_SOURCE, source)
+        val dialog = AddPoiDialogFragment()
+        dialog.arguments = args
+        fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
+    }
     /**
      * Vérification de la connexion réseau
      * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE

@@ -63,6 +63,17 @@
     <string name="euro">€</string>
     <string name="dollar_title">dollar $</string>
     <string name="euro_title">euro €</string>
+    <string name="mini">mini</string>
+    <string name="maxi">maxi</string>
+    <string name="area">area</string>
+    <string name="picture">picture</string>
+    <string name="one">1</string>
+    <string name="three">3</string>
+    <string name="five">5+</string>
+    <string name="poi">poi</string>
+    <string name="sold_date">sold date :</string>
+    <string name="_02_02_2019">02/02/2019</string>
+    <string name="add_poi">add poi</string>
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>
