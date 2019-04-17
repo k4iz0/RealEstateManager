@@ -22,6 +22,7 @@ import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
+import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import timber.log.Timber
 import java.util.*
@@ -134,7 +135,7 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureAddPoiBtn() {
-       fragment_add_add_poi_btn.setOnClickListener { this.showAddPoiAlertDialog() }
+       fragment_add_add_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_ADD) }
     }
     private fun configureSpinner() {
         val items = (0..15).toList()
@@ -279,8 +280,5 @@ class AddFragment : BaseFragment() {
         val dialog = AddPictureDialogFragment()
         fragmentManager?.let { dialog.show(it, TAG_ADD_PICTURE_DIALOG) }
     }
-    private fun showAddPoiAlertDialog() {
-        val dialog = AddPoiDialogFragment()
-        fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
-    }
+
 }

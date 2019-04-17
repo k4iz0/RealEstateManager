@@ -1,5 +1,6 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_add_poi_dialog.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
+import ltd.kaizo.realestatemanager.controller.ui.search.SearchActivity
+import ltd.kaizo.realestatemanager.controller.ui.search.SearchViewModel
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPoiDialogBinding
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromList
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
+import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_SEARCH
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 import ltd.kaizo.realestatemanager.utils.TAG_ADD_POI_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
@@ -21,9 +26,11 @@ import timber.log.Timber
 
 class AddPoiDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddPoiDialogBinding
-    private lateinit var parent: EstateActivity
+    private lateinit var parent: Activity
     private lateinit var estateViewModel: EstateViewModel
+    private lateinit var searchViewModel: SearchViewModel
     private lateinit var poiListAdapter: PoiListAdapter
+    private var sourceTag = 0
     private var poiList = mutableListOf<String>()
     private var poiListTmp = mutableListOf<String>()
 
@@ -33,6 +40,9 @@ class AddPoiDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_poi_dialog, container, false)
+        if (arguments != null) {
+            this.sourceTag = this.arguments!!.getInt(ESTATE_SOURCE)
+        }
         return binding.root
     }
 
@@ -57,11 +67,21 @@ class AddPoiDialogFragment : DialogFragment() {
     }
 
     private fun configurePoiListTmp() {
-        if (estateViewModel.poiListTmp.value == null) {
-            estateViewModel.poiListTmp.value = mutableListOf()
+        if (sourceTag == ESTATE_SOURCE_SEARCH) {
+            if (searchViewModel.poiListTmp.value == null) {
+                searchViewModel.poiListTmp.value = mutableListOf()
+            } else {
+                this.poiList.addAll(searchViewModel.poiListTmp.value!!)
+                this.poiListTmp.addAll(searchViewModel.poiListTmp.value!!)
+            }
         } else {
-            this.poiList.addAll(estateViewModel.poiListTmp.value!!)
-            this.poiListTmp.addAll(estateViewModel.poiListTmp.value!!)
+
+            if (estateViewModel.poiListTmp.value == null) {
+                estateViewModel.poiListTmp.value = mutableListOf()
+            } else {
+                this.poiList.addAll(estateViewModel.poiListTmp.value!!)
+                this.poiListTmp.addAll(estateViewModel.poiListTmp.value!!)
+            }
         }
     }
 
@@ -72,15 +92,25 @@ class AddPoiDialogFragment : DialogFragment() {
     }
 
     private fun configureViewModel() {
-        parent = activity as EstateActivity
-        estateViewModel = parent.estateViewModel
+        if (sourceTag == ESTATE_SOURCE_SEARCH) {
+            parent = activity as SearchActivity
+            searchViewModel = (parent as SearchActivity).searchViewModel
+        } else {
+            parent = activity as EstateActivity
+            estateViewModel = (parent as EstateActivity).estateViewModel
+        }
         binding.addPoiDialogFragment = this
         this.poiSourceList = getPoiSourceList(parent.applicationContext)
     }
 
     fun saveData() {
-        estateViewModel.poiList.value = getGsonFromList(this.poiListTmp)
-        estateViewModel.poiListTmp.value = this.poiListTmp
+        if (sourceTag == ESTATE_SOURCE_SEARCH) {
+            searchViewModel.poiList.value = getGsonFromList(this.poiListTmp)
+            searchViewModel.poiListTmp.value = this.poiListTmp
+        } else {
+            estateViewModel.poiList.value = getGsonFromList(this.poiListTmp)
+            estateViewModel.poiListTmp.value = this.poiListTmp
+        }
         closeDialog()
     }
 
@@ -91,19 +121,30 @@ class AddPoiDialogFragment : DialogFragment() {
 
     private fun configureObserver() {
         // POI list
-        estateViewModel.poiList.observe(this, Observer { list ->
-            if (list.length > 1) {
-                this.poiList = getListFromGson(list).toMutableList()
-                poiListAdapter.notifyDataSetChanged()
-            }
-        })
+        if (::estateViewModel.isInitialized) {
+
+            estateViewModel.poiList.observe(this, Observer { list ->
+                if (list.length > 1) {
+                    this.poiList = getListFromGson(list).toMutableList()
+                    poiListAdapter.notifyDataSetChanged()
+                }
+            })
+        }
+        if (::searchViewModel.isInitialized) {
+            searchViewModel.poiList.observe(this, Observer { list ->
+                if (list.length > 1) {
+                    this.poiList = getListFromGson(list).toMutableList()
+                    poiListAdapter.notifyDataSetChanged()
+                }
+            })
+        }
 
     }
 
     private fun updateList(list: List<String>) {
         this.poiList.clear()
         this.poiList.addAll(list)
-        poiListAdapter.notifyDataSetChanged()
+        this.poiListAdapter.notifyDataSetChanged()
     }
 
     private fun closeDialog() {

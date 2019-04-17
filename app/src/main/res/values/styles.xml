@@ -25,7 +25,7 @@
     <style name="titleTextView">
     <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@android:color/white</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
     <!--sold textview-->
     <style name="soldTextView">
