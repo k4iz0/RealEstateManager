@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+<<<<<<< HEAD
 import ltd.kaizo.realestatemanager.utils.CURRENCY_DOLLAR
 import ltd.kaizo.realestatemanager.utils.CURRENCY_EURO
 import ltd.kaizo.realestatemanager.utils.CURRENT_CURRENCY
@@ -13,6 +14,10 @@ import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils
 import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
+=======
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
+import ltd.kaizo.realestatemanager.utils.Utils
+>>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
