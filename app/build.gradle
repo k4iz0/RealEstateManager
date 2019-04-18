@@ -78,10 +78,9 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     //GSON
     implementation 'com.google.code.gson:gson:2.8.5'
-<<<<<<< HEAD
+
     //MOCKITO
     implementation "org.mockito:mockito-core:2.27.0"
-=======
+    implementation 'com.google.android.material:material:1.0.0'
 
->>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
 }
