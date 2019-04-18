@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import kotlinx.android.synthetic.main.fragment_search.*
 import ltd.kaizo.realestatemanager.R
@@ -34,6 +35,18 @@ class SearchFragment : BaseFragment() {
         this.configureViewModel()
         this.configureObserver()
         this.configureEvents()
+        this.configureSpinner()
+    }
+
+    private fun configureSpinner() {
+        val typeAdapter =
+            ArrayAdapter(
+                parentActivity,
+                R.layout.support_simple_spinner_dropdown_item,
+                searchViewModel.typeArray.value!!
+            )
+        fragment_search_type_spinner.adapter = typeAdapter
+
     }
 
     private fun configureEvents() {
@@ -51,6 +64,7 @@ class SearchFragment : BaseFragment() {
         searchViewModel = parentActivity.searchViewModel
         binding.lifecycleOwner = this
         binding.searchViewModel = searchViewModel
+        searchViewModel.typeArray.value = resources.getStringArray(R.array.typeArray)
     }
 
 }

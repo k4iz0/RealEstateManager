@@ -17,11 +17,8 @@ import ltd.kaizo.realestatemanager.controller.ui.search.SearchViewModel
 import ltd.kaizo.realestatemanager.databinding.FragmentAddPoiDialogBinding
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromList
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
-<<<<<<< HEAD
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_SEARCH
-=======
->>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
 import ltd.kaizo.realestatemanager.utils.RC_POI_ADD_ITEM
 import ltd.kaizo.realestatemanager.utils.TAG_ADD_POI_DIALOG
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
@@ -107,7 +104,7 @@ class AddPoiDialogFragment : DialogFragment() {
     }
 
     fun saveData() {
-<<<<<<< HEAD
+
         if (sourceTag == ESTATE_SOURCE_SEARCH) {
             searchViewModel.poiList.value = getGsonFromList(this.poiListTmp)
             searchViewModel.poiListTmp.value = this.poiListTmp
@@ -115,10 +112,7 @@ class AddPoiDialogFragment : DialogFragment() {
             estateViewModel.poiList.value = getGsonFromList(this.poiListTmp)
             estateViewModel.poiListTmp.value = this.poiListTmp
         }
-=======
-        estateViewModel.poiList.value = getGsonFromList(this.poiListTmp)
-        estateViewModel.poiListTmp.value = this.poiListTmp
->>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
+
         closeDialog()
     }
 
@@ -129,7 +123,7 @@ class AddPoiDialogFragment : DialogFragment() {
 
     private fun configureObserver() {
         // POI list
-<<<<<<< HEAD
+
         if (::estateViewModel.isInitialized) {
 
             estateViewModel.poiList.observe(this, Observer { list ->
@@ -147,15 +141,6 @@ class AddPoiDialogFragment : DialogFragment() {
                 }
             })
         }
-=======
-        estateViewModel.poiList.observe(this, Observer { list ->
-            if (list.length > 1) {
-                this.poiList = getListFromGson(list).toMutableList()
-                poiListAdapter.notifyDataSetChanged()
-            }
-        })
->>>>>>> 4467aa526de47bd9335482f60ac9f9a0c2e23717
-
     }
 
     private fun updateList(list: List<String>) {

@@ -51,7 +51,7 @@ class AddFragment : BaseFragment() {
     }
 
     override val fragmentLayout: Int
-        get() = ltd.kaizo.realestatemanager.R.layout.fragment_add
+        get() = R.layout.fragment_add
 
     /*
     * onCreateView
@@ -135,8 +135,9 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureAddPoiBtn() {
-       fragment_add_add_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_ADD) }
+        fragment_add_add_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_ADD) }
     }
+
     private fun configureSpinner() {
         val items = (0..15).toList()
         val adapter = ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, items)
@@ -146,8 +147,12 @@ class AddFragment : BaseFragment() {
         fragment_add_constraint_layout.setOnClickListener { hideKeyboard(parentActivity) }
 
         val typeAdapter =
-            ArrayAdapter(parentActivity, R.layout.support_simple_spinner_dropdown_item, estateViewModel.typeArray.value!!)
-        fragment_add_type_spinner.adapter = typeAdapter
+            ArrayAdapter(
+                parentActivity,
+                R.layout.support_simple_spinner_dropdown_item,
+                estateViewModel.typeArray.value!!
+            )
+        fragment_search_type_spinner.adapter = typeAdapter
 
     }
 
@@ -219,8 +224,8 @@ class AddFragment : BaseFragment() {
         estateViewModel.updateUiWithData(estate)
         //spinner
         fragment_add_nb_room_spinner.setSelection(estate.nbRoom)
-        fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom )
-        fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom )
+        fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom)
+        fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom)
         //sold switch
         fragment_add_sold_switch.isChecked = estate.isSold
         if (estate.isSold) datePickerDialog.dismiss()
@@ -236,7 +241,7 @@ class AddFragment : BaseFragment() {
         })
     }
 
-     /****************************
+    /****************************
      *********   DIALOG   ********
      *****************************/
 
@@ -246,21 +251,21 @@ class AddFragment : BaseFragment() {
 
         val date = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             val MyYear = add0ToDate(year)
-            val MyMonth = add0ToDate(month+1)
+            val MyMonth = add0ToDate(month + 1)
             val MyDay = add0ToDate(dayOfMonth)
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             when (source) {
                 RC_DATE_IN -> estateViewModel.dateIn.value = "$MyDay/$MyMonth/$MyYear"
-                RC_DATE_OUT ->{
+                RC_DATE_OUT -> {
                     Timber.i("date 1 = ${estateViewModel.dateIn.value} et date 2 = $MyDay/$MyMonth/$MyYear")
                     if (checkDateDifference(estateViewModel.dateIn.value!!, "$MyDay/$MyMonth/$MyYear")) {
                         estateViewModel.dateOut.value = "$MyDay/$MyMonth/$MyYear"
                     } else {
                         estateViewModel.message.value = "error check your sale date"
                     }
-            }
+                }
             }
 
         }

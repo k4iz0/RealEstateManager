@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.search
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import timber.log.Timber
 import java.util.concurrent.Executor
 
 class SearchViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -25,6 +26,18 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
     val dateOutMini = MutableLiveData<String>()
     val dateOutMaxi = MutableLiveData<String>()
     val poiListTmp = MutableLiveData<MutableList<String>>()
+    val typeArray = MutableLiveData<Array<String>>()
 
+
+    fun launchSearchRequest() {
+        Timber.i(
+            """area = ${area.value}
+surfaceMini = ${surfaceMini.value}
+surfaceMaxi = ${surfaceMaxi.value}
+nbRoomMaxi = ${nbRoomMaxi.value}
+spinner = ${typeArray.value?.get(type.value!!)}
+"""
+        )
+    }
 
 }
