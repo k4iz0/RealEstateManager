@@ -39,6 +39,7 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
 
     fun launchSearchRequest() {
         val sqliteQuery = SimpleSQLiteQuery(configureQuery(), arrayOf(argsList))
+        Timber.i("argsList = ${argsList.size}")
         if (argsList.size == 0) {
             executor.execute { searchResult = estateDataSource.getAllEstate() }
         } else {
@@ -77,7 +78,7 @@ dateOutMaxi = ${dateOutMaxi.value}
         if (!surfaceMaxi.value.isNullOrBlank()) {
             query += checkCondition
             query += "surface <= ?"
-            argsList.add(surfaceMini.value!!.toInt())
+            argsList.add(surfaceMaxi.value!!.toInt())
         }
         return query
 

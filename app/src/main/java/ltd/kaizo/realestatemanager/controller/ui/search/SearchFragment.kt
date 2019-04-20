@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_search.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentSearchBinding
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_SEARCH
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
+import timber.log.Timber
 
 class SearchFragment : BaseFragment() {
     private lateinit var searchViewModel: SearchViewModel
@@ -57,7 +59,11 @@ class SearchFragment : BaseFragment() {
         fragment_search_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_SEARCH) }
     }
 
-    private fun configureObserver() {}
+    private fun configureObserver() {
+        searchViewModel.searchResult.observe(this, Observer { searchResultList ->
+        Timber.i("resultList = $searchResultList")
+        })
+    }
 
     private fun configureViewModel() {
         parentActivity = activity as SearchActivity

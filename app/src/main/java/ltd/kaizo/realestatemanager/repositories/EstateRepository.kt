@@ -1,6 +1,7 @@
 package ltd.kaizo.realestatemanager.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.sqlite.db.SimpleSQLiteQuery
 import ltd.kaizo.realestatemanager.database.EstateDao
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
