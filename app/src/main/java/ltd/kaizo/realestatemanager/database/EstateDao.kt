@@ -35,4 +35,7 @@ interface EstateDao {
 
     @Query("UPDATE estate SET latitude=:latitude, longitude=:longitude WHERE id=:estateId")
     fun updateLatLng(estateId: Long, latitude:Double, longitude:Double)
+    
+    @RawQuery(observedEntities =[Estate::class])
+    fun getSearchResult(query: SimpleSQLiteQuery):LiveData<List<Estate>>
 }
