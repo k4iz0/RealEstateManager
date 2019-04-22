@@ -13,6 +13,7 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentSearchBinding
 import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_SEARCH
+import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import timber.log.Timber
 
@@ -53,6 +54,7 @@ class SearchFragment : BaseFragment() {
 
     private fun configureEvents() {
         this.configureAddPoiBtn()
+        fragment_search_coordinator_layout.setOnClickListener { hideKeyboard(parentActivity) }
     }
 
     private fun configureAddPoiBtn() {
@@ -60,8 +62,8 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun configureObserver() {
-        searchViewModel.searchResult.observe(this, Observer { searchResultList ->
-        Timber.i("resultList = $searchResultList")
+        searchViewModel.resultList.observe(this, Observer { resultList ->
+        Timber.i("resultList = $resultList")
         })
     }
 
