@@ -21,9 +21,9 @@
                     android:layout_height="wrap_content"
                     style="@style/titleTextView"
                     android:text="@string/surface"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_surface_mini_edittext"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_surface_mini_edittext"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_surface_mini_edittext"
+                    android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:maxLength="4"
@@ -50,18 +50,18 @@
                     android:background="@drawable/border_line"
                     android:inputType="number"
                     app:layout_constraintStart_toEndOf="@+id/fragment_search_surface_mini_edittext"
-                    app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintHorizontal_bias="0.5"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
             <TextView
                     android:id="@+id/fragment_search_room_title_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="17dp"
                     style="@style/titleTextView"
                     android:text="@string/number_of_rooms"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_surface_title_textview"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_room_mini_edittext"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_room_mini_edittext"
-            />
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:maxLength="2"
@@ -89,7 +89,7 @@
                     android:inputType="number"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_surface_maxi_edittext"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_search_surface_maxi_edittext"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_surface_maxi_edittext"/>
             <TextView
@@ -98,9 +98,9 @@
                     android:layout_height="wrap_content"
                     style="@style/titleTextView"
                     android:text="@string/number_of_bedrooms"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_room_title_textview"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_bedroom_mini_edittext"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_bedroom_mini_edittext"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_bedroom_mini_edittext"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:maxLength="2"
@@ -113,7 +113,7 @@
                     android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_room_mini_edittext"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_room_mini_edittext"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_search_room_mini_edittext"/>
 
             <EditText
@@ -128,7 +128,7 @@
                     android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_room_maxi_edittext"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_room_maxi_edittext"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_search_room_maxi_edittext"/>
             <TextView
                     android:id="@+id/fragment_search_bathroom_title_textview"
@@ -138,7 +138,8 @@
                     android:text="@string/number_of_bathrooms"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_bedroom_title_textview"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_bathroom_mini_edittext"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_bathroom_mini_edittext"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_bathroom_mini_edittext"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:maxLength="2"
@@ -151,7 +152,7 @@
                     android:inputType="number"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_bedroom_mini_edittext"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_bedroom_mini_edittext"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_search_bedroom_mini_edittext"/>
 
             <EditText
@@ -166,7 +167,7 @@
                     android:inputType="number"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_bedroom_maxi_edittext"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_bedroom_maxi_edittext"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_search_bedroom_maxi_edittext"/>
             <TextView
                     android:id="@+id/fragment_search_price_title_textview"
@@ -176,8 +177,7 @@
                     android:text="@string/price"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_price_mini_edittext"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_price_mini_edittext"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_bathroom_title_textview"
-            />
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:maxLength="7"
@@ -188,10 +188,11 @@
                     android:hint="@string/mini"
                     android:text="@={searchViewModel.priceMini}"
                     android:inputType="number"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_bathroom_mini_edittext"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_bathroom_mini_edittext"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_bathroom_mini_edittext"/>
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_bathroom_mini_edittext"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_search_price_title_textview"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_price_maxi_edittext"/>
 
             <EditText
                     android:gravity="center"
@@ -204,9 +205,9 @@
                     android:background="@drawable/border_line"
                     android:inputType="number"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_bathroom_maxi_edittext"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_bathroom_maxi_edittext"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_bathroom_maxi_edittext"/>
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_bathroom_maxi_edittext"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
             <TextView
                     android:id="@+id/fragment_search_area_textview"
                     android:layout_width="wrap_content"
@@ -219,8 +220,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_area_edittext"/>
             <EditText
                     android:gravity="center"
-
-                    android:maxLength="20"
                     android:id="@+id/fragment_search_area_edittext"
                     android:layout_width="0dp"
                     android:background="@drawable/border_line"
@@ -237,28 +236,30 @@
                     android:layout_height="wrap_content"
                     style="@style/titleTextView"
                     android:text="@string/type"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_area_textview"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_area_textview"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_type_spinner"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_type_spinner"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_type_spinner"
+            />
             <Spinner
                     android:id="@+id/fragment_search_type_spinner"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:selectedItemPosition="@={searchViewModel.type}"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_area_edittext"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_area_edittext"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_area_edittext"/>
+                    app:layout_constraintStart_toEndOf="@+id/fragment_search_type_textview"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_out__mini_textview"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_date_out__maxi_textview"
+                    android:layout_marginEnd="8dp"/>
             <TextView
                     android:id="@+id/fragment_search_picture_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/titleTextView"
                     android:text="@string/picture"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_type_textview"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_picture_mini_editext"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_picture_mini_editext"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_picture_mini_editext"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"/>
             <EditText
                     android:id="@+id/fragment_search_picture_mini_editext"
                     android:layout_width="wrap_content"
@@ -269,9 +270,11 @@
                     android:maxLength="2"
                     android:background="@drawable/border_line"
                     android:text="@={searchViewModel.pictureMini}"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_type_spinner"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_type_spinner" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_type_spinner">
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_search_picture_textview"
+                    android:layout_marginStart="8dp">
 
             </EditText>
             <com.google.android.material.button.MaterialButton
@@ -280,10 +283,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/poi"
                     style="@style/ButtonMaterialStyleBlue"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_out_textview_title"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out_textview_title"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_search_search_btn"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_search_btn"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_search_type_spinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_type_spinner"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out__maxi_textview"
+                    android:layout_marginStart="8dp" android:layout_marginTop="8dp"/>
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/fragment_search_search_btn"
                     android:layout_width="0dp"
@@ -291,18 +296,18 @@
                     android:text="@string/search"
                     android:onClick="@{()->searchViewModel.launchSearchRequest()}"
                     style="@style/ButtonMaterialStyleBlue"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out__mini_textview"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_out__maxi_textview"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_out__maxi_textview"/>
+                    app:layout_constraintStart_toStartOf="@+id/fragment_search_type_spinner"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_poi_btn" android:layout_marginEnd="8dp"
+                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/fragment_search_poi_btn"/>
             <TextView
                     android:id="@+id/fragment_search_date_in_textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/date"
                     style="@style/titleTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_picture_textview"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__mini_textview"/>
+                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__mini_textview"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"/>
             <TextView
                     android:id="@+id/fragment_search_date_in__mini_textview"
                     android:layout_width="wrap_content"
@@ -315,11 +320,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:textStyle="bold"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_date_in__maxi_textview"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_picture_mini_editext"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__maxi_textview"/>
+                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__maxi_textview"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_search_date_in_textview_title"
+                    android:layout_marginStart="8dp"/>
             <TextView
                     android:id="@+id/fragment_search_date_in__maxi_textview"
                     android:layout_width="wrap_content"
@@ -333,19 +336,20 @@
                     android:focusable="true"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/fragment_search_date_in__mini_textview"
-                    android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_picture_mini_editext" android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_picture_mini_editext"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_picture_mini_editext"
+            />
             <TextView
                     android:id="@+id/fragment_search_date_out_textview_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sold_date"
                     style="@style/titleTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_in_textview_title"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_date_out__mini_textview"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_date_out__mini_textview"
-                    android:layout_marginBottom="8dp" android:layout_marginTop="8dp"/>
+                    android:layout_marginBottom="8dp" android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"/>
             <TextView
                     android:id="@+id/fragment_search_date_out__mini_textview"
                     android:layout_width="wrap_content"
@@ -358,8 +362,6 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:textStyle="bold"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_date_out__maxi_textview"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_date_in__mini_textview"
                     app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_out__maxi_textview"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"/>
@@ -378,8 +380,14 @@
                     app:layout_constraintStart_toEndOf="@+id/fragment_search_date_out__mini_textview"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_in__maxi_textview"
-                    android:layout_marginStart="8dp" android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_in__maxi_textview"/>
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_in__maxi_textview"
+                    android:layout_marginStart="8dp"/>
+            <androidx.constraintlayout.widget.Guideline
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guideline2" app:layout_constraintGuide_percent="0.5"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

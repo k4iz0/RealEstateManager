@@ -2,6 +2,7 @@ package ltd.kaizo.realestatemanager.controller.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
 import ltd.kaizo.realestatemanager.model.Estate
@@ -13,6 +14,7 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
     private var argsList = mutableListOf<Any>()
     val message = MutableLiveData<String>()
     lateinit var searchResult: LiveData<List<Estate>>
+    var resultList = MutableLiveData<List<Estate>>()
     val area = MutableLiveData<String>()
     val surfaceMini = MutableLiveData<String>()
     val surfaceMaxi = MutableLiveData<String>()
@@ -24,6 +26,7 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
     val nbBathroomMaxi = MutableLiveData<String>()
     val priceMini = MutableLiveData<String>()
     val priceMaxi = MutableLiveData<String>()
+    val pictureMini = MutableLiveData<String>()
     val poiList = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
     val dateInMini = MutableLiveData<String>()
@@ -34,16 +37,19 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
     val typeArray = MutableLiveData<Array<String>>()
 
     init {
-        launchSearchRequest()
+        resultList.value = mutableListOf()
     }
 
     fun launchSearchRequest() {
         val sqliteQuery = SimpleSQLiteQuery(configureQuery(), arrayOf(argsList))
-        Timber.i("argsList = ${argsList.size}")
+        Timber.i("argsList = $argsList")
         if (argsList.size == 0) {
             executor.execute { searchResult = estateDataSource.getAllEstate() }
         } else {
-            executor.execute { searchResult = estateDataSource.getSearchResult(sqliteQuery) }
+            executor.execute {
+                searchResult = estateDataSource.getSearchResult(sqliteQuery)
+                resultList.postValue(searchResult.value)
+            }
         }
 
     }
@@ -72,14 +78,60 @@ dateOutMaxi = ${dateOutMaxi.value}
         }
         if (!surfaceMini.value.isNullOrBlank()) {
             query += checkCondition
-            query += " surface >= ?"
-            argsList.add(surfaceMini.value!!.toInt())
+            query += "surface >= ?"
+            argsList.add(surfaceMini.value!!)
         }
         if (!surfaceMaxi.value.isNullOrBlank()) {
             query += checkCondition
             query += "surface <= ?"
-            argsList.add(surfaceMaxi.value!!.toInt())
+            argsList.add(surfaceMaxi.value!!)
         }
+        if (!nbRoomMini.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbRoom >= ?"
+            argsList.add(nbRoomMini.value!!.toInt())
+        }
+        if (!nbRoomMaxi.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbRoom <= ?"
+            argsList.add(nbRoomMaxi.value!!.toInt())
+        }
+        if (!nbBedroomMini.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbBedroom >= ?"
+            argsList.add(nbBedroomMini.value!!.toInt())
+        }
+        if (!nbBedroomMaxi.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbBedroom <= ?"
+            argsList.add(nbBedroomMaxi.value!!.toInt())
+        }
+         if (!nbBathroomMini.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbBathroom >= ?"
+            argsList.add(nbBathroomMini.value!!.toInt())
+        }
+        if (!nbBathroomMaxi.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "nbBathroom <= ?"
+            argsList.add(nbBathroomMaxi.value!!.toInt())
+        }
+         if (!priceMini.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "price >= ?"
+            argsList.add(priceMini.value!!.toInt())
+        }
+        if (!priceMaxi.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "price <= ?"
+            argsList.add(priceMaxi.value!!.toInt())
+        }
+        if (!area.value.isNullOrBlank()) {
+            query += checkCondition
+            query += "address  LIKE ? OR city LIKE ?"
+            argsList.add(area.value!!)
+        }
+
         return query
 
     }
