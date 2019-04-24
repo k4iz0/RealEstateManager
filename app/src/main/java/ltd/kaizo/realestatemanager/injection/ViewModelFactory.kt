@@ -14,7 +14,7 @@ class ViewModelFactory(private val estateDataSource : EstateRepository, private 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(ListViewModel::class.java)) {
-            return ListViewModel(estateDataSource, executor) as T
+            return ListViewModel(estateDataSource) as T
         }
         if (modelClass.isAssignableFrom(EstateViewModel::class.java)) {
             return EstateViewModel(estateDataSource, executor) as T

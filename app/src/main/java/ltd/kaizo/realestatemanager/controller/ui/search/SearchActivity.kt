@@ -4,10 +4,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.utils.Utils
+import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class SearchActivity : BaseActivity() {
     lateinit var searchViewModel: SearchViewModel
@@ -31,7 +33,7 @@ class SearchActivity : BaseActivity() {
             this,
             Observer { message ->
                 if (message != "" && message != null) {
-                    Utils.showSnackBar(fragment_add_coordinator_layout, message)
+                    showSnackBar(fragment_search_coordinator_layout, message)
                     searchViewModel.message.value = ""
                 }
 

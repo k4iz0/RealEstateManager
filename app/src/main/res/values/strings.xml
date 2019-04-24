@@ -74,6 +74,7 @@
     <string name="sold_date">sold date :</string>
     <string name="_02_02_2019">02/02/2019</string>
     <string name="add_poi">add poi</string>
+    <string name="no_result_found">no result found</string>
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>

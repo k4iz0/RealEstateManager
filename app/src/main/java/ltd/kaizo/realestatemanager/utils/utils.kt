@@ -23,6 +23,17 @@ import java.util.regex.Pattern
 
 
 object Utils {
+    /**
+     * Vérification de la connexion réseau
+     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
+     * @param context
+     * @return
+     */
+    fun isInternetAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val networkInfo: NetworkInfo? = connectivityManager?.activeNetworkInfo
+        return networkInfo?.isConnected ?: false
+    }
 
     /**
      * Conversion de la date d'aujourd'hui en un format plus approprié
@@ -71,24 +82,15 @@ object Utils {
         result.maximumFractionDigits = 0
         return result.format(nb)
     }
-     fun showAddPoiAlertDialog(fragmentManager: FragmentManager?, source: Int) {
+
+    fun showAddPoiAlertDialog(fragmentManager: FragmentManager?, source: Int) {
         val args = Bundle()
         args.putInt(ESTATE_SOURCE, source)
         val dialog = AddPoiDialogFragment()
         dialog.arguments = args
         fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
     }
-    /**
-     * Vérification de la connexion réseau
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @param context
-     * @return
-     */
-    fun isInternetAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val networkInfo: NetworkInfo? = connectivityManager?.activeNetworkInfo
-        return networkInfo?.isConnected ?: false
-    }
+
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()

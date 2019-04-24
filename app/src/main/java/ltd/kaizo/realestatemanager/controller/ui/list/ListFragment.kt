@@ -19,6 +19,7 @@ class ListFragment : BaseFragment() {
     private lateinit var adapter: ListAdapter
     private lateinit var estateList: MutableList<Estate>
     private lateinit var parentActivity: ListActivity
+    private var search = false
 
     override val fragmentLayout: Int
         get() = R.layout.list_fragment
@@ -34,7 +35,7 @@ class ListFragment : BaseFragment() {
     private fun configureObserver() {
         //ESTATE LIST
         listViewModel.estateList.observe(viewLifecycleOwner, Observer { list ->
-            updateList(list)
+            if (!search) updateList(list)
         })
     }
 
@@ -45,7 +46,13 @@ class ListFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        estateList = mutableListOf()
+        if (listViewModel.searchResultList.size > 0) {
+            estateList = listViewModel.searchResultList
+            search = true
+        } else {
+            estateList = mutableListOf()
+        }
+
         adapter = ListAdapter(estateList) { estateItem -> onEstateItemClicked(estateItem) }
         list_fragment_recycle_view.layoutManager = LinearLayoutManager(context)
         list_fragment_recycle_view.adapter = adapter

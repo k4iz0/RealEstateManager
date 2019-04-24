@@ -37,7 +37,10 @@ class EstateRepository(val estateDao: EstateDao) {
     fun setLatLng(estateId: Long, latitude: Double, longitude: Double) {
         return estateDao.updateLatLng(estateId, latitude, longitude)
     }
-     fun getSearchResult(query: SimpleSQLiteQuery): LiveData<List<Estate>> {
+     fun getSearchResult(query: SimpleSQLiteQuery): List<Estate> {
         return estateDao.getSearchResult(query)
+    }
+    fun getAllPhoto(): LiveData<List<EstatePhoto>> {
+        return estateDao.getAllPhoto()
     }
 }
