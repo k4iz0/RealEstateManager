@@ -23,6 +23,7 @@ import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.User
 import ltd.kaizo.realestatemanager.model.UserHelper
 import ltd.kaizo.realestatemanager.utils.*
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getEstateListFromGson
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -39,10 +40,17 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun configureDesign() {
         setSupportActionBar(activity_list_toolbar)
         this.configureViewModel()
+        this.getDataFromIntent()
         this.configureCurrentUser()
         this.configureAndShowListFragment()
         this.configureAndShowDetailFragment()
         this.configureNavigationDrawer()
+    }
+
+    private fun getDataFromIntent() {
+        if (intent.getStringExtra(ESTATE_LIST) != null) {
+            listViewModel.searchResultList = getEstateListFromGson(intent.getStringExtra(ESTATE_LIST)).toMutableList()
+        }
     }
 
     private fun configureViewModel() {

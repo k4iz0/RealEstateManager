@@ -9,8 +9,9 @@ import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
 import java.util.concurrent.Executor
 
-class ListViewModel(val estateDataSource: EstateRepository, val executor: Executor) : ViewModel() {
+class ListViewModel(private val estateDataSource: EstateRepository) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
+    var searchResultList = mutableListOf<Estate>()
     val estateId = MutableLiveData<Long>()
     val description = MutableLiveData<String>()
     val address = MutableLiveData<String>()
@@ -35,7 +36,6 @@ class ListViewModel(val estateDataSource: EstateRepository, val executor: Execut
     }
 
     fun updateUiWithData(estate: Estate) {
-
         description.value = estate.description
         surface.value = estate.surface.toString()
         nbRoom.value = estate.nbRoom.toString()

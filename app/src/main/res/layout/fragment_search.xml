@@ -291,10 +291,10 @@
                     android:text="@string/search"
                     android:onClick="@{()->searchViewModel.launchSearchRequest()}"
                     style="@style/ButtonMaterialStyleBlue"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out__mini_textview"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_out__maxi_textview"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out_mini_textview"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_out_maxi_textview"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_out__maxi_textview"/>
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_search_date_out_maxi_textview"/>
             <TextView
                     android:id="@+id/fragment_search_date_in_textview_title"
                     android:layout_width="wrap_content"
@@ -343,11 +343,11 @@
                     android:text="@string/sold_date"
                     style="@style/titleTextView"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_in_textview_title"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_search_date_out__mini_textview"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_date_out__mini_textview"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_search_date_out_mini_textview"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_date_out_mini_textview"
                     android:layout_marginBottom="8dp" android:layout_marginTop="8dp"/>
             <TextView
-                    android:id="@+id/fragment_search_date_out__mini_textview"
+                    android:id="@+id/fragment_search_date_out_mini_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/_02_02_2019"
@@ -359,12 +359,12 @@
                     android:focusable="true"
                     android:textStyle="bold"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_date_out__maxi_textview"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_search_date_out_maxi_textview"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_date_in__mini_textview"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_out__maxi_textview"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_out_maxi_textview"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"/>
             <TextView
-                    android:id="@+id/fragment_search_date_out__maxi_textview"
+                    android:id="@+id/fragment_search_date_out_maxi_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/_02_02_2019"
@@ -375,7 +375,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_search_date_out__mini_textview"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_search_date_out_mini_textview"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_in__maxi_textview"
                     android:layout_marginStart="8dp" android:layout_marginTop="16dp"
