@@ -38,25 +38,13 @@ class ListAdapter(
             it.apply {
                 setBackgroundColor(getColor(it.context, R.color.colorAccent))
                 lastView = it
-
             }
-
-
         }
         with(holder) {
             type.text = estate.type
             cardView.setBackgroundColor(getColor(cardView.context, android.R.color.white))
             location.text = estate.city.toUpperCase()
             price.text = formatNumberFromCurrency(estate.price)
-//            if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
-//                price.text = formatNumberToString(estate.price))
-//                currencyEuro.visibility = View.VISIBLE
-//                currencyDollar.visibility = View.GONE
-//            } else {
-//                price.text = formatNumberToString(convertEuroToDollar(estate.price))
-//                currencyEuro.visibility = View.GONE
-//                currencyDollar.visibility = View.VISIBLE
-//            }
             if (estate.mainPicture != "") {
                 Picasso.get().load(estate.mainPicture).into(picture)
             }
@@ -79,14 +67,6 @@ class ListAdapter(
         val type = itemView.findViewById<TextView>(R.id.item_type_textview)!!
         val location = itemView.findViewById<TextView>(R.id.item_location_textview)!!
         val price = itemView.findViewById<TextView>(R.id.item_price_textview)!!
-        val soldState = itemView.findViewById<TextView>(R.id.picture_item_sold_textview)!!
+        val soldState = itemView.findViewById<ImageView>(R.id.picture_item_sold_imageview)!!
     }
-//    interface EstateListListener {
-//        fun onEstateSelected(estate: Estate)
-//    }
-//    override fun onClick(view: View?) {
-//        when (view?.id) {
-//            R.id.list_cardview -> listener?.onEstateSelected(estateList[view.id])
-//        }
-//    }
 }

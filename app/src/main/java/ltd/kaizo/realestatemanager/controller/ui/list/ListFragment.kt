@@ -3,6 +3,7 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 import android.content.res.Configuration
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.android.synthetic.main.list_fragment.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.ListAdapter
@@ -30,6 +31,7 @@ class ListFragment : BaseFragment() {
         this.configureViewModel()
         this.configureRecycleView()
         this.configureObserver()
+        this.configureSwipeRefreshLayout()
     }
 
     private fun configureObserver() {
@@ -76,9 +78,16 @@ class ListFragment : BaseFragment() {
         }
 
     }
-
+    private fun configureSwipeRefreshLayout() {
+        swipe_refresh_layout.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+        swipe_refresh_layout.setOnRefreshListener{
+            search = false
+            updateList(listViewModel.estateList.value!!)
+        }
+    }
 
     private fun updateList(list: List<Estate>) {
+        swipe_refresh_layout.isRefreshing = false
         estateList.clear()
         estateList.addAll(list)
         adapter.notifyDataSetChanged()

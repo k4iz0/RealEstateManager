@@ -10,24 +10,15 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:orientation="vertical">
-
-    <TextView
-            android:id="@+id/nav_header_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/house_for_sale"
+            android:id="@+id/appCompatImageView" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="8dp"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.101" />
+            app:layout_constraintVertical_bias="0.25" app:layout_constraintBottom_toTopOf="@+id/nav_header_avatar"/>
 
     <TextView
             android:id="@+id/nav_header_username"
@@ -60,7 +51,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/nav_header_avatar"
-            app:layout_constraintTop_toBottomOf="@+id/nav_header_title"
             app:layout_constraintVertical_bias="0.898"
             tools:text="j.holden@rossinante.com" />
 

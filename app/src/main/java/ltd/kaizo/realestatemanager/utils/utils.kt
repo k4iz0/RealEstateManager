@@ -139,15 +139,6 @@ object Utils {
      *******   google map   ******
      *****************************/
 
-
-    //https://maps.googleapis.com/maps/api/staticmap?
-    // center=avenue+de+la+resistance,lannion,
-    // &zoom=13
-    // &size=600x300
-    // &maptype=roadmap
-    // &markers=color:green%7Clabel:G%7C40.711614,-74.012318
-    // &key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
-
     //geocoding address
     //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
     fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String): String {
@@ -175,16 +166,6 @@ object Utils {
         }
     }
 
-    fun fromContentValuesToEstatePhoto(values: ContentValues?): EstatePhoto {
-        val photo = EstatePhoto(0, 0, "")
-        if (values!!.containsKey("photoId")) photo.photoId = values.getAsLong("photoId")
-        if (values.containsKey("estateId")) photo.estateId = values.getAsLong("estateId")
-        if (values.containsKey("uri")) photo.uri = values.getAsString("uri")
-        if (values.containsKey("name")) photo.name = values.getAsString("name")
-        if (values.containsKey("mainPicture")) photo.mainPicture = values.getAsBoolean("mainPicture")
-
-        return photo
-    }
 
     fun getPoiSourceList(context: Context): Array<String> =
         context.resources.getStringArray(ltd.kaizo.realestatemanager.R.array.poiArray)

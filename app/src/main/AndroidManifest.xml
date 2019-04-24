@@ -24,10 +24,13 @@
                 android:name=".provider.EstateContentProvider"
                 android:authorities="ltd.kaizo.realestatemanager.provider"
                 android:exported="true"
-                android:grantUriPermissions="true">
-            <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/file_paths"/>
+                >
+        </provider>
+        <provider
+                android:name=".provider.EstatePhotoContentProvider"
+                android:authorities="ltd.kaizo.realestatemanager.provider"
+                android:exported="true"
+                >
         </provider>
 
         <meta-data
