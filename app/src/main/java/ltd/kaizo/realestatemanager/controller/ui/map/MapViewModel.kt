@@ -11,6 +11,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.api.geocoding.GeoData
 import ltd.kaizo.realestatemanager.model.api.stream.GeoStream
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
 import ltd.kaizo.realestatemanager.utils.Utils.getLocation
 import timber.log.Timber
 import java.util.concurrent.Executor
@@ -66,7 +67,7 @@ class MapViewModel(val estateDataSource: EstateRepository, val executor: Executo
         markerOptions.position(latLng)
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
         markerOptions.title(estate.id.toString())
-        markerOptions.snippet("${estate.type}\n${estate.price}")
+        markerOptions.snippet("${estate.type} \n\n${formatNumberFromCurrency(estate.price)}")
         marker.value = markerOptions
     }
 

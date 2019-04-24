@@ -14,13 +14,16 @@ interface EstateDao {
     fun insertEstate(estate: Estate): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPhoto(estatePhoto: EstatePhoto):Long
+    fun insertPhoto(estatePhoto: EstatePhoto): Long
 
     @Query("SELECT * FROM estate")
     fun getAllEstate(): LiveData<List<Estate>>
 
     @Query("SELECT * FROM estate WHERE id=:id")
     fun getEstateById(id: Long): LiveData<Estate>
+
+    @Query("SELECT * FROM estate WHERE id=:id")
+    fun getEstateByIdWithCursor(id: Long): Cursor
 
     @Query("SELECT * FROM EstatePhoto WHERE estateId=:id")
     fun getPhotoListById(id: Long): LiveData<List<EstatePhoto>>
@@ -32,11 +35,11 @@ interface EstateDao {
     fun setMainPicture(estateId: Long, uri: String)
 
     @Query("UPDATE estate SET latitude=:latitude, longitude=:longitude WHERE id=:estateId")
-    fun updateLatLng(estateId: Long, latitude:Double, longitude:Double)
-    
+    fun updateLatLng(estateId: Long, latitude: Double, longitude: Double)
+
     @RawQuery
-    fun getSearchResult(query: SimpleSQLiteQuery):List<Estate>
+    fun getSearchResult(query: SimpleSQLiteQuery): List<Estate>
 
     @Query("SELECT * FROM EstatePhoto")
-    fun getAllPhoto():LiveData<List<EstatePhoto>>
+    fun getAllPhoto(): LiveData<List<EstatePhoto>>
 }

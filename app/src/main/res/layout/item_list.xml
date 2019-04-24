@@ -26,12 +26,12 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:src="@mipmap/ic_launcher_round"/>
-            <TextView
-                    android:id="@+id/picture_item_sold_textview"
+            <ImageView
+                    android:id="@+id/picture_item_sold_imageview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/sold"
-                    style="@style/soldTextView"
+                    android:src="@drawable/stamp_sold"
                     app:layout_constraintBottom_toBottomOf="@+id/picture_item_list_photo"
                     app:layout_constraintEnd_toEndOf="@+id/picture_item_list_photo"
                     app:layout_constraintStart_toStartOf="@+id/picture_item_list_photo"
