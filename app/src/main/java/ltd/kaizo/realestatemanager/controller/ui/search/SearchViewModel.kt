@@ -109,8 +109,12 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         }
         if (!area.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "address  LIKE ? OR city LIKE ?"
-            argsList.add(area.value!!)
+            query += "address  LIKE ?"
+            argsList.add("%" + area.value!! + "%")
+            query += " OR city LIKE ?"
+            argsList.add("%" + area.value!! + "%")
+            query += " OR postalCode LIKE ?"
+            argsList.add("%" + area.value!! + "%")
         }
         if (!dateInMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
@@ -135,11 +139,14 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         if (!pictureMini.value.isNullOrBlank()) {
             pictureLimit = pictureMini.value!!.toInt()
         }
-//        if (poiListTmp.value!!.size > 0) {
-//            query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-//            query += "poi like ?"
-//            argsList.add(getGpoiListTmp.value!!)
-//        }
+        if (poiListTmp.value == null) poiListTmp.value = mutableListOf()
+        if (poiListTmp.value!!.size > 0 && poiListTmp.value != null) {
+            for (poi in poiListTmp.value!!) {
+                query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
+                query += "poi like ?"
+                argsList.add("%$poi%")
+            }
+        }
         return query
 
     }

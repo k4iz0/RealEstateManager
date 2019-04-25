@@ -3,36 +3,33 @@
     <string name="search">search</string>
     <string name="add">add</string>
     <string name="edit">edit</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="media">Media</string>
-    <string name="description">Description</string>
-    <string name="surface">Surface :</string>
-    <string name="number_of_rooms">rooms :</string>
-    <string name="number_of_bathrooms">Bathrooms :</string>
-    <string name="number_of_bedrooms">bedrooms :</string>
+    <string name="media" translatable="false">Media</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="surface" translatable="false">Surface</string>
+    <string name="number_of_rooms">Rooms</string>
+    <string name="number_of_bathrooms">Bathrooms</string>
+    <string name="number_of_bedrooms">Bedrooms</string>
     <string name="location">Location</string>
-    <string name="connection_succeed">connection successful</string>
+    <string name="connection_succeed" translatable="false">connection successful</string>
     <string name="error_no_internet">error check your internet connection</string>
     <string name="error_unknown_error">unknown error</string>
     <string name="error_authentication_canceled">error authentication cancel</string>
-    <string name="open_drawer">Open navigation drawer</string>
-    <string name="close_drawer">Close navigationdrawer</string>
-    <string name="logo">logo</string>
-    <string name="zero">0</string>
+    <string name="open_drawer" translatable="false">Open navigation drawer</string>
+    <string name="close_drawer" translatable="false">Close navigationdrawer</string>
+    <string name="logo" translatable="false">logo</string>
     <string name="address">address</string>
     <string name="create">create</string>
     <string name="no_picture_found">no picture found</string>
-    <string name="estatePhoto">estatePhoto</string>
-    <string name="price">Price :</string>
-    <string name="type">Type :</string>
-    <string name="dollar">$</string>
+    <string name="estatePhoto" translatable="false">estatePhoto</string>
+    <string name="price">Price</string>
+    <string name="type" translatable="false">Type</string>
+    <string name="dollar" translatable="false">$</string>
     <string name="picture_name">Picture name</string>
     <string name="add_picture">Add picture</string>
     <string name="save">save</string>
     <string name="postal_code">postal code</string>
     <string name="city">city</string>
-    <string name="sold_out">sold :</string>
+    <string name="sold_out">sold</string>
     <string name="date">entry date :</string>
     <string name="sold">sold</string>
     <string name="manager">manager :</string>
@@ -52,7 +49,7 @@
     <string name="update_email">update email</string>
     <string name="update_email_success">email successfully updated to</string>
     <string name="updateEmailError">please enter a valid address email</string>
-    <string name="select_picture">you need select a picture</string>
+    <string name="select_picture">you need to select a picture</string>
     <string name="enter_picture_name">you need to enter a picture name</string>
     <string name="select_estate_edit">you need to select an estate to edit</string>
     <string name="map_request_error">You can\'t make map request</string>
@@ -60,19 +57,16 @@
     </string>
     <string name="map">map</string>
     <string name="currency">currency :</string>
-    <string name="euro">€</string>
-    <string name="dollar_title">dollar $</string>
-    <string name="euro_title">euro €</string>
-    <string name="mini">mini</string>
-    <string name="maxi">maxi</string>
+    <string name="euro" translatable="false">€</string>
+    <string name="dollar_title" translatable="false">dollar $</string>
+    <string name="euro_title" translatable="false">euro €</string>
+    <string name="mini" translatable="false">mini</string>
+    <string name="maxi" translatable="false">maxi</string>
     <string name="area">area</string>
     <string name="picture">picture</string>
-    <string name="one">1</string>
-    <string name="three">3</string>
-    <string name="five">5+</string>
-    <string name="poi">poi</string>
+    <string name="poi" translatable="false">poi</string>
     <string name="sold_date">sold date :</string>
-    <string name="_02_02_2019">02/02/2019</string>
+    <string name="_02_02_2019" translatable="false">02/02/2019</string>
     <string name="add_poi">add poi</string>
     <string name="no_result_found">no result found</string>
     <string-array name="typeArray">
