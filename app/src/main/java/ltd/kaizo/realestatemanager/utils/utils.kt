@@ -2,7 +2,6 @@ package ltd.kaizo.realestatemanager.utils
 
 
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -13,7 +12,6 @@ import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
-import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import org.joda.time.format.DateTimeFormat
 import java.text.NumberFormat
@@ -83,14 +81,6 @@ object Utils {
         return result.format(nb)
     }
 
-    fun showAddPoiAlertDialog(fragmentManager: FragmentManager?, source: Int) {
-        val args = Bundle()
-        args.putInt(ESTATE_SOURCE, source)
-        val dialog = AddPoiDialogFragment()
-        dialog.arguments = args
-        fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
-    }
-
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
@@ -158,6 +148,21 @@ object Utils {
         return "$address, $postalCode, $city"
     }
 
+    /****************************
+     *********    POI     ********
+     *****************************/
+
+    fun showAddPoiAlertDialog(fragmentManager: FragmentManager?, source: Int) {
+        val args = Bundle()
+        args.putInt(ESTATE_SOURCE, source)
+        val dialog = AddPoiDialogFragment()
+        dialog.arguments = args
+        fragmentManager?.let { dialog.show(it, TAG_ADD_POI_DIALOG) }
+    }
+
+    fun getPoiSourceList(context: Context): Array<String> =
+        context.resources.getStringArray(ltd.kaizo.realestatemanager.R.array.poiArray)
+
     fun hideKeyboard(activity: Activity) {
         val view = activity.findViewById<View>(android.R.id.content)
         if (view != null) {
@@ -165,9 +170,4 @@ object Utils {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
-
-    fun getPoiSourceList(context: Context): Array<String> =
-        context.resources.getStringArray(ltd.kaizo.realestatemanager.R.array.poiArray)
-
 }

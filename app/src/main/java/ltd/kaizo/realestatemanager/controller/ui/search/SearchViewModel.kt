@@ -135,6 +135,11 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         if (!pictureMini.value.isNullOrBlank()) {
             pictureLimit = pictureMini.value!!.toInt()
         }
+//        if (poiListTmp.value!!.size > 0) {
+//            query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
+//            query += "poi like ?"
+//            argsList.add(getGpoiListTmp.value!!)
+//        }
         return query
 
     }

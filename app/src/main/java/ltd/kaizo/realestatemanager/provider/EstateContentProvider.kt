@@ -6,7 +6,6 @@ import android.content.ContentUris
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
-import androidx.room.RoomMasterTable
 import ltd.kaizo.realestatemanager.database.AppDatabase
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.fromContentValuesToEstate
@@ -15,7 +14,7 @@ open class EstateContentProvider : ContentProvider() {
     companion object {
         val AUTHORITY = "ltd.kaizo.realestatemanager.provider"
         val ESTATE_TABLE_NAME = Estate::class.java.simpleName
-        val URI_ESTATE = Uri.parse("content://$AUTHORITY/${RoomMasterTable.TABLE_NAME}")
+        val URI_ESTATE = Uri.parse("content://$AUTHORITY/${ESTATE_TABLE_NAME}")
     }
 
     override fun onCreate(): Boolean {

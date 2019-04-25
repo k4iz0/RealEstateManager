@@ -5,7 +5,6 @@ import android.content.ContentUris
 import android.content.ContentValues
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.common.base.CharMatcher.`is`
 import junit.framework.Assert.assertEquals
 import ltd.kaizo.realestatemanager.database.AppDatabase
 import ltd.kaizo.realestatemanager.provider.EstateContentProvider
@@ -59,20 +58,22 @@ class ContentProviderTest {
         )
         assertEquals(notNullValue(), cursor)
         assertEquals(1, cursor!!.count)
-        assertEquals(true,cursor.moveToFirst())
-        assertEquals(3299000,cursor.getInt(cursor.getColumnIndexOrThrow("price")))
+        assertEquals(true, cursor.moveToFirst())
+        assertEquals(3299000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))
     }
 
     // ---
 
     private fun generateEstate(): ContentValues {
-        val description= StringBuilder()
-        description.append("description", "Lorem ipsum dolor sit amet," +
-                " consectetur adipiscing elit. Donec et elementum erat." +
-                " Curabitur condimentum, lacus ac tempus porta, felis neque facilisis quam," +
-                " vel tempor est ex eget ipsum." +
-                " sed congue sem euismod sit amet. Nulla accumsan odio felis, ac malesuada lectus aliquam id." +
-                " Quisque est arcu, lacinia sed placerat at, tempus a mauris.")
+        val description = StringBuilder()
+        description.append(
+            "description", "Lorem ipsum dolor sit amet," +
+                    " consectetur adipiscing elit. Donec et elementum erat." +
+                    " Curabitur condimentum, lacus ac tempus porta, felis neque facilisis quam," +
+                    " vel tempor est ex eget ipsum." +
+                    " sed congue sem euismod sit amet. Nulla accumsan odio felis, ac malesuada lectus aliquam id." +
+                    " Quisque est arcu, lacinia sed placerat at, tempus a mauris."
+        )
         val contentValues = ContentValues()
         contentValues.put("id", 1)
         contentValues.put("mainPicture", "content/test/picture")
@@ -82,7 +83,7 @@ class ContentProviderTest {
         contentValues.put("nbRoom", 5)
         contentValues.put("nbBathroom", 2)
         contentValues.put("nbBedroom", 5)
-        contentValues.put("description",description.toString())
+        contentValues.put("description", description.toString())
         contentValues.put("address", "rue Malibu 4568442 MALIBU")
         contentValues.put("postalCode", "4568442")
         contentValues.put("city", "MALIBU")
