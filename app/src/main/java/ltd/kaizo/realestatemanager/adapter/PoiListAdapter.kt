@@ -48,7 +48,6 @@ class PoiListAdapter(
             nameItem.text = poi
             pictureItem.setImageResource(getDrawableFromName(poi))
             if (poiList.contains(poi))   pictureItem.alpha = 1f else   pictureItem.alpha = 0.5f
-
         }
     }
 
@@ -74,7 +73,11 @@ class PoiListAdapter(
             else -> R.drawable.ic_cross_24dp_white
         }
     }
-
+     fun updateList(list: List<String>) {
+        this.poiList.clear()
+        this.poiList.addAll(list)
+        this.notifyDataSetChanged()
+    }
     /****************************
      *******   VIEWHOLDER   ******
      *****************************/

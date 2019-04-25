@@ -88,7 +88,7 @@ class AddPoiDialogFragment : DialogFragment() {
     private fun updatePoiToList(poi: String) {
         if (!poiListTmp.contains(poi)) poiListTmp.add(poi) else poiListTmp.remove(poi)
         Timber.i("$poiListTmp")
-        updateList(poiListTmp)
+        this.poiListAdapter.updateList(poiListTmp)
     }
 
     private fun configureViewModel() {
@@ -120,7 +120,6 @@ class AddPoiDialogFragment : DialogFragment() {
      *******   OBSERVERS  ********
      *****************************/
 
-
     private fun configureObserver() {
         // POI list
 
@@ -142,13 +141,6 @@ class AddPoiDialogFragment : DialogFragment() {
             })
         }
     }
-
-    private fun updateList(list: List<String>) {
-        this.poiList.clear()
-        this.poiList.addAll(list)
-        this.poiListAdapter.notifyDataSetChanged()
-    }
-
     private fun closeDialog() {
         fragmentManager?.findFragmentByTag(TAG_ADD_POI_DIALOG)?.let {
             (it as DialogFragment).dismiss()
