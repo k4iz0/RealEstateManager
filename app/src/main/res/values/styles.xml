@@ -27,6 +27,13 @@
         <item name="android:background">@android:color/white</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <!--title search-->
+    <style name="titleSearchTextView">
+    <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <!--sold textview-->
     <style name="soldTextView">
     <item name="android:textColor">@android:color/holo_red_dark</item>
