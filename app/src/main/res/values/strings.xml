@@ -72,6 +72,14 @@
     <string name="real_estate_n_manager" translatable="false">Real estate manager</string>
     <string name="notification">notification</string>
     <string name="notificationText">new estate successfully created</string>
+    <string name="loan_sim">loan simulator</string>
+    <string name="loan_amount">Loan amount</string>
+    <string name="contribution">contribution</string>
+    <string name="rate_in">rate in %</string>
+    <string name="loan_term_in_years">loan term in years</string>
+    <string name="calculate">calculate</string>
+    <string name="monthly_payments">Monthly Payments</string>
+    <string name="total_interest_paid">Total Interest Paid</string>
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>

@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-<!--DIALOG-->
+    <!--DIALOG-->
     <style name="customDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="android:padding">8dp</item>
     </style>
@@ -21,44 +21,53 @@
     </style>
     <style name="LoginTheme"/>
 
+    <!--loan editText-->
+    <style name="loanEditText">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@drawable/border_line</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:ems">10</item>
+        <item name="android:maxLength">10</item>
+    </style>
+
     <!--title-->
     <style name="titleTextView">
-    <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:background">@android:color/white</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-    <!--title search-->
-    <style name="titleSearchTextView">
-    <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <!--sold textview-->
+
+    <!--title search-->
+    <style name="titleSearchTextView">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--sold textView-->
     <style name="soldTextView">
-    <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
+
     <!--button-->
     <style name="ButtonMaterialStyleBlue" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="cornerRadius">10dp</item>
     </style>
-    <!--button-->
-    <style name="ButtonTextStyleBlue" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:background">@android:color/white</item>
-        <item name="android:textStyle">bold</item>
-        <item name="cornerRadius">10dp</item>
-    </style>
+
     <!--BIG title-->
     <style name="bigTitleTextView">
-    <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>

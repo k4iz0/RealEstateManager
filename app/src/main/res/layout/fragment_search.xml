@@ -302,7 +302,8 @@
                     android:text="@string/date"
                     style="@style/titleSearchTextView"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_picture_textview"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__mini_textview"/>
+                    app:layout_constraintBaseline_toBaselineOf="@+id/fragment_search_date_in__mini_textview"
+            />
             <TextView
                     android:id="@+id/fragment_search_date_in__mini_textview"
                     android:gravity="center"
@@ -345,7 +346,8 @@
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_in_textview_title"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_date_out_mini_textview"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_date_out_mini_textview"
-                    android:layout_marginBottom="8dp" android:layout_marginTop="8dp"/>
+                    android:layout_marginBottom="8dp" android:layout_marginTop="8dp"
+            />
             <TextView
                     android:id="@+id/fragment_search_date_out_mini_textview"
                     android:gravity="center"

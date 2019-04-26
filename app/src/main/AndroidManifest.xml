@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ltd.kaizo.realestatemanager">
+          xmlns:tools="http://schemas.android.com/tools" package="ltd.kaizo.realestatemanager">
 
     <uses-permission android:name="android.Manifest.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -15,22 +15,24 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity android:name=".controller.ui.search.SearchActivity"
+            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".controller.ui.loan.LoanSimActivity"
                   android:parentActivityName=".controller.ui.list.ListActivity">
+        </activity>
+        <activity
+                android:name=".controller.ui.search.SearchActivity"
+                android:parentActivityName=".controller.ui.list.ListActivity">
         </activity>
 
         <provider
                 android:name=".provider.EstateContentProvider"
                 android:authorities="ltd.kaizo.realestatemanager.provider"
-                android:exported="true"
-                >
+                android:exported="true">
         </provider>
         <provider
                 android:name=".provider.EstatePhotoContentProvider"
                 android:authorities="ltd.kaizo.realestatemanager.provider"
-                android:exported="true"
-                >
+                android:exported="true">
         </provider>
 
         <meta-data

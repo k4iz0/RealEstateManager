@@ -75,7 +75,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:layout_height="wrap_content"
-                    style="@style/ButtonTextStyleBlue"
+                    style="@style/ButtonMaterialStyleBlue"
                     android:onClick="@{()-> AddPictureDialogFragment.closeDialog()}"
                     app:rippleColor="@color/colorAccent"
             />
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:layout_margin="8dp"
                     android:layout_height="wrap_content"
-                    style="@style/ButtonTextStyleBlue"
+                    style="@style/ButtonMaterialStyleBlue"
                     android:onClick="@{()-> AddPictureDialogFragment.savePicture()}"
                     android:background="@color/greyTransparent"
                     app:rippleColor="@color/colorAccent"

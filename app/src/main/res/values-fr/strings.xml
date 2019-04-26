@@ -53,4 +53,13 @@
     <string name="user_logout">utilisateur deconnecté</string>
     <string name="add_poi">ajouter POI</string>
     <string name="notification">notification</string>
+    <string name="loan_sim">simulateur de prêt</string>
+    <string name="calculate">calculer</string>
+    <string name="contribution">apport</string>
+    <string name="loan_amount">montant du prêt</string>
+    <string name="loan_term_in_years">durée du prêt</string>
+    <string name="monthly_payments">mensualités</string>
+    <string name="notificationText">nouveau bien crée avec succès</string>
+    <string name="rate_in">taux en %</string>
+    <string name="total_interest_paid">total intérêts payés</string>
 </resources>
