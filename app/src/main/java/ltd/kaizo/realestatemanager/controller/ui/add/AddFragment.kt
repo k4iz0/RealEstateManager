@@ -184,6 +184,7 @@ class AddFragment : BaseFragment() {
         //Boolean to finish activity after room request
         estateViewModel.isFinish.observe(this, Observer { isFinish ->
             if (isFinish) {
+                this.launchNotification()
                 parentActivity.finish()
                 estateViewModel.isFinish.value = false
             }
@@ -203,6 +204,12 @@ class AddFragment : BaseFragment() {
                 estateViewModel.dateOut.value = ""
             }
         })
+    }
+
+    private fun launchNotification() {
+            val notificationHelper = NotificationHelper(parentActivity)
+            val builder = notificationHelper.notificationBuilder()
+            notificationHelper.getManager()?.notify(3, builder.build())
     }
 
     /****************************
