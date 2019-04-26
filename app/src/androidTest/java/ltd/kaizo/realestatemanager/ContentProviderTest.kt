@@ -75,7 +75,7 @@ class ContentProviderTest {
                     " Quisque est arcu, lacinia sed placerat at, tempus a mauris."
         )
         val contentValues = ContentValues()
-        contentValues.put("id", 1)
+        contentValues.put("id", 0)
         contentValues.put("mainPicture", "content/test/picture")
         contentValues.put("type", "Loft")
         contentValues.put("price", 3299000)

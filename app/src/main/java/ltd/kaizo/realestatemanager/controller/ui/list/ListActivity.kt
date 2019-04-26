@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.list_activity.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.EstateActivity
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
+import ltd.kaizo.realestatemanager.controller.ui.loan.LoanSimActivity
 import ltd.kaizo.realestatemanager.controller.ui.login.LoginActivity
 import ltd.kaizo.realestatemanager.controller.ui.map.MapActivity
 import ltd.kaizo.realestatemanager.controller.ui.search.SearchActivity
@@ -106,6 +107,10 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 runWithPermissions(FINE_LOCATION, COARSE_LOCATION) {
                     startActivity(Intent(this, MapActivity::class.java))
                 }
+                true
+            }
+             R.id.activity_main_drawer_loan -> {
+                    startActivity(Intent(this, LoanSimActivity::class.java))
                 true
             }
             R.id.activity_main_drawer_logout -> {
