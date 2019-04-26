@@ -69,6 +69,9 @@
     <string name="_02_02_2019" translatable="false">02/02/2019</string>
     <string name="add_poi">add poi</string>
     <string name="no_result_found">no result found</string>
+    <string name="real_estate_n_manager" translatable="false">Real estate manager</string>
+    <string name="notification">notification</string>
+    <string name="notificationText">new estate successfully created</string>
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>

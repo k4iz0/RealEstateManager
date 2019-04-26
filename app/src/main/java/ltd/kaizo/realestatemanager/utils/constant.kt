@@ -20,6 +20,8 @@ const val COLLECTION_NAME = "users"
 const val CURRENCY_DOLLAR  = "$"
 const val CURRENCY_EURO = "€"
 const val CURRENT_CURRENCY = "CURRENT_CURRENCY"
+const val ESTATE_CHANNEL_ID = "EstateChannelID"
+const val ESTATE_CHANNEL_NAME = "Estate channel"
 /****************************
  *********   PERMS   ********
  *****************************/

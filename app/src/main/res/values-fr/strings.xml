@@ -52,4 +52,5 @@
     <string name="update_username_success">nom d\'utilisateur mis à jour avec succès</string>
     <string name="user_logout">utilisateur deconnecté</string>
     <string name="add_poi">ajouter POI</string>
+    <string name="notification">notification</string>
 </resources>
