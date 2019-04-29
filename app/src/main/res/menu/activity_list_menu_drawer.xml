@@ -8,24 +8,20 @@
         <item
                 android:id="@+id/activity_main_drawer_map"
                 android:icon="@drawable/ic_map_blue"
-                android:title="@string/map"
-                app:itemTextColor="@color/colorPrimary"/>
+                android:title="@string/map"/>
         <item
                 android:id="@+id/activity_main_drawer_loan"
                 android:icon="@drawable/ic_money_blue"
-                android:title="@string/loan_sim"
-                app:itemTextColor="@color/colorPrimary"/>
+                android:title="@string/loan_sim" />
 
         <item
                 android:id="@+id/activity_main_drawer_settings"
                 android:icon="@drawable/ic_setting_blue"
-                android:title="@string/settings"
-                app:itemTextColor="@color/colorPrimary"/>
+                android:title="@string/settings" />
         <item
                 android:id="@+id/activity_main_drawer_logout"
                 android:icon="@drawable/ic_logout_blue"
-                android:title="@string/logout"
-                app:itemTextColor="@color/colorPrimary"/>
+                android:title="@string/logout" />
     </group>
 
 

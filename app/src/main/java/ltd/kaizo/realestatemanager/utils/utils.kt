@@ -67,6 +67,9 @@ object Utils {
     fun convertEuroToDollar(euros: Int): Int {
         return Math.round(euros / 0.812).toInt()
     }
+    fun convertEuroToDollar(euros: Double): Double {
+        return Math.round(euros / 0.812).toDouble()
+    }
 
     fun formatNumberFromCurrency(number: Int): String {
         var nb = number
@@ -78,6 +81,18 @@ object Utils {
         }
         val result = NumberFormat.getCurrencyInstance(currentLocale)
         result.maximumFractionDigits = 0
+        return result.format(nb)
+    }
+fun formatNumberFromCurrency(number: Double): String {
+        var nb = number
+        val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
+            Locale.FRANCE
+        } else {
+            nb = convertEuroToDollar(number)
+            Locale.US
+        }
+        val result = NumberFormat.getCurrencyInstance(currentLocale)
+        result.maximumFractionDigits = 2
         return result.format(nb)
     }
 

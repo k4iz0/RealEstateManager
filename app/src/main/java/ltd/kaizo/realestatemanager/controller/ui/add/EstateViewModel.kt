@@ -56,23 +56,17 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     }
 
     private fun checkFieldView() = (
-            description.value != ""
-                    && description.value != null
-                    && address.value != ""
-                    && address.value != null
-                    && postalCode.value != ""
-                    && postalCode.value != null
-                    && city.value != ""
-                    && city.value != null
-                    && surface.value != null
-                    && surface.value != ""
+                     !description.value.isNullOrBlank()
+                    && !address.value.isNullOrBlank()
+                    && !postalCode.value.isNullOrBlank()
+                    && !city.value.isNullOrBlank()
+                    && !surface.value.isNullOrBlank()
                     && nbRoom.value != null
                     && nbBathroom.value != null
                     && nbBedroom.value != null
                     && type.value != null
-                    && price.value != null
-                    && price.value != "")
-
+                    && !price.value.isNullOrBlank()
+    )
     private fun insertPhotoFromList(pictureList: List<EstatePhoto>, id: Long) {
         for (photo in pictureList) {
             photo.estateId = id
