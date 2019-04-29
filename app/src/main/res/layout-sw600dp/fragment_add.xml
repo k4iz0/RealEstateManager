@@ -77,7 +77,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_add_picture_list_recycle_view"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="@dimen/description_height"
                         android:background="@drawable/border_line"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
@@ -104,19 +104,19 @@
                 <EditText
                         android:id="@+id/fragment_add_description_edittext"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="@dimen/description_height"
                         android:background="@drawable/border_line"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp"
                         android:text="@={estateViewModel.description}"
-                        android:hint="@string/description" android:layout_marginTop="8dp"
+                        android:hint="@string/description" android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_picture_list_recycle_view"/>
                 <TextView
                         android:id="@+id/fragment_add_surface_title_textview"
                         android:layout_width="wrap_content"
-                        android:layout_height="17dp"
+                        android:layout_height="wrap_content"
                         android:text="@string/surface"
                         style="@style/titleTextView"
                         app:layout_constraintTop_toTopOf="@+id/fragment_add_surface_edittext"
@@ -132,7 +132,7 @@
                         android:inputType="number"
                         android:maxLength="5"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_description_edittext"
                 />
                 <TextView
@@ -198,7 +198,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/price"
                         style="@style/titleTextView"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_add_price_edittext"
                         app:layout_constraintTop_toTopOf="@+id/fragment_add_price_edittext"
                         app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
@@ -213,7 +213,7 @@
                         android:maxLength="7"
                         android:background="@drawable/border_line"
                         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_search_type_spinner"
                 />
                 <com.google.android.material.button.MaterialButton
@@ -227,10 +227,9 @@
                         app:layout_constraintStart_toStartOf="@+id/fragment_add_city_edittext"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="@+id/fragment_add_city_edittext"
-                        android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="64dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_dateOut_textview"
-                        app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="1.0"/>
+                        app:layout_constraintHorizontal_bias="0.0"/>
 
                 <com.google.android.material.button.MaterialButton
                         android:id="@+id/fragment_add_add_poi_btn"
@@ -241,7 +240,8 @@
                         app:layout_constraintBottom_toTopOf="@+id/fragment_add_create_button"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_dateOut_textview"
                         app:layout_constraintEnd_toEndOf="@+id/fragment_add_create_button"
-                        app:layout_constraintStart_toStartOf="@+id/fragment_add_create_button"/>
+                        app:layout_constraintStart_toStartOf="@+id/fragment_add_create_button"
+                        android:layout_marginTop="16dp" android:layout_marginBottom="16dp"/>
                 <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/fragment_add_sold_switch"
                         android:layout_width="wrap_content"
@@ -259,7 +259,7 @@
                         android:text="@string/sold_out"
                         style="@style/titleTextView"
                         app:layout_constraintStart_toStartOf="@+id/guideline3"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_city_edittext"
                         android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toStartOf="@+id/fragment_add_dateOut_textview"/>
@@ -309,9 +309,9 @@
                         android:inputType="text"
                         app:layout_constraintStart_toStartOf="@+id/guideline3"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_description_edittext"
-                        android:layout_marginEnd="16dp"/>
+                        android:layout_marginEnd="16dp" android:layout_marginStart="16dp"/>
                 <EditText
                         android:id="@+id/fragment_add_postal_code_edittext"
                         android:layout_width="0dp"
@@ -322,7 +322,7 @@
                         android:inputType="number"
                         app:layout_constraintStart_toStartOf="@+id/fragment_add_address_edittext"
                         app:layout_constraintEnd_toEndOf="@+id/fragment_add_address_edittext"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_address_edittext"/>
                 <EditText
                         android:id="@+id/fragment_add_city_edittext"
@@ -334,7 +334,7 @@
                         android:inputType="text"
                         app:layout_constraintStart_toStartOf="@+id/fragment_add_postal_code_edittext"
                         app:layout_constraintEnd_toEndOf="@+id/fragment_add_postal_code_edittext"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_postal_code_edittext"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

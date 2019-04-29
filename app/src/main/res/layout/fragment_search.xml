@@ -182,7 +182,7 @@
                     android:gravity="center"
                     android:maxLength="7"
                     android:id="@+id/fragment_search_price_mini_edittext"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:background="@drawable/border_line"
                     android:layout_height="wrap_content"
                     android:hint="@string/mini"
@@ -197,7 +197,7 @@
                     android:gravity="center"
                     android:maxLength="7"
                     android:id="@+id/fragment_search_price_maxi_edittext"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:layout_height="wrap_content"
                     android:hint="@string/maxi"
                     android:text="@={searchViewModel.priceMaxi}"
@@ -307,7 +307,7 @@
             <TextView
                     android:id="@+id/fragment_search_date_in__mini_textview"
                     android:gravity="center"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:layout_height="wrap_content"
                     android:hint="@string/mini"
                     style="@style/titleSearchTextView"
@@ -324,7 +324,7 @@
             <TextView
                     android:id="@+id/fragment_search_date_in__maxi_textview"
                     android:gravity="center"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:layout_height="wrap_content"
                     android:hint="@string/maxi"
                     android:text="@={searchViewModel.dateInMaxi}"
@@ -351,7 +351,7 @@
             <TextView
                     android:id="@+id/fragment_search_date_out_mini_textview"
                     android:gravity="center"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:layout_height="wrap_content"
                     android:hint="@string/mini"
                     android:text="@={searchViewModel.dateOutMini}"
@@ -368,7 +368,7 @@
             <TextView
                     android:id="@+id/fragment_search_date_out_maxi_textview"
                     android:gravity="center"
-                    android:layout_width="110dp"
+                    android:layout_width="@dimen/edit_text_width"
                     android:layout_height="wrap_content"
                     android:hint="@string/maxi"
                     android:text="@={searchViewModel.dateOutMaxi}"

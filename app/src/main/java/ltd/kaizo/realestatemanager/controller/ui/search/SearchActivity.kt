@@ -3,12 +3,10 @@ package ltd.kaizo.realestatemanager.controller.ui.search
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.fragment_add.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.injection.Injection
-import ltd.kaizo.realestatemanager.utils.Utils
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class SearchActivity : BaseActivity() {
