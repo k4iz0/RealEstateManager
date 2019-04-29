@@ -29,11 +29,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
     override val fragmentLayout: Int
-        get() = ltd.kaizo.realestatemanager.R.layout.fragment_map
+        get() = R.layout.fragment_map
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(ltd.kaizo.realestatemanager.R.layout.fragment_map, container, false)
-        mapView = rootView.findViewById(ltd.kaizo.realestatemanager.R.id.fragment_map_mapview) as MapView
+        val rootView = inflater.inflate(R.layout.fragment_map, container, false)
+        mapView = rootView.findViewById(R.id.fragment_map_mapview) as MapView
         mapView.onCreate(savedInstanceState)
         this.initMap()
         mapView.onResume()
@@ -45,9 +45,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         mapViewModel = parentActivity.mapViewModel
     }
 
-    override fun configureDesign() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun configureDesign() {}
 
     override fun updateDesign() {
         this.configureViewModel()

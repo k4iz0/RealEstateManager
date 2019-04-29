@@ -1,6 +1,7 @@
 package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -68,6 +69,10 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun configureAndShowDetailFragment() {
         var detailFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_detail)
         if (detailFragment != null && fragment_container_detail != null) {
+            val args = Bundle()
+            val id = if(listViewModel.estateId.value != null)listViewModel.estateId.value else -1
+            args.putLong(ESTATE_ID, id!!)
+            detailFragment.arguments = args
             detailFragment = DetailFragment.newInstance()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_detail, detailFragment)

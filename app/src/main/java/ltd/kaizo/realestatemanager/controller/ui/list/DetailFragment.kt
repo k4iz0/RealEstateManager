@@ -132,7 +132,6 @@ class DetailFragment : BaseFragment() {
 
     }
 
-
     private fun updatePictureList(list: List<EstatePhoto>) {
         pictureList.clear()
         pictureList.addAll(list)
@@ -140,7 +139,6 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun updatePoiList(list: List<String>) {
-        Timber.i("list = $list")
         poiList.clear()
         poiList.addAll(list)
         poiListAdapter.notifyDataSetChanged()

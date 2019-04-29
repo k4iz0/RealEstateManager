@@ -7,9 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_loan_sim.*
-import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
-import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.databinding.ActivityLoanSimBinding
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.utils.Utils
