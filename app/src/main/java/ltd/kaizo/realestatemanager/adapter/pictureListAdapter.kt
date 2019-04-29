@@ -40,7 +40,6 @@ class PictureListAdapter(
         with(holder) {
             cardView.setOnClickListener { clickListener(picture, RC_PICTURE_LISTENER_VIEW) }
             nameItem.text = picture.name
-            Timber.i("name = ${picture.name} et uri = ${picture.uri}")
             Picasso.get().load(picture.uri).into(pictureItem)
             if (sourceId == RC_PICTURE_ITEM_DETAIL) {
                 heartBtn.visibility = View.INVISIBLE
