@@ -6,6 +6,7 @@ import android.content.ContentValues
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import ltd.kaizo.realestatemanager.database.AppDatabase
 import ltd.kaizo.realestatemanager.provider.EstateContentProvider
 import org.hamcrest.CoreMatchers.notNullValue
@@ -33,13 +34,13 @@ class ContentProviderTest {
     @Test
     fun getEstateWhenNoEstateInserted() {
         val cursor = mContentResolver!!.query(
-            ContentUris.withAppendedId(EstateContentProvider.URI_ESTATE, ESTATE_ID),
+            ContentUris.withAppendedId(EstateContentProvider.URI_ESTATE, 0),
             null,
             null,
             null,
             null
         )
-        assertEquals(notNullValue(), cursor)
+        assertNotNull(cursor)
         assertEquals(0, cursor!!.count)
         cursor.close()
     }
@@ -56,7 +57,7 @@ class ContentProviderTest {
             null,
             null
         )
-        assertEquals(notNullValue(), cursor)
+        assertNotNull(cursor)
         assertEquals(1, cursor!!.count)
         assertEquals(true, cursor.moveToFirst())
         assertEquals(3299000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))

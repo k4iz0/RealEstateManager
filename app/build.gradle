@@ -46,8 +46,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:18.2.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0-alpha01'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation "android.arch.core:core-testing:1.1.1"
     //TIMBER
     implementation 'com.jakewharton.timber:timber:4.7.1'
     // ViewModel and LiveData
@@ -80,6 +80,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //MOCKITO
     implementation "org.mockito:mockito-core:2.27.0"
+    testImplementation 'org.mockito:mockito-inline:2.8.47'
+
     implementation 'com.google.android.material:material:1.0.0'
 
 }

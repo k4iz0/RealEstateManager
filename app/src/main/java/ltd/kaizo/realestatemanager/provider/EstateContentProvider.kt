@@ -32,6 +32,7 @@ open class EstateContentProvider : ContentProvider() {
             val estateId = ContentUris.parseId(uri)
             val cursor = AppDatabase.getInstance(context!!)?.estateDao()?.getEstateByIdWithCursor(estateId)
             cursor?.setNotificationUri(context!!.contentResolver, uri)
+            return cursor
         }
         throw IllegalArgumentException("Failed to query row for uri " + uri)
     }
