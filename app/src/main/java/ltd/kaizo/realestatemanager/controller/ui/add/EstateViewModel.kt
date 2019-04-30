@@ -24,8 +24,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     val nbBedroom = MutableLiveData<Int>()
     val nbBathroom = MutableLiveData<Int>()
     val price = MutableLiveData<String>()
-    val poiList = MutableLiveData<String>()
     val type = MutableLiveData<Int>()
+    val poiList = MutableLiveData<String>()
     val managerName = MutableLiveData<String>()
     val isSold = MutableLiveData<Boolean>()
     val dateIn = MutableLiveData<String>()
@@ -55,7 +55,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         executor.execute { estateDataSource.insertPhoto(estatePhoto) }
     }
 
-    private fun checkFieldView() = (
+    fun checkFieldView() = (
                      !description.value.isNullOrBlank()
                     && !address.value.isNullOrBlank()
                     && !postalCode.value.isNullOrBlank()

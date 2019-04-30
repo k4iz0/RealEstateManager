@@ -32,9 +32,9 @@ class UtilsTest {
     @Test
     fun shouldReturnAFormattedDate() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-        val dateOfTheDay=  dateFormat.format(Date())
+        val dateOfTheDay = dateFormat.format(Date())
         val result = todayDate
-        assertEquals(dateOfTheDay,result)
+        assertEquals(dateOfTheDay, result)
     }
 
     @Test
@@ -42,7 +42,8 @@ class UtilsTest {
         val email = "testemailtest.fr"
         assertEquals(false, validateEmail(email))
     }
-     @Test
+
+    @Test
     fun givenAnGoodEmailShouldReturnTrue() {
         val email = "testemail@test.fr"
         assertEquals(true, validateEmail(email))
@@ -54,16 +55,16 @@ class UtilsTest {
         assertEquals(false, validateEmail(username))
     }
 
-//    @Test
-//    fun givenANumberShouldReturnAFormatedString() {
-//        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
-//       val context = Mockito.mock(Context::class.java)
-//        Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
-//        DataRecordHelper.init(context)
-//        Mockito.`when`(read(anyString(), anyString())).thenReturn(CURRENCY_EURO)
-//        val number = 1000000
-//        val str = "1 000 000"
-//        assertEquals(str,formatNumberFromCurrency(number))
-//    }
+    @Test
+    fun givenANumberShouldReturnAFormatedString() {
+        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
+        val context = Mockito.mock(Context::class.java)
+        Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
+        DataRecordHelper.init(context)
+        Mockito.`when`(read(anyString(), anyString())).thenReturn(CURRENCY_EURO)
+        val number = 1000000
+        val str = "1 000 000"
+        assertEquals(str, formatNumberFromCurrency(number))
+    }
 
 }

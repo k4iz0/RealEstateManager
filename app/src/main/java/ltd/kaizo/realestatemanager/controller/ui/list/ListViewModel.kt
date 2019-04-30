@@ -7,7 +7,6 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
-import java.util.concurrent.Executor
 
 class ListViewModel(private val estateDataSource: EstateRepository) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
