@@ -4,8 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/picture_list_cardview"
-        android:layout_width="87dp"
-        android:layout_height="87dp"
+        android:layout_width="@dimen/photo_cardview_size"
+        android:layout_height="@dimen/photo_cardview_size"
         android:focusable="true"
         android:clickable="true"
          app:cardCornerRadius="5dp"
@@ -20,7 +20,7 @@
 
         <ImageView
                 android:id="@+id/picture_item_list_photo"
-                android:layout_width="90dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:src="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"

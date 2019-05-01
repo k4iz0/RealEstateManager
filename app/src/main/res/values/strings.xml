@@ -51,6 +51,8 @@
     <string name="updateEmailError">please enter a valid address email</string>
     <string name="select_picture">you need to select a picture</string>
     <string name="enter_picture_name">you need to enter a picture name</string>
+    <string name="add_picture_error">You must add at least one picture</string>
+    <string name="main_picture_error">You must choose a main picture</string>
     <string name="select_estate_edit">you need to select an estate to edit</string>
     <string name="map_request_error">You can\'t make map request</string>
     <string name="unable_get_location">Unable to get current location have you enable localisation on your device ?
@@ -78,8 +80,12 @@
     <string name="rate_in">rate in %</string>
     <string name="loan_term_in_years">loan term in years</string>
     <string name="calculate">calculate</string>
-    <string name="monthly_payments">Monthly Payments</string>
-    <string name="total_interest_paid">Total Interest Paid</string>
+    <string name="monthly_payments">Monthly Payments : </string>
+    <string name="total_interest_paid">"Total Investment : "</string>
+    <string name="sale_date_error">error check your sale date</string>
+    <string name="data_insert_error">error inserting data</string>
+    <string name="verify_data">verify your data</string>
+
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>

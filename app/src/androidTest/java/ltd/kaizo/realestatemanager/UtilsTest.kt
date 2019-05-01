@@ -18,7 +18,6 @@ class UtilsTest {
         val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo
         val status = networkInfo?.isConnected ?: false
         val result = isInternetAvailable(context)
-        Timber.i("status = $status et result $$result")
         assertEquals(status, result)
     }
 

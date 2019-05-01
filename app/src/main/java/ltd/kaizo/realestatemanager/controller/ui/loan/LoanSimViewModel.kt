@@ -2,6 +2,7 @@ package ltd.kaizo.realestatemanager.controller.ui.loan
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ltd.kaizo.realestatemanager.utils.STR_VERIFY_DATA
 import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
 import java.lang.Math.abs
 import kotlin.math.pow
@@ -13,7 +14,7 @@ class LoanSimViewModel : ViewModel() {
     val rate = MutableLiveData<String>()
     val duration = MutableLiveData<String>()
     val monthlyPayment = MutableLiveData<String>()
-    val totalInterest = MutableLiveData<String>()
+    val totalInvestment = MutableLiveData<String>()
 
 
     fun calculate() {
@@ -24,18 +25,18 @@ class LoanSimViewModel : ViewModel() {
                 rate.value!!.toDouble(),
                 duration.value!!.toInt()
             )
-            totalInterest.value = calculateInterest(
+            totalInvestment.value = calculateTotalInvestment(
                 totalAmount.value!!.toDouble(),
                 setContribution(contribution.value),
                 rate.value!!.toDouble(),
                 duration.value!!.toInt()
             )
         } else {
-            message.value = "verify your data"
+            message.value = STR_VERIFY_DATA
         }
     }
 
-    private fun checkFieldView() = (
+     fun checkFieldView() = (
             !totalAmount.value.isNullOrBlank()
                     && !rate.value.isNullOrBlank()
                     && !duration.value.isNullOrBlank()
@@ -44,7 +45,7 @@ class LoanSimViewModel : ViewModel() {
     private fun setContribution(str: String?): Double = if (str.isNullOrBlank()) 0.0 else str.toDouble()
 
 
-    private fun calculateMonthlyPayment(
+     fun calculateMonthlyPayment(
         totalAmount: Double,
         contribution: Double,
         rate: Double,
@@ -58,7 +59,7 @@ class LoanSimViewModel : ViewModel() {
         return formatNumberFromCurrency(result)
     }
 
-    private fun calculateInterest(
+     fun calculateTotalInvestment(
         totalAmount: Double,
         contribution: Double,
         rate: Double,
@@ -66,8 +67,8 @@ class LoanSimViewModel : ViewModel() {
     ): String {
         val capital = totalAmount - contribution
         var result = 0.0
-        //Mensualité = ( K x T ) / ( 1 - ( 1 + T )-d )
-        result = (capital * rate * duration) / 100
+        //interest =  = ( K x T ) * d
+        result = ((capital * rate) * duration) / 100
         return formatNumberFromCurrency(result)
     }
 }

@@ -4,4 +4,8 @@
 	<dimen name="big_text_size">22dp</dimen>
 	<dimen name="description_height">90dp</dimen>
 	<dimen name="edit_text_width">100dp</dimen>
+	<dimen name="cardview_height">100dp</dimen>
+	<dimen name="picture_size">80dp</dimen>
+	<dimen name="photo_cardview_size">90dp</dimen>
+
 </resources>

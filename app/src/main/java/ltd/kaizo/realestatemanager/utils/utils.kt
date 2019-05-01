@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import org.joda.time.format.DateTimeFormat
@@ -67,6 +68,7 @@ object Utils {
     fun convertEuroToDollar(euros: Int): Int {
         return Math.round(euros / 0.812).toInt()
     }
+
     fun convertEuroToDollar(euros: Double): Double {
         return Math.round(euros / 0.812).toDouble()
     }
@@ -83,7 +85,8 @@ object Utils {
         result.maximumFractionDigits = 0
         return result.format(nb)
     }
-fun formatNumberFromCurrency(number: Double): String {
+
+    fun formatNumberFromCurrency(number: Double): String {
         var nb = number
         val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
             Locale.FRANCE
@@ -96,6 +99,17 @@ fun formatNumberFromCurrency(number: Double): String {
         return result.format(nb)
     }
 
+    fun configureMessage(message: String, context: Context): String {
+        return when (message) {
+            STR_ERROR_INSERT_DATA -> context.getString(R.string.data_insert_error)
+            STR_ESTATE_SUCCESS -> context.getString(R.string.notificationText)
+            STR_VERIFY_PICTURE -> context.getString(R.string.add_picture_error)
+            STR_VERIFY_MAIN_PICTURE -> context.getString(R.string.main_picture_error)
+            STR_VERIFY_DATA -> context.getString(R.string.verify_data)
+            else -> message
+        }
+
+    }
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()

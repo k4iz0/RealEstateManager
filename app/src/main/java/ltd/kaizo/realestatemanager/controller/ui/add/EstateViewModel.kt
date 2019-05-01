@@ -78,8 +78,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
 
         if (checkFieldView()) {
             when {
-                (pictureList.size == 0) -> message.value = "You must add at least 1 picture"
-                !checkMainPicture() -> message.value = "You must choose a main picture"
+                (pictureList.size == 0) -> message.value = STR_VERIFY_PICTURE
+                !checkMainPicture() -> message.value = STR_VERIFY_MAIN_PICTURE
                 else -> {
                     this.configureDefaultValue()
                     val estateToCreate = Estate(
@@ -108,7 +108,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                 }
             }
         } else {
-            message.value = "verify your data"
+            message.value = STR_VERIFY_DATA
         }
 
     }
@@ -123,6 +123,11 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         }
     }
 
+    /**
+     * check if mainPicture is set
+     *
+     * @return
+     */
     private fun checkMainPicture(): Boolean {
         var valid = false
         for (picture in pictureListTmp) {
@@ -139,10 +144,10 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
             if (estateId.toInt() != -1) {
                 insertPhotoFromList(pictureList, estateId)
                 setMainPicture(estateId)
-                message.postValue("estate successfully created")
+                message.postValue(STR_ESTATE_SUCCESS)
                 isFinish.postValue(true)
             } else {
-                message.postValue("error inserting data")
+                message.postValue(STR_ERROR_INSERT_DATA)
             }
         }
     }

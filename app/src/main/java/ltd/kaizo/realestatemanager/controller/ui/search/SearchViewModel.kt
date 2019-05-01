@@ -39,7 +39,6 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
 
     fun launchSearchRequest() {
         val sqliteQuery = SimpleSQLiteQuery(configureQuery(), argsList.toTypedArray())
-        Timber.i("argsList = $argsList")
         executor.execute {
             searchResult = estateDataSource.getSearchResult(sqliteQuery)
             resultList.postValue(searchResult)
