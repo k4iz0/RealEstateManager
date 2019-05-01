@@ -11,7 +11,7 @@ import java.util.concurrent.Executor
 class SearchViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
 
     val pictureList = estateDataSource.getAllPhoto()
-    private var argsList = mutableListOf<Any>()
+    var argsList = mutableListOf<Any>()
     val message = MutableLiveData<String>()
     lateinit var searchResult: List<Estate>
     var resultList = MutableLiveData<List<Estate>>()
@@ -46,7 +46,7 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
 
     }
 
-    private fun configureQuery(): String {
+     fun configureQuery(): String {
 
         var query = "SELECT * FROM Estate"
         this.argsList = mutableListOf()
@@ -91,17 +91,17 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
             query += "nbBathroom >= ?"
             argsList.add(nbBathroomMini.value!!.toInt())
         }
-        if (!nbBathroomMaxi.value.isNullOrBlank()) {
-            query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "nbBathroom <= ?"
-            argsList.add(nbBathroomMaxi.value!!.toInt())
-        }
-        if (!priceMini.value.isNullOrBlank()) {
+         if (!nbBathroomMaxi.value.isNullOrBlank()) {
+             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
+             query += "nbBathroom <= ?"
+             argsList.add(nbBathroomMaxi.value!!.toInt())
+         }
+         if (!priceMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "price >= ?"
             argsList.add(priceMini.value!!.toInt())
         }
-        if (!priceMaxi.value.isNullOrBlank()) {
+         if (!priceMaxi.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "price <= ?"
             argsList.add(priceMaxi.value!!.toInt())
