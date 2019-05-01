@@ -136,7 +136,6 @@
                     android:layout_height="wrap_content"
                     style="@style/titleSearchTextView"
                     android:text="@string/number_of_bathrooms"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_bedroom_title_textview"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_bathroom_mini_edittext"
                     app:layout_constraintBottom_toBottomOf="@+id/fragment_search_bathroom_mini_edittext"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
@@ -214,10 +213,9 @@
                     android:layout_height="wrap_content"
                     style="@style/titleSearchTextView"
                     android:text="@string/area"
-                    app:layout_constraintEnd_toEndOf="@+id/fragment_search_price_title_textview"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintTop_toTopOf="@+id/fragment_search_area_edittext"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_area_edittext"/>
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_area_edittext"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
             <EditText
                     android:gravity="center"
                     android:id="@+id/fragment_search_area_edittext"

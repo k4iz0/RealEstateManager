@@ -6,4 +6,6 @@
 	<dimen name="cardview_height">150dp</dimen>
 	<dimen name="picture_size">130dp</dimen>
 	<dimen name="photo_cardview_size">120dp</dimen>
+	<dimen name="gmap_size">200dp</dimen>
+	<dimen name="poi_cardview_size">60dp</dimen>
 </resources>

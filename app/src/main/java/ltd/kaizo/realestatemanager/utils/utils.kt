@@ -162,7 +162,7 @@ object Utils {
     //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
     fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String): String {
         val zoom = 15
-        val size = 200
+        val size = 250
         val type = "roadmap"
         val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
         return "https://maps.googleapis.com/maps/api/staticmap?center=${getLocation(
@@ -190,7 +190,7 @@ object Utils {
     }
 
     fun getPoiSourceList(context: Context): Array<String> =
-        context.resources.getStringArray(ltd.kaizo.realestatemanager.R.array.poiArray)
+        context.resources.getStringArray(R.array.poiArray)
 
     fun hideKeyboard(activity: Activity) {
         val view = activity.findViewById<View>(android.R.id.content)
