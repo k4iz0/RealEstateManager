@@ -8,14 +8,15 @@
         android:layout_height="80dp"
         android:focusable="true"
         android:clickable="true"
+        android:layout_margin="8dp"
         app:cardCornerRadius="4dp">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
         <ImageView
                 android:id="@+id/poi_item_imageview"
-                android:layout_width="50dp"
-                android:layout_height="50dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="@dimen/poi_cardview_size"
+                android:layout_height="@dimen/poi_cardview_size" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +33,10 @@
                 android:layout_height="wrap_content" tools:text="school"
                 app:layout_constraintTop_toBottomOf="@+id/poi_item_imageview"
                 app:layout_constraintEnd_toEndOf="@+id/poi_item_imageview"
+                android:textColor="@color/colorPrimary"
                 android:gravity="center"
-                style="@style/titleTextView"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/poi_item_imageview"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"

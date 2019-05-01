@@ -68,7 +68,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_add_picture_list_recycle_view"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/description_height"
+                        android:layout_height="@dimen/cardview_height"
                         android:background="@drawable/border_line"
                         android:layout_marginEnd="8dp"
                         app:layout_constraintStart_toStartOf="parent"
