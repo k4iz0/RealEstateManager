@@ -21,10 +21,10 @@ import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
+import ltd.kaizo.realestatemanager.utils.Utils.configureMessage
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
-import timber.log.Timber
 import java.util.*
 
 
@@ -176,7 +176,7 @@ class AddFragment : BaseFragment() {
             this,
             Observer { message ->
                 if (message != "" && message != null) {
-                    showSnackBar(fragment_add_coordinator_layout, message)
+                    showSnackBar(fragment_add_coordinator_layout, configureMessage(message, parentActivity))
                     estateViewModel.message.value = ""
                 }
 
@@ -207,9 +207,9 @@ class AddFragment : BaseFragment() {
     }
 
     private fun launchNotification() {
-            val notificationHelper = NotificationHelper(parentActivity)
-            val builder = notificationHelper.notificationBuilder()
-            notificationHelper.getManager()?.notify(3, builder.build())
+        val notificationHelper = NotificationHelper(parentActivity)
+        val builder = notificationHelper.notificationBuilder()
+        notificationHelper.getManager()?.notify(3, builder.build())
     }
 
     /****************************
@@ -266,11 +266,10 @@ class AddFragment : BaseFragment() {
             when (source) {
                 RC_DATE_IN -> estateViewModel.dateIn.value = "$MyDay/$MyMonth/$MyYear"
                 RC_DATE_OUT -> {
-                    Timber.i("date 1 = ${estateViewModel.dateIn.value} et date 2 = $MyDay/$MyMonth/$MyYear")
                     if (checkDateDifference(estateViewModel.dateIn.value!!, "$MyDay/$MyMonth/$MyYear")) {
                         estateViewModel.dateOut.value = "$MyDay/$MyMonth/$MyYear"
                     } else {
-                        estateViewModel.message.value = "error check your sale date"
+                        estateViewModel.message.value = getString(R.string.sale_date_error)
                     }
                 }
             }

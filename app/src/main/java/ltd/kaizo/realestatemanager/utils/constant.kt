@@ -17,7 +17,7 @@ const val ESTATE_SOURCE_SEARCH = 60
 const val TAG_ADD_PICTURE_DIALOG = "AddPictureDialogFragment"
 const val TAG_ADD_POI_DIALOG = "AddPoiDialogFragment"
 const val COLLECTION_NAME = "users"
-const val CURRENCY_DOLLAR  = "$"
+const val CURRENCY_DOLLAR = "$"
 const val CURRENCY_EURO = "€"
 const val CURRENT_CURRENCY = "CURRENT_CURRENCY"
 const val ESTATE_CHANNEL_ID = "EstateChannelID"
@@ -53,3 +53,12 @@ const val RC_POI_ADD_ITEM = 9001
  *********   KEYS   ********
  *****************************/
 const val API_KEY = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
+
+/****************************
+ *********   STRING   ********
+ *****************************/
+const val STR_VERIFY_DATA = "STR_VERIFY_DATA"
+const val STR_VERIFY_PICTURE = "STR_VERIFY_PICTURE"
+const val STR_VERIFY_MAIN_PICTURE = "STR_VERIFY__MAIN_PICTURE"
+const val STR_ESTATE_SUCCESS = "STR_ESTATE_SUCCESS"
+const val STR_ERROR_INSERT_DATA = "STR_ERROR_INSERT_DATA"

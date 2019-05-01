@@ -56,14 +56,28 @@ class UtilsTest {
     }
 
     @Test
-    fun givenANumberShouldReturnAFormatedString() {
-        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
+    fun givenANumberShouldReturnAFormattedStringInEuro() {
         val context = Mockito.mock(Context::class.java)
+        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
+        Mockito.`when`(context.packageName).thenReturn("prefs")
         Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
         DataRecordHelper.init(context)
         Mockito.`when`(read(anyString(), anyString())).thenReturn(CURRENCY_EURO)
         val number = 1000000
-        val str = "1 000 000"
+        val str = "1 000 000 €"
+        assertEquals(str, formatNumberFromCurrency(number))
+    }
+
+  @Test
+    fun givenANumberInEuroShouldReturnAFormattedStringInDollar() {
+        val context = Mockito.mock(Context::class.java)
+        val sharedPrefs = Mockito.mock(SharedPreferences::class.java)
+        Mockito.`when`(context.packageName).thenReturn("prefs")
+        Mockito.`when`(context.getSharedPreferences(anyString(), anyInt())).thenReturn(sharedPrefs)
+        DataRecordHelper.init(context)
+        Mockito.`when`(read(anyString(), anyString())).thenReturn(CURRENCY_DOLLAR)
+        val number = 1000000
+        val str = "$1,231,527"
         assertEquals(str, formatNumberFromCurrency(number))
     }
 

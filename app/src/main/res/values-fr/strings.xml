@@ -57,9 +57,16 @@
     <string name="calculate">calculer</string>
     <string name="contribution">apport</string>
     <string name="loan_amount">montant du prêt</string>
-    <string name="loan_term_in_years">durée du prêt</string>
-    <string name="monthly_payments">mensualités</string>
+    <string name="loan_term_in_years">durée du prêt (année)</string>
+    <string name="monthly_payments">mensualités : </string>
     <string name="notificationText">nouveau bien crée avec succès</string>
     <string name="rate_in">taux en %</string>
-    <string name="total_interest_paid">total intérêts payés</string>
+    <string name="total_interest_paid">"total investissement : "</string>
+    <string name="add_picture_error">Vous devez ajouter au moins une photo</string>
+    <string name="main_picture_error">Vous devez choisir une photo principale</string>
+    <string name="sale_date_error">vérifiez votre date de vente</string>
+    <string name="data_insert_error">erreur lors de l\'insertion des données</string>
+    <string name="verify_data">verifiez vos données</string>
+
+
 </resources>

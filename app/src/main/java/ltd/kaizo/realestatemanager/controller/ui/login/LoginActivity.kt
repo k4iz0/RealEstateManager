@@ -56,22 +56,12 @@ class LoginActivity : BaseActivity() {
         if (RC_SIGN_IN == requestCode) {
             if (resultCode == Activity.RESULT_OK) { // SUCCESS
                 if (this.getCurrentUser() != null) {
-//                    if (getCurrentUser()?.photoUrl == null) {
-//                        //email & password account no picture
-//                        UserHelper.createUser(
-//                            getCurrentUser()!!.uid,
-//                            getCurrentUser()?.displayName,
-//                            "",
-//                            getCurrentUser()?.email
-//                        )
-//                    } else {
                         UserHelper.createUser(
                             getCurrentUser()!!.uid,
                             getCurrentUser()?.displayName!!,
                             getCurrentUser()?.photoUrl.toString(),
                             getCurrentUser()?.email!!
                         )
-//                    }
                 Snackbar.make(
                     activity_login_coordinator_layout,
                     getString(ltd.kaizo.realestatemanager.R.string.connection_succeed),

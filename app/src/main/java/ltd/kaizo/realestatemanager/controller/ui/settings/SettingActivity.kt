@@ -49,19 +49,19 @@ class SettingActivity : BaseActivity() {
 
     private fun configureUpdateEmail() {
         activity_setting_update_email_btn.setOnClickListener {
-        if (isEmailValid(activity_setting_email_edittext)) {
-            UserHelper.updateEmail(activity_setting_email_edittext.text.toString(), getCurrentUser()!!.uid)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        showSnackBar(activity_setting_coordinator_layout, getString(R.string.update_email_success))
+            if (isEmailValid(activity_setting_email_edittext)) {
+                UserHelper.updateEmail(activity_setting_email_edittext.text.toString(), getCurrentUser()!!.uid)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            showSnackBar(activity_setting_coordinator_layout, getString(R.string.update_email_success))
+                        }
+                    }.addOnFailureListener {
+                        showSnackBar(activity_setting_coordinator_layout, getString(R.string.error_unknown_error))
                     }
-                }.addOnFailureListener {
-                    showSnackBar(activity_setting_coordinator_layout, getString(R.string.error_unknown_error))
-                }
-        } else {
-            showSnackBar(activity_setting_coordinator_layout, getString(R.string.updateEmailError))
+            } else {
+                showSnackBar(activity_setting_coordinator_layout, getString(R.string.updateEmailError))
+            }
         }
-    }
     }
 
     private fun configureToolbar() {
@@ -74,7 +74,7 @@ class SettingActivity : BaseActivity() {
     private fun configureRadioGroup() {
         val currentCurrency = read(CURRENT_CURRENCY, CURRENCY_EURO)
         when (currentCurrency) {
-           CURRENCY_EURO -> activity_setting_euro_radioButton.toggle()
+            CURRENCY_EURO -> activity_setting_euro_radioButton.toggle()
             CURRENCY_DOLLAR -> activity_setting_dollar_radioButton.toggle()
         }
     }
@@ -82,8 +82,8 @@ class SettingActivity : BaseActivity() {
     /**
      * configure the onClick event for the radio buttons
      */
-   private fun onRadioButtonClicked() {
-        activity_setting_radioGroup.setOnCheckedChangeListener{ group, checkedId ->
+    private fun onRadioButtonClicked() {
+        activity_setting_radioGroup.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.activity_setting_euro_radioButton -> write(CURRENT_CURRENCY, CURRENCY_EURO)
                 R.id.activity_setting_dollar_radioButton -> write(CURRENT_CURRENCY, CURRENCY_DOLLAR)

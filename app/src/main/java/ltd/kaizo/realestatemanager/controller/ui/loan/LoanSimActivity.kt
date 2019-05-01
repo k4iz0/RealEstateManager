@@ -11,7 +11,9 @@ import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.databinding.ActivityLoanSimBinding
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.utils.Utils
+import ltd.kaizo.realestatemanager.utils.Utils.configureMessage
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
+import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class LoanSimActivity : AppCompatActivity() {
     private lateinit var loanSimViewModel: LoanSimViewModel
@@ -37,7 +39,7 @@ class LoanSimActivity : AppCompatActivity() {
             Observer { message ->
                 if (message != "" && message != null) {
                     hideKeyboard(this)
-                    Utils.showSnackBar(activity_loan_coordinator_layout, message)
+                    showSnackBar(activity_loan_coordinator_layout, configureMessage(message, this))
                     loanSimViewModel.message.value = ""
                 }
 
