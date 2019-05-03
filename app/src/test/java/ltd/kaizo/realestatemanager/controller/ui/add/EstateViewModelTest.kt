@@ -13,6 +13,7 @@ import org.junit.rules.TestRule
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import java.util.*
 import java.util.concurrent.Executor
 
 class EstateViewModelTest {
@@ -56,8 +57,8 @@ class EstateViewModelTest {
          "MALIBU",
          "",
          false,
-         "01/02/2019",
-         "",
+         Date(),
+         null,
          "Yann",
          0.0,
          0.0

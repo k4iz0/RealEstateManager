@@ -59,9 +59,9 @@ class SearchViewModelTest {
                 "AND nbBathroom <= ? " +
                 "AND price >= ? " +
                 "AND price <= ? " +
-                "AND address  LIKE ? " +
+                "AND (address  LIKE ? " +
                 "OR city LIKE ? " +
-                "OR postalCode LIKE ?", searchViewModel.configureQuery())
+                "OR postalCode LIKE ?)", searchViewModel.configureQuery())
         assertEquals("300", searchViewModel.argsList[0])
         assertEquals("1300", searchViewModel.argsList[1])
         assertEquals(2, searchViewModel.argsList[2])

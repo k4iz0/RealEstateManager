@@ -6,13 +6,16 @@ import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
 import ltd.kaizo.realestatemanager.utils.Utils.convertEuroToDollar
 import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
+import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
 import ltd.kaizo.realestatemanager.utils.Utils.todayDate
 import ltd.kaizo.realestatemanager.utils.Utils.validateEmail
+import net.danlew.android.joda.JodaTimeAndroid
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +33,7 @@ class UtilsTest {
     }
 
     @Test
-    fun shouldReturnAFormattedDate() {
+    fun shouldReturnAFormattedDateOfTheDay() {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy")
         val dateOfTheDay = dateFormat.format(Date())
         val result = todayDate
@@ -68,7 +71,7 @@ class UtilsTest {
         assertEquals(str, formatNumberFromCurrency(number))
     }
 
-  @Test
+    @Test
     fun givenANumberInEuroShouldReturnAFormattedStringInDollar() {
         val context = Mockito.mock(Context::class.java)
         val sharedPrefs = Mockito.mock(SharedPreferences::class.java)

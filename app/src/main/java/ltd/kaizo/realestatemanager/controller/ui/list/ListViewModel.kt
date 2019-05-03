@@ -7,6 +7,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
+import ltd.kaizo.realestatemanager.utils.Utils.getStringFromDate
 
 class ListViewModel(private val estateDataSource: EstateRepository) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
@@ -45,9 +46,8 @@ class ListViewModel(private val estateDataSource: EstateRepository) : ViewModel(
         city.value = estate.city
         price.value = formatNumberFromCurrency(estate.price)
         managerName.value = estate.estateManager
-        dateOut.value = estate.dateOut
-        dateIn.value = estate.dateIn
-        dateOut.value = estate.dateOut
+        dateOut.value = getStringFromDate(estate.dateOut)
+        dateIn.value = getStringFromDate(estate.dateIn)
         isSold.value = estate.isSold
     }
 

@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
@@ -48,6 +49,27 @@ object Utils {
             "" + nb
         }
 
+    fun getDateFromString(date: String?): Date? {
+        if (date != null) {
+            val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
+            return dtf.parseDateTime(date).toDate()
+        }
+        return null
+    }
+
+    fun getStringFromDate(date: Date?): String {
+        return if (date != null) {
+            val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
+            DateTime(date).toString(dtf)
+        } else {
+            ""
+        }
+    }
+
+    /**
+     * check if date2 is after date 1
+     * @return  Boolean
+     */
     fun checkDateDifference(date1: String, date2: String): Boolean {
         val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
         val d1 = dtf.parseDateTime(date1)
@@ -73,6 +95,13 @@ object Utils {
         return Math.round(euros / 0.812).toDouble()
     }
 
+    /**
+     * take a number and return a formatted string
+     * with currency
+     * € = 1 000 €      $ = $1,000
+     * @param number to convert
+     * @return string
+     */
     fun formatNumberFromCurrency(number: Int): String {
         var nb = number
         val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
@@ -86,6 +115,13 @@ object Utils {
         return result.format(nb)
     }
 
+    /**
+     * take a number and return a formatted string
+     * with currency
+     * € = 1 000,00 €      $ = $1,000.00
+     * @param number to convert
+     * @return string
+     */
     fun formatNumberFromCurrency(number: Double): String {
         var nb = number
         val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {

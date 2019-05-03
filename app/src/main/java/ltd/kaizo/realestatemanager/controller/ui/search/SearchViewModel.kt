@@ -129,13 +129,17 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         }
         if (!dateOutMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "dateOut >= ?"
+            query += "(dateOut >= ?"
             argsList.add(dateOutMini.value!!)
+            query += " AND isSold = ?)"
+            argsList.add(1)
         }
         if (!dateOutMaxi.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "dateOut <= ?"
+            query += "(dateOut <= ?"
             argsList.add(dateOutMaxi.value!!)
+            query += " AND isSold = ?)"
+            argsList.add(1)
         }
         if (!pictureMini.value.isNullOrBlank()) {
             pictureLimit = pictureMini.value!!.toInt()
