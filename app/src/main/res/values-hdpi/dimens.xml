@@ -3,4 +3,5 @@
 	<dimen name="big_text_size">24dp</dimen>
 	<dimen name="description_height">100dp</dimen>
 	<dimen name="edit_text_width">110dp</dimen>
+    <dimen name="text_poi">16sp</dimen>
 </resources>
