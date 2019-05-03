@@ -3,6 +3,11 @@ package ltd.kaizo.realestatemanager.model
 import android.content.ContentValues
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import ltd.kaizo.realestatemanager.utils.DateConverter
+import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
+import java.util.*
 
 @Entity
 data class Estate(
@@ -21,8 +26,8 @@ data class Estate(
     var city: String,
     var poi: String,
     var isSold: Boolean,
-    var dateIn: String,
-    var dateOut: String?,
+    var dateIn: Date,
+    var dateOut: Date?,
     var estateManager: String,
     var latitude: Double,
     var longitude: Double
@@ -44,8 +49,8 @@ fun fromContentValuesToEstate(values: ContentValues?): Estate {
         "",
         "",
         false,
-        "",
-        "",
+        Date(),
+        null,
         "",
         0.0,
         0.0
@@ -64,8 +69,8 @@ fun fromContentValuesToEstate(values: ContentValues?): Estate {
     if (values.containsKey("city")) estate.city = values.getAsString("city")
     if (values.containsKey("poi")) estate.poi = values.getAsString("poi")
     if (values.containsKey("isSold")) estate.isSold = values.getAsBoolean("isSold")
-    if (values.containsKey("dateIn")) estate.dateIn = values.getAsString("dateIn")
-    if (values.containsKey("dateOut")) estate.dateOut = values.getAsString("dateOut")
+    if (values.containsKey("dateIn")) estate.dateIn = getDateFromString(values.getAsString("dateIn"))!!
+    if (values.containsKey("dateOut")) estate.dateOut = getDateFromString(values.getAsString("dateOut"))
     if (values.containsKey("estateManager")) estate.estateManager = values.getAsString("estateManager")
     if (values.containsKey("latitude")) estate.latitude = values.getAsDouble("latitude")
     if (values.containsKey("longitude")) estate.longitude = values.getAsDouble("longitude")

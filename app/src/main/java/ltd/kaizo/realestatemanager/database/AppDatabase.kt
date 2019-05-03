@@ -2,16 +2,15 @@ package ltd.kaizo.realestatemanager.database
 
 import android.content.ContentValues
 import android.content.Context
-import androidx.room.Database
-import androidx.room.OnConflictStrategy
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.DATABASE_NAME
+import ltd.kaizo.realestatemanager.utils.DateConverter
 
-@Database(entities = [Estate::class, EstatePhoto::class], version = 1, exportSchema = false)
+@Database(entities = [Estate::class, EstatePhoto::class], version = 2, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun estateDao(): EstateDao
 

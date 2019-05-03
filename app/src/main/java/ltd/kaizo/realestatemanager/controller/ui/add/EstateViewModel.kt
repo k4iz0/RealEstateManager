@@ -10,7 +10,8 @@ import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
 import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
-import java.security.AccessController.getContext
+import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
+import ltd.kaizo.realestatemanager.utils.Utils.getStringFromDate
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -56,7 +57,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     }
 
     fun checkFieldView() = (
-                     !description.value.isNullOrBlank()
+            !description.value.isNullOrBlank()
                     && !address.value.isNullOrBlank()
                     && !postalCode.value.isNullOrBlank()
                     && !city.value.isNullOrBlank()
@@ -66,7 +67,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     && nbBedroom.value != null
                     && type.value != null
                     && !price.value.isNullOrBlank()
-    )
+            )
+
     private fun insertPhotoFromList(pictureList: List<EstatePhoto>, id: Long) {
         for (photo in pictureList) {
             photo.estateId = id
@@ -97,8 +99,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                         city.value!!,
                         poiList.value!!,
                         isSold.value!!,
-                        dateIn.value!!,
-                        dateOut.value,
+                        getDateFromString(dateIn.value)!!,
+                        getDateFromString(dateOut.value),
                         managerName.value!!,
                         95.0,
                         195.0
@@ -114,10 +116,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     }
 
     private fun configureDefaultValue() {
-        if (isSold.value == null) {
-            isSold.value = false
-        }
+        if (isSold.value == null) isSold.value = false
         if (poiList.value == null) poiList.value = ""
+        if (dateOut.value.equals("")) dateOut.value = null
         if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_DOLLAR) {
             price.value = convertDollarToEuro(price.value!!.toInt()).toString()
         }
@@ -165,8 +166,8 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         postalCode.value = estate.postalCode
         city.value = estate.city
         price.value = estate.price.toString()
-        dateIn.value = estate.dateIn
-        dateOut.value = estate.dateOut
+        dateOut.value = getStringFromDate(estate.dateOut)
+        dateIn.value = getStringFromDate(estate.dateIn)
         if (estate.poi != "") {
             poiListTmp.value = getListFromGson(estate.poi).toMutableList()
         }
