@@ -108,12 +108,14 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         }
         if (!area.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
+            query += "("
             query += "address  LIKE ?"
             argsList.add("%" + area.value!! + "%")
             query += " OR city LIKE ?"
             argsList.add("%" + area.value!! + "%")
             query += " OR postalCode LIKE ?"
             argsList.add("%" + area.value!! + "%")
+            query += ")"
         }
         if (!dateInMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
