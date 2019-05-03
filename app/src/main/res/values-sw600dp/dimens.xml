@@ -8,4 +8,5 @@
 	<dimen name="photo_cardview_size">120dp</dimen>
 	<dimen name="gmap_size">200dp</dimen>
 	<dimen name="poi_cardview_size">60dp</dimen>
+    <dimen name="text_poi">18sp</dimen>
 </resources>

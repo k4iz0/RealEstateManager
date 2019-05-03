@@ -66,12 +66,11 @@
                         android:text="@={estateViewModel.managerName}"
                         tools:text="Yann"
                         style="@style/titleTextView"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                        app:layout_constraintStart_toEndOf="@+id/fragment_add_manager_title_textview"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/fragment_add_picture_list_recycle_view"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" android:layout_marginStart="8dp"
+                        app:layout_constraintStart_toStartOf="@+id/guideline4"/>
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/fragment_add_picture_list_recycle_view"
                         android:layout_width="0dp"
@@ -158,7 +157,8 @@
                         app:layout_constraintTop_toTopOf="@+id/fragment_add_nb_bathroom_spinner"
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_add_nb_bathroom_spinner"
                         app:layout_constraintStart_toStartOf="@+id/guideline4"
-                        android:layout_marginStart="8dp"/>
+                        app:layout_constraintEnd_toStartOf="@+id/fragment_add_nb_bathroom_spinner"
+                        android:layout_marginEnd="8dp"/>
                 <Spinner
                         android:id="@+id/fragment_add_nb_bathroom_spinner"
                         android:layout_width="wrap_content"
