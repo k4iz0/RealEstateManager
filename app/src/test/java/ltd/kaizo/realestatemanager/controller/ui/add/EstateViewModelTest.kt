@@ -1,11 +1,16 @@
 package ltd.kaizo.realestatemanager.controller.ui.add
 
+import android.content.Context
+import android.content.res.Resources
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.databinding.library.baseAdapters.BR.estateViewModel
 import androidx.lifecycle.MutableLiveData
 import junit.framework.Assert.assertEquals
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
+import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
+import net.danlew.android.joda.JodaTimeAndroid
+import org.joda.time.DateTime
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -15,6 +20,11 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import java.util.*
 import java.util.concurrent.Executor
+import org.mockito.Mockito.`when`
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.Mockito.mock
+import java.io.InputStream
+
 
 class EstateViewModelTest {
     @get:Rule
@@ -41,6 +51,16 @@ class EstateViewModelTest {
        estateViewModel.price.value = "350000"
        estateViewModel.type.value= 2
     }
+    @Before
+    fun prepareBeforeTests() {
+        val context = mock(Context::class.java)
+        val appContext = mock(Context::class.java)
+        val resources = mock(Resources::class.java)
+        `when`(resources.openRawResource(anyInt())).thenReturn(mock(InputStream::class.java))
+        `when`<Resources>(appContext.resources).thenReturn(resources)
+        `when`<Context>(context.applicationContext).thenReturn(appContext)
+        JodaTimeAndroid.init(context)
+    }
     private fun generateEstate() : Estate {
         return Estate(
          100,
@@ -57,7 +77,7 @@ class EstateViewModelTest {
          "MALIBU",
          "",
          false,
-         Date(),
+         getDateFromString("01/02/2019")!!,
          null,
          "Yann",
          0.0,

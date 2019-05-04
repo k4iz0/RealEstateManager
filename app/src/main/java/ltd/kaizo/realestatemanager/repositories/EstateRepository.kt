@@ -14,19 +14,20 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.getAllEstate()
     }
 
-    fun getEstateById(id:Long): LiveData<Estate> {
+    fun getEstateById(id: Long): LiveData<Estate> {
         return estateDao.getEstateById(id)
     }
 
     fun getPhotoListById(id: Long): LiveData<List<EstatePhoto>> {
         return estateDao.getPhotoListById(id)
     }
+
     //INSERT
     fun insertEstate(estate: Estate): Long {
         return estateDao.insertEstate(estate)
     }
 
-    fun insertPhoto(estatePhoto: EstatePhoto) :Long{
+    fun insertPhoto(estatePhoto: EstatePhoto): Long {
         return estateDao.insertPhoto(estatePhoto)
     }
 
@@ -34,12 +35,10 @@ class EstateRepository(val estateDao: EstateDao) {
         return estateDao.setMainPicture(estateId, uri)
     }
 
-    fun setLatLng(estateId: Long, latitude: Double, longitude: Double) {
-        return estateDao.updateLatLng(estateId, latitude, longitude)
-    }
-     fun getSearchResult(query: SimpleSQLiteQuery): List<Estate> {
+    fun getSearchResult(query: SimpleSQLiteQuery): List<Estate> {
         return estateDao.getSearchResult(query)
     }
+
     fun getAllPhoto(): LiveData<List<EstatePhoto>> {
         return estateDao.getAllPhoto()
     }
