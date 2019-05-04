@@ -72,8 +72,7 @@ class SettingActivity : BaseActivity() {
     }
 
     private fun configureRadioGroup() {
-        val currentCurrency = read(CURRENT_CURRENCY, CURRENCY_EURO)
-        when (currentCurrency) {
+        when (read(CURRENT_CURRENCY, CURRENCY_EURO)) {
             CURRENCY_EURO -> activity_setting_euro_radioButton.toggle()
             CURRENCY_DOLLAR -> activity_setting_dollar_radioButton.toggle()
         }
@@ -83,7 +82,7 @@ class SettingActivity : BaseActivity() {
      * configure the onClick event for the radio buttons
      */
     private fun onRadioButtonClicked() {
-        activity_setting_radioGroup.setOnCheckedChangeListener { group, checkedId ->
+        activity_setting_radioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.activity_setting_euro_radioButton -> write(CURRENT_CURRENCY, CURRENCY_EURO)
                 R.id.activity_setting_dollar_radioButton -> write(CURRENT_CURRENCY, CURRENCY_DOLLAR)

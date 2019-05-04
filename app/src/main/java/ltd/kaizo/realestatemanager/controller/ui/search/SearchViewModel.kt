@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
-import timber.log.Timber
+import ltd.kaizo.realestatemanager.utils.DateConverter
+import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
 import java.util.concurrent.Executor
 
 class SearchViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -46,7 +47,7 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
 
     }
 
-     fun configureQuery(): String {
+    fun configureQuery(): String {
 
         var query = "SELECT * FROM Estate"
         this.argsList = mutableListOf()
@@ -91,17 +92,17 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
             query += "nbBathroom >= ?"
             argsList.add(nbBathroomMini.value!!.toInt())
         }
-         if (!nbBathroomMaxi.value.isNullOrBlank()) {
-             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-             query += "nbBathroom <= ?"
-             argsList.add(nbBathroomMaxi.value!!.toInt())
-         }
-         if (!priceMini.value.isNullOrBlank()) {
+        if (!nbBathroomMaxi.value.isNullOrBlank()) {
+            query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
+            query += "nbBathroom <= ?"
+            argsList.add(nbBathroomMaxi.value!!.toInt())
+        }
+        if (!priceMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "price >= ?"
             argsList.add(priceMini.value!!.toInt())
         }
-         if (!priceMaxi.value.isNullOrBlank()) {
+        if (!priceMaxi.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "price <= ?"
             argsList.add(priceMaxi.value!!.toInt())
@@ -120,26 +121,22 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
         if (!dateInMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "dateIn >= ?"
-            argsList.add(dateInMini.value!!)
+            argsList.add(getDateFromString(dateInMini.value)!!.time)
         }
         if (!dateInMaxi.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
             query += "dateIn <= ?"
-            argsList.add(dateInMaxi.value!!)
+            argsList.add(getDateFromString(dateInMaxi.value)!!.time)
         }
         if (!dateOutMini.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "(dateOut >= ?"
-            argsList.add(dateOutMini.value!!)
-            query += " AND isSold = ?)"
-            argsList.add(1)
+            query += "dateOut >= ?"
+            argsList.add(getDateFromString(dateOutMini.value)!!.time)
         }
         if (!dateOutMaxi.value.isNullOrBlank()) {
             query += if (containsCondition) " AND " else " WHERE "; containsCondition = true
-            query += "(dateOut <= ?"
-            argsList.add(dateOutMaxi.value!!)
-            query += " AND isSold = ?)"
-            argsList.add(1)
+            query += "dateOut <= ?"
+            argsList.add(getDateFromString(dateOutMaxi.value)!!.time)
         }
         if (!pictureMini.value.isNullOrBlank()) {
             pictureLimit = pictureMini.value!!.toInt()
