@@ -2,8 +2,8 @@ package ltd.kaizo.realestatemanager.controller.ui.loan
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ltd.kaizo.realestatemanager.utils.CurrencyUtils.formatNumberFromCurrency
 import ltd.kaizo.realestatemanager.utils.STR_VERIFY_DATA
-import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
 import java.lang.Math.abs
 import kotlin.math.pow
 
@@ -36,7 +36,7 @@ class LoanSimViewModel : ViewModel() {
         }
     }
 
-     fun checkFieldView() = (
+    fun checkFieldView() = (
             !totalAmount.value.isNullOrBlank()
                     && !rate.value.isNullOrBlank()
                     && !duration.value.isNullOrBlank()
@@ -45,7 +45,7 @@ class LoanSimViewModel : ViewModel() {
     private fun setContribution(str: String?): Double = if (str.isNullOrBlank()) 0.0 else str.toDouble()
 
 
-     fun calculateMonthlyPayment(
+    fun calculateMonthlyPayment(
         totalAmount: Double,
         contribution: Double,
         rate: Double,
@@ -59,7 +59,7 @@ class LoanSimViewModel : ViewModel() {
         return formatNumberFromCurrency(result)
     }
 
-     fun calculateTotalInvestment(
+    fun calculateTotalInvestment(
         totalAmount: Double,
         contribution: Double,
         rate: Double,

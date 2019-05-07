@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.sqlite.db.SimpleSQLiteQuery
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
-import ltd.kaizo.realestatemanager.utils.DateConverter
-import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
+import ltd.kaizo.realestatemanager.utils.DateUtils.getDateFromString
 import java.util.concurrent.Executor
 
 class SearchViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {

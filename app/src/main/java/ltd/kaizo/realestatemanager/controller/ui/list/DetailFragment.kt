@@ -27,7 +27,6 @@ import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
-import timber.log.Timber
 import java.io.File
 
 class DetailFragment : BaseFragment() {

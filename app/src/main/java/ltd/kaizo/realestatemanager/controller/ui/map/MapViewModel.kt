@@ -11,7 +11,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.api.geocoding.GeoData
 import ltd.kaizo.realestatemanager.model.api.stream.GeoStream
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
-import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
+import ltd.kaizo.realestatemanager.utils.CurrencyUtils.formatNumberFromCurrency
 import ltd.kaizo.realestatemanager.utils.Utils.getLocation
 import timber.log.Timber
 import java.util.concurrent.Executor

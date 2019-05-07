@@ -13,12 +13,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
-import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.regex.Pattern
 
 
@@ -35,106 +29,6 @@ object Utils {
         return networkInfo?.isConnected ?: false
     }
 
-    /**
-     * Conversion de la date d'aujourd'hui en un format plus approprié
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @return
-     */
-    val todayDate: String = SimpleDateFormat("dd/MM/yyyy").format(Date())
-
-    fun add0ToDate(nb: Int) =
-        if (nb < 10) {
-            "0$nb"
-        } else {
-            "" + nb
-        }
-
-    fun getDateFromString(date: String?): Date? {
-        if (date != null) {
-            val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
-            return dtf.parseDateTime(date).toDate()
-        }
-        return null
-    }
-
-    fun getStringFromDate(date: Date?): String {
-        return if (date != null) {
-            val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
-            DateTime(date).toString(dtf)
-        } else {
-            ""
-        }
-    }
-
-    /**
-     * check if date2 is after date 1
-     * @return  Boolean
-     */
-    fun checkDateDifference(date1: String, date2: String): Boolean {
-        val dtf = DateTimeFormat.forPattern("dd/MM/yyyy")
-        val d1 = dtf.parseDateTime(date1)
-        val d2 = dtf.parseDateTime(date2)
-        return d2.isAfter(d1)
-    }
-
-    /**
-     * Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
-     * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @param dollars
-     * @return
-     */
-    fun convertDollarToEuro(dollars: Int): Int {
-        return Math.round(dollars * 0.812).toInt()
-    }
-
-    fun convertEuroToDollar(euros: Int): Int {
-        return Math.round(euros / 0.812).toInt()
-    }
-
-    fun convertEuroToDollar(euros: Double): Double {
-        return Math.round(euros / 0.812).toDouble()
-    }
-
-    /**
-     * take a number and return a formatted string
-     * with currency
-     * € = 1 000 €      $ = $1,000
-     * @param number to convert
-     * @return string
-     */
-    fun formatNumberFromCurrency(number: Int): String {
-        var nb = number
-        val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
-            Locale.FRANCE
-        } else {
-            nb = convertEuroToDollar(number)
-            Locale.US
-        }
-        val result = NumberFormat.getCurrencyInstance(currentLocale)
-        result.maximumFractionDigits = 0
-        return result.format(nb)
-    }
-
-    /**
-     * take a number and return a formatted string
-     * with currency
-     * € = 1 000,00 €      $ = $1,000.00
-     * @param number to convert
-     * @return string
-     */
-    fun formatNumberFromCurrency(number: Double): String {
-        var nb = number
-        val currentLocale = if (read(CURRENT_CURRENCY, CURRENCY_EURO) == CURRENCY_EURO) {
-            Locale.FRANCE
-        } else {
-            nb = convertEuroToDollar(number)
-            Locale.US
-        }
-        val result = NumberFormat.getCurrencyInstance(currentLocale)
-        result.maximumFractionDigits = 2
-        return result.format(nb)
-    }
-
     fun configureMessage(message: String, context: Context): String {
         return when (message) {
             STR_ERROR_INSERT_DATA -> context.getString(R.string.data_insert_error)
@@ -149,6 +43,24 @@ object Utils {
 
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    /**
+     * return the position to set spinner according to the type
+     *
+     * @param typeDescription type name
+     * @param typeArray array of type name
+     * @return index of array
+     */
+
+    fun getTypePositionForSpinner(typeDescription: String, typeArray: Array<String>): Int {
+        var position = 0
+        for (type in typeArray) {
+            if (type == typeDescription) {
+                position = typeArray.indexOf(type)
+            }
+        }
+        return position
     }
 
     /****************************
@@ -176,9 +88,6 @@ object Utils {
     fun isEmailValid(emailEditText: EditText): Boolean {
         return emailEditText.text.toString() != "" && validateEmail(emailEditText.text.toString())
     }
-    /****************************
-     *****   username check   *****
-     *****************************/
 
     /**
      * return true if the username is bigger than 2 characters
@@ -190,7 +99,7 @@ object Utils {
         return usernameEditText.text.length > 2
     }
 
-    /****************************
+    /*****************************
      *******   google map   ******
      *****************************/
 

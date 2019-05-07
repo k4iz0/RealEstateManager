@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.model.Estate
-import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
+import ltd.kaizo.realestatemanager.utils.CurrencyUtils.formatNumberFromCurrency
 
 class ListAdapter(
     private val estateList: List<Estate>,

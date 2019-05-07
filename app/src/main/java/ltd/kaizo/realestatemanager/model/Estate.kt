@@ -3,10 +3,7 @@ package ltd.kaizo.realestatemanager.model
 import android.content.ContentValues
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
-import ltd.kaizo.realestatemanager.utils.DateConverter
-import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
+import ltd.kaizo.realestatemanager.utils.DateUtils.getDateFromString
 import java.util.*
 
 @Entity

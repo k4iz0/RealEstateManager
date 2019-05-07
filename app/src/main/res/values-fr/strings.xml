@@ -58,7 +58,7 @@
     <string name="contribution">apport</string>
     <string name="loan_amount">montant du prêt</string>
     <string name="loan_term_in_years">durée du prêt (année)</string>
-    <string name="monthly_payments">mensualités : </string>
+    <string name="monthly_payments">mensualités :</string>
     <string name="notificationText">nouveau bien crée avec succès</string>
     <string name="rate_in">taux en %</string>
     <string name="total_interest_paid">"total investissement : "</string>
@@ -71,6 +71,8 @@
         <item>"Apt"</item>
         <item>"Loft"</item>
         <item>"Maison"</item>
+        <item>"Apt-terrasse"</item>
+        <item>"Manoir"</item>
         <item>"Plein pied"</item>
         <item>"Studio"</item>
         <item>"Autres"</item>

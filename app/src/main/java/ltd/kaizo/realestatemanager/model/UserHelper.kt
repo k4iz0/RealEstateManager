@@ -5,12 +5,8 @@ import com.google.firebase.firestore.*
 import ltd.kaizo.realestatemanager.utils.COLLECTION_NAME
 
 object UserHelper {
-    val usersCollection: CollectionReference
+    private val usersCollection: CollectionReference
         get() = FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
-//
-//    val allUser: Query = UserHelper.usersCollection
-//            .orderBy("username")
-
 
     fun createUser(uid: String, username: String, urlPicture: String, email: String): Task<Void> {
 

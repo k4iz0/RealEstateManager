@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
-import ltd.kaizo.realestatemanager.utils.Utils.formatNumberFromCurrency
-import ltd.kaizo.realestatemanager.utils.Utils.getStringFromDate
+import ltd.kaizo.realestatemanager.utils.CurrencyUtils.formatNumberFromCurrency
+import ltd.kaizo.realestatemanager.utils.DateUtils.getStringFromDate
 
 class ListViewModel(private val estateDataSource: EstateRepository) : ViewModel() {
     val estateList = estateDataSource.getAllEstate()
