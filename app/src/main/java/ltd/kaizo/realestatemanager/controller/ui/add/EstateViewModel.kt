@@ -7,11 +7,12 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.repositories.EstateRepository
 import ltd.kaizo.realestatemanager.utils.*
+import ltd.kaizo.realestatemanager.utils.CurrencyUtils.convertDollarToEuro
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.read
-import ltd.kaizo.realestatemanager.utils.Utils.convertDollarToEuro
-import ltd.kaizo.realestatemanager.utils.Utils.getDateFromString
-import ltd.kaizo.realestatemanager.utils.Utils.getStringFromDate
+import ltd.kaizo.realestatemanager.utils.DateUtils.getDateFromString
+import ltd.kaizo.realestatemanager.utils.DateUtils.getStringFromDate
+import ltd.kaizo.realestatemanager.utils.DateUtils.todayDate
 import java.util.concurrent.Executor
 
 class EstateViewModel(private val estateDataSource: EstateRepository, private val executor: Executor) : ViewModel() {
@@ -41,7 +42,7 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     private var mainPicture = ""
 
     init {
-        dateIn.value = Utils.todayDate
+        dateIn.value = todayDate
     }
 
     fun getEstateById(id: Long): LiveData<Estate> {
@@ -56,6 +57,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         executor.execute { estateDataSource.insertPhoto(estatePhoto) }
     }
 
+    /**
+     * check if all fields are not empty or null
+     */
     fun checkFieldView() = (
             !description.value.isNullOrBlank()
                     && !address.value.isNullOrBlank()
@@ -69,6 +73,11 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
                     && !price.value.isNullOrBlank()
             )
 
+    /**
+     * insert all photo in database with the appropriate id
+     * @param pictureList
+     * @param id of the estate
+     */
     private fun insertPhotoFromList(pictureList: List<EstatePhoto>, id: Long) {
         for (photo in pictureList) {
             photo.estateId = id
@@ -76,6 +85,9 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         }
     }
 
+    /**
+     * check all fields, set default value and create an estate
+     */
     fun createEstate() {
 
         if (checkFieldView()) {
@@ -115,6 +127,10 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
 
     }
 
+    /**
+     * configure the default value to prevent null value in database
+     * and convert price to euro
+     */
     private fun configureDefaultValue() {
         if (isSold.value == null) isSold.value = false
         if (poiList.value == null) poiList.value = ""
@@ -139,6 +155,11 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         return valid
     }
 
+    /**
+     * insert an estate in database
+     *
+     * @param estateToCreate
+     */
     private fun insertEstate(estateToCreate: Estate) {
         executor.execute {
             val estateId = estateDataSource.insertEstate(estateToCreate)
@@ -159,6 +180,11 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
         }
     }
 
+    /**
+     * update the ui with the data of an estate
+     *
+     * @param estate
+     */
     fun updateUiWithData(estate: Estate) {
         description.value = estate.description
         surface.value = estate.surface.toString()

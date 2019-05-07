@@ -198,9 +198,9 @@
                         android:textSize="16sp"
                         android:maxLength="7"
                         android:background="@drawable/border_line"
-                        app:layout_constraintStart_toStartOf="@+id/fragment_search_type_spinner"
+                        app:layout_constraintStart_toStartOf="@+id/fragment_add_type_spinner"
                         android:layout_marginEnd="8dp"
-                        app:layout_constraintEnd_toEndOf="@+id/fragment_search_type_spinner"
+                        app:layout_constraintEnd_toEndOf="@+id/fragment_add_type_spinner"
                         app:layout_constraintTop_toTopOf="@+id/fragment_add_price_textview"
                         app:layout_constraintBottom_toBottomOf="@+id/fragment_add_price_textview"/>
                 <com.google.android.material.button.MaterialButton
@@ -272,7 +272,7 @@
                         android:layout_marginStart="8dp"
                         app:layout_constraintStart_toStartOf="@+id/fragment_add_nb_bedroom_title_textview"/>
                 <Spinner
-                        android:id="@+id/fragment_search_type_spinner"
+                        android:id="@+id/fragment_add_type_spinner"
                         android:layout_width="wrap_content"
                         android:selectedItemPosition="@={estateViewModel.type}"
                         android:layout_height="wrap_content"

@@ -19,9 +19,10 @@ import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
-import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
-import ltd.kaizo.realestatemanager.utils.Utils.checkDateDifference
+import ltd.kaizo.realestatemanager.utils.DateUtils.add0ToDate
+import ltd.kaizo.realestatemanager.utils.DateUtils.checkDateDifference
 import ltd.kaizo.realestatemanager.utils.Utils.configureMessage
+import ltd.kaizo.realestatemanager.utils.Utils.getTypePositionForSpinner
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
@@ -152,7 +153,7 @@ class AddFragment : BaseFragment() {
                 R.layout.support_simple_spinner_dropdown_item,
                 estateViewModel.typeArray.value!!
             )
-        fragment_search_type_spinner.adapter = typeAdapter
+        fragment_add_type_spinner.adapter = typeAdapter
 
     }
 
@@ -233,6 +234,12 @@ class AddFragment : BaseFragment() {
         fragment_add_nb_room_spinner.setSelection(estate.nbRoom)
         fragment_add_nb_bathroom_spinner.setSelection(estate.nbBathroom)
         fragment_add_nb_bedroom_spinner.setSelection(estate.nbBedroom)
+        fragment_add_type_spinner.setSelection(
+            getTypePositionForSpinner(
+                estate.type,
+                estateViewModel.typeArray.value!!
+            )
+        )
         //sold switch
         fragment_add_sold_switch.isChecked = estate.isSold
         if (estate.isSold) datePickerDialog.dismiss()

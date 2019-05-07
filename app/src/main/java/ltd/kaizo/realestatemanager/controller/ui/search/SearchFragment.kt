@@ -19,7 +19,7 @@ import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromEstateList
-import ltd.kaizo.realestatemanager.utils.Utils.add0ToDate
+import ltd.kaizo.realestatemanager.utils.DateUtils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import java.util.*
@@ -58,7 +58,7 @@ class SearchFragment : BaseFragment() {
                 R.layout.support_simple_spinner_dropdown_item,
                 searchViewModel.typeArray.value!!
             )
-        fragment_search_type_spinner.adapter = typeAdapter
+        fragment_add_type_spinner.adapter = typeAdapter
 
     }
 

@@ -237,11 +237,11 @@
                     style="@style/titleSearchTextView"
                     android:text="@string/type"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_search_type_spinner"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_type_spinner"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_type_spinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_type_spinner"
                     android:layout_marginStart="16dp"/>
             <Spinner
-                    android:id="@+id/fragment_search_type_spinner"
+                    android:id="@+id/fragment_add_type_spinner"
                     android:layout_width="wrap_content"
                     android:selectedItemPosition="@={searchViewModel.type}"
                     android:layout_height="wrap_content"
@@ -285,8 +285,8 @@
                     style="@style/ButtonMaterialStyleBlue"
                     app:layout_constraintEnd_toEndOf="@+id/fragment_search_date_out_maxi_textview"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_search_type_spinner"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_search_type_spinner"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_add_type_spinner"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_add_type_spinner"
                     app:layout_constraintStart_toStartOf="@+id/fragment_search_date_out_maxi_textview"
                     android:layout_marginTop="8dp"/>
             <com.google.android.material.button.MaterialButton
