@@ -79,7 +79,7 @@ class ContentProviderTest {
         contentValues.put("id", 0)
         contentValues.put("mainPicture", "content/test/picture")
         contentValues.put("type", "House")
-        contentValues.put("price", 3299000)
+        contentValues.put("price", 2499000)
         contentValues.put("surface", 300)
         contentValues.put("nbRoom", 10)
         contentValues.put("nbBathroom", 4)
