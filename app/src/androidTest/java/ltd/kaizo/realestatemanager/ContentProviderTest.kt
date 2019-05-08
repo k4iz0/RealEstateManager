@@ -9,7 +9,7 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
 import ltd.kaizo.realestatemanager.database.AppDatabase
 import ltd.kaizo.realestatemanager.provider.EstateContentProvider
-import org.hamcrest.CoreMatchers.notNullValue
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromList
 import org.junit.Before
 import org.junit.Test
 
@@ -60,10 +60,11 @@ class ContentProviderTest {
         assertNotNull(cursor)
         assertEquals(1, cursor!!.count)
         assertEquals(true, cursor.moveToFirst())
-        assertEquals(3299000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))
+        assertEquals(2499000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))
+        assertEquals("House", cursor.getInt(cursor.getColumnIndexOrThrow("type")))
+        assertEquals(300, cursor.getInt(cursor.getColumnIndexOrThrow("surface")))
     }
 
-    // ---
 
     private fun generateEstate(): ContentValues {
         val description = StringBuilder()
@@ -76,7 +77,7 @@ class ContentProviderTest {
                     " Quisque est arcu, lacinia sed placerat at, tempus a mauris."
         )
         val contentValues = ContentValues()
-        contentValues.put("id", 0)
+        contentValues.put("id", 1000)
         contentValues.put("mainPicture", "content/test/picture")
         contentValues.put("type", "House")
         contentValues.put("price", 2499000)
@@ -88,7 +89,7 @@ class ContentProviderTest {
         contentValues.put("address", "beach road")
         contentValues.put("postalCode", "4568442")
         contentValues.put("city", "MALIBU")
-        contentValues.put("poi", "")
+        contentValues.put("poi", getGsonFromList(listOf("school","banks","restaurant")))
         contentValues.put("isSold", false)
         contentValues.put("dateIn", "10/02/2019")
         contentValues.put("estateManager", "Yann")
@@ -100,6 +101,6 @@ class ContentProviderTest {
 
     companion object {
         // DATA SET FOR TEST
-        private val ESTATE_ID: Long = 1
+        private val ESTATE_ID: Long = 1000
     }
 }

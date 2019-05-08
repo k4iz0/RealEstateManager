@@ -9,6 +9,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
+import ltd.kaizo.realestatemanager.BuildConfig
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
@@ -109,7 +111,9 @@ class DetailFragment : BaseFragment() {
 
     private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
         //launch default image viewer on device to show the picture
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.fromFile(File(estatePhoto.uri))))
+        val intent = Intent(Intent.ACTION_VIEW, FileProvider.getUriForFile(parentActivity, BuildConfig.APPLICATION_ID + ".provider", File(estatePhoto.uri)))
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        startActivity(intent)
     }
 
 

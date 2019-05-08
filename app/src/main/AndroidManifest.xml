@@ -34,7 +34,15 @@
                 android:authorities="ltd.kaizo.realestatemanager.provider"
                 android:exported="true">
         </provider>
-
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+        </provider>
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"/>

@@ -2,6 +2,7 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.content.res.Configuration
 import android.os.Bundle
+import androidx.core.content.ContextCompat.getColor
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.list_fragment.*
@@ -80,7 +81,7 @@ class ListFragment : BaseFragment() {
 
     }
     private fun configureSwipeRefreshLayout() {
-        swipe_refresh_layout.setColorSchemeColors(resources.getColor(R.color.colorPrimary))
+        swipe_refresh_layout.setColorSchemeColors(getColor(parentActivity,R.color.colorPrimary))
         swipe_refresh_layout.setOnRefreshListener{
             search = false
             updateList(listViewModel.estateList.value!!)
