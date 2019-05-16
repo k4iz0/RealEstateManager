@@ -10,26 +10,23 @@ import kotlinx.android.synthetic.main.activity_loan_sim.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.databinding.ActivityLoanSimBinding
 import ltd.kaizo.realestatemanager.injection.Injection
-import ltd.kaizo.realestatemanager.utils.Utils
 import ltd.kaizo.realestatemanager.utils.Utils.configureMessage
-import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class LoanSimActivity : AppCompatActivity() {
     private lateinit var loanSimViewModel: LoanSimViewModel
-    private lateinit var binding:ActivityLoanSimBinding
+    private lateinit var binding: ActivityLoanSimBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_loan_sim)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_loan_sim)
         this.configureDesign()
     }
 
 
-     fun configureDesign() {
+    fun configureDesign() {
         this.configureToolbar()
         this.configureViewModel()
         this.configureObserver()
-        activity_loan_constraint_layout.setOnClickListener { hideKeyboard(this) }
     }
 
     private fun configureObserver() {
@@ -38,7 +35,6 @@ class LoanSimActivity : AppCompatActivity() {
             this,
             Observer { message ->
                 if (message != "" && message != null) {
-                    hideKeyboard(this)
                     showSnackBar(activity_loan_coordinator_layout, configureMessage(message, this))
                     loanSimViewModel.message.value = ""
                 }

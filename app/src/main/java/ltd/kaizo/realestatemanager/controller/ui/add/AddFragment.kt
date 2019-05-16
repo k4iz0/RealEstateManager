@@ -23,7 +23,6 @@ import ltd.kaizo.realestatemanager.utils.DateUtils.add0ToDate
 import ltd.kaizo.realestatemanager.utils.DateUtils.checkDateDifference
 import ltd.kaizo.realestatemanager.utils.Utils.configureMessage
 import ltd.kaizo.realestatemanager.utils.Utils.getTypePositionForSpinner
-import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 import java.util.*
@@ -145,7 +144,6 @@ class AddFragment : BaseFragment() {
         fragment_add_nb_room_spinner.adapter = adapter
         fragment_add_nb_bedroom_spinner.adapter = adapter
         fragment_add_nb_bathroom_spinner.adapter = adapter
-        fragment_add_constraint_layout.setOnClickListener { hideKeyboard(parentActivity) }
 
         val typeAdapter =
             ArrayAdapter(

@@ -29,6 +29,12 @@ object Utils {
         return networkInfo?.isConnected ?: false
     }
 
+    /**
+     * get the correct string for displaying a message
+     * @param message the id of the message
+     * @param context
+     * @return the resource's string according to the id
+     */
     fun configureMessage(message: String, context: Context): String {
         return when (message) {
             STR_ERROR_INSERT_DATA -> context.getString(R.string.data_insert_error)
@@ -104,7 +110,6 @@ object Utils {
      *****************************/
 
     //geocoding address
-    //https://maps.googleapis.com/maps/api/geocode/json?address=avenue%20de%20la%20resistance,%20lannion&sensor=false&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
     fun getStaticMapUrlFromAddress(address: String, postalCode: String, city: String): String {
         val zoom = 15
         val size = 250
@@ -136,12 +141,4 @@ object Utils {
 
     fun getPoiSourceList(context: Context): Array<String> =
         context.resources.getStringArray(R.array.poiArray)
-
-    fun hideKeyboard(activity: Activity) {
-        val view = activity.findViewById<View>(android.R.id.content)
-        if (view != null) {
-            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-    }
 }

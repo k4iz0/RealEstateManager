@@ -28,8 +28,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     private lateinit var mapView: MapView
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
-    override val fragmentLayout: Int
-        get() = R.layout.fragment_map
+
+    override val fragmentLayout = R.layout.fragment_map
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_map, container, false)
@@ -106,10 +106,15 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
         }
     }
 
-    private fun configureAndShowDetailFragment(title: String) {
+    /**
+     * launch the DetailFragment if the infoWindow is clicked
+     *
+     * @param estateId
+     */
+    private fun configureAndShowDetailFragment(estateId: String) {
         val detailFragment = DetailFragment()
         val args = Bundle()
-        args.putLong(ESTATE_ID, title.toLong())
+        args.putLong(ESTATE_ID, estateId.toLong())
         args.putInt(ESTATE_SOURCE, ESTATE_SOURCE_MAP)
         detailFragment.arguments = args
         parentActivity.supportFragmentManager.beginTransaction()
