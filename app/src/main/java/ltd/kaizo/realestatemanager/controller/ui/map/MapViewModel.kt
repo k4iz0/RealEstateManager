@@ -33,6 +33,12 @@ class MapViewModel(val estateDataSource: EstateRepository, val executor: Executo
         }
     }
 
+    /**
+     * get the latitude and longitude from an address
+     * thanks to the geoApiLocation from google
+     * and set up a marker accordingly
+     * @param estate
+     */
     private fun streamFetchGeoDataFromAddress(estate: Estate) {
         val disposable =
             GeoStream.streamFetchGeoDataFromAddress(getLocation(estate.address, estate.postalCode, estate.city))

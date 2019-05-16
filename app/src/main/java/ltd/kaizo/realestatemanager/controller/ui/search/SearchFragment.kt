@@ -20,7 +20,6 @@ import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromEstateList
 import ltd.kaizo.realestatemanager.utils.DateUtils.add0ToDate
-import ltd.kaizo.realestatemanager.utils.Utils.hideKeyboard
 import ltd.kaizo.realestatemanager.utils.Utils.showAddPoiAlertDialog
 import java.util.*
 
@@ -31,8 +30,7 @@ class SearchFragment : BaseFragment() {
     private lateinit var datePickerDialog: DatePickerDialog
     private lateinit var pictureFilteredList: List<EstatePhoto>
 
-    override val fragmentLayout: Int
-        get() = R.layout.fragment_search
+    override val fragmentLayout = R.layout.fragment_search
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,32 +49,14 @@ class SearchFragment : BaseFragment() {
         this.configureSpinner()
     }
 
-    private fun configureSpinner() {
-        val typeAdapter =
-            ArrayAdapter(
-                parentActivity,
-                R.layout.support_simple_spinner_dropdown_item,
-                searchViewModel.typeArray.value!!
-            )
-        fragment_add_type_spinner.adapter = typeAdapter
-
-    }
-
-    private fun configureEvents() {
-        this.configureAddPoiBtn()
-        fragment_search_coordinator_layout.setOnClickListener { hideKeyboard(parentActivity) }
-        this.configureDateButton()
-    }
-
-    private fun configureDateButton() {
-        fragment_search_date_in__mini_textview.setOnClickListener { configureDatePicker(RC_DATE_IN_MINI) }
-        fragment_search_date_in__maxi_textview.setOnClickListener { configureDatePicker(RC_DATE_IN_MAXI) }
-        fragment_search_date_out_mini_textview.setOnClickListener { configureDatePicker(RC_DATE_OUT_MINI) }
-        fragment_search_date_out_maxi_textview.setOnClickListener { configureDatePicker(RC_DATE_OUT_MAXI) }
-    }
-
-    private fun configureAddPoiBtn() {
-        fragment_search_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_SEARCH) }
+    private fun configureViewModel() {
+        parentActivity = activity as SearchActivity
+        searchViewModel = parentActivity.searchViewModel
+        binding.lifecycleOwner = this
+        binding.searchViewModel = searchViewModel
+        val array = arrayOf(getString(R.string.all))
+        array + resources.getStringArray(R.array.typeArray)
+        searchViewModel.typeArray.value = array + resources.getStringArray(R.array.typeArray)
     }
 
     private fun configureObserver() {
@@ -126,14 +106,32 @@ class SearchFragment : BaseFragment() {
         startActivity(listActivity)
     }
 
-    private fun configureViewModel() {
-        parentActivity = activity as SearchActivity
-        searchViewModel = parentActivity.searchViewModel
-        binding.lifecycleOwner = this
-        binding.searchViewModel = searchViewModel
-        val array = arrayOf("All")
-        array + resources.getStringArray(R.array.typeArray)
-        searchViewModel.typeArray.value = array + resources.getStringArray(R.array.typeArray)
+
+    private fun configureEvents() {
+        this.configureAddPoiBtn()
+        this.configureDateButton()
+    }
+
+    private fun configureSpinner() {
+        val typeAdapter =
+            ArrayAdapter(
+                parentActivity,
+                R.layout.support_simple_spinner_dropdown_item,
+                searchViewModel.typeArray.value!!
+            )
+        fragment_add_type_spinner.adapter = typeAdapter
+
+    }
+
+    private fun configureDateButton() {
+        fragment_search_date_in__mini_textview.setOnClickListener { configureDatePicker(RC_DATE_IN_MINI) }
+        fragment_search_date_in__maxi_textview.setOnClickListener { configureDatePicker(RC_DATE_IN_MAXI) }
+        fragment_search_date_out_mini_textview.setOnClickListener { configureDatePicker(RC_DATE_OUT_MINI) }
+        fragment_search_date_out_maxi_textview.setOnClickListener { configureDatePicker(RC_DATE_OUT_MAXI) }
+    }
+
+    private fun configureAddPoiBtn() {
+        fragment_search_poi_btn.setOnClickListener { showAddPoiAlertDialog(fragmentManager, ESTATE_SOURCE_SEARCH) }
     }
 
     private fun configureDatePicker(source: Int) {

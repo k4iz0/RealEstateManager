@@ -67,6 +67,7 @@
     <string name="sale_date_error">vérifiez votre date de vente</string>
     <string name="data_insert_error">erreur lors de l\'insertion des données</string>
     <string name="verify_data">verifiez vos données</string>
+    <string name="all">Tous</string>
     <string-array name="typeArray">
         <item>"Apt"</item>
         <item>"Loft"</item>

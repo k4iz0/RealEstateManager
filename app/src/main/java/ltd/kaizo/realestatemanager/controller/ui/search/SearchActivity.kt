@@ -12,9 +12,8 @@ import ltd.kaizo.realestatemanager.utils.Utils.showSnackBar
 
 class SearchActivity : BaseActivity() {
     lateinit var searchViewModel: SearchViewModel
-    override fun getFragmentLayout(): Int {
-        return R.layout.activity_search
-    }
+
+    override fun getFragmentLayout() = R.layout.activity_search
 
     override fun configureDesign() {
         this.configureToolbar()

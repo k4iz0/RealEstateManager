@@ -66,9 +66,12 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             .commit()
     }
 
+    /**
+     * show the detailFragment next to the list if the device is in landscape mode
+     */
     private fun configureAndShowDetailFragment() {
-        var detailFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_detail)
-        if (detailFragment != null && fragment_container_detail != null) {
+        var detailFragment = DetailFragment()
+        if (fragment_container_detail != null) {
             val args = Bundle()
             val id = if(listViewModel.estateId.value != null)listViewModel.estateId.value else -1
             args.putLong(ESTATE_ID, id!!)

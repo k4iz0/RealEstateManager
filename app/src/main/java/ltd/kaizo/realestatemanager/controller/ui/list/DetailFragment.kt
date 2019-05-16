@@ -62,6 +62,9 @@ class DetailFragment : BaseFragment() {
         fragment_detail_description_textview.movementMethod = ScrollingMovementMethod()
     }
 
+    /**
+     * launch the mapActivity if the static map is clicked
+     */
     private fun configureOnMapClicked() {
         fragment_detail_map_container.setOnClickListener {
             runWithPermissions(FINE_LOCATION, COARSE_LOCATION) {
@@ -70,6 +73,9 @@ class DetailFragment : BaseFragment() {
         }
     }
 
+    /**
+     * configure the viewModel according to the activity's source
+     */
     private fun configureViewModel() {
         when (sourceTag) {
             0 -> {
@@ -85,7 +91,9 @@ class DetailFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.listViewModel = listViewModel
     }
-
+    /**
+     * configure the recycle view for the estate's pictures
+     */
     private fun configurePictureListRecycleView() {
         pictureListAdapter =
             PictureListAdapter(
@@ -97,6 +105,9 @@ class DetailFragment : BaseFragment() {
         fragment_detail_picture_list_recycle_view.adapter = pictureListAdapter
     }
 
+    /**
+     * configure the recycle view for the point of interest
+     */
     private fun configurePoiListRecycleView() {
         poiListAdapter =
             PoiListAdapter(poiList, getPoiSourceList(parentActivity.applicationContext), RC_PICTURE_ITEM_DETAIL) {}
@@ -105,6 +116,11 @@ class DetailFragment : BaseFragment() {
         fragment_detail_poi_list_recycle_view.adapter = poiListAdapter
     }
 
+    /**
+     * send the picture list to the detail picture fragment
+     * to be seen in full screen
+     * @param estatePhotoList
+     */
     private fun onPictureItemClicked(estatePhotoList: List<EstatePhoto>) {
         configureAndLaunchPictureDetailFragment(estatePhotoList)
     }
@@ -116,6 +132,7 @@ class DetailFragment : BaseFragment() {
         pictureDetail.arguments = args
         activity!!.supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, pictureDetail)
+            .addToBackStack(null)
             .commit()
     }
 
