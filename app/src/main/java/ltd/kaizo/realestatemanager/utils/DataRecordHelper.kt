@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ltd.kaizo.realestatemanager.model.Estate
+import ltd.kaizo.realestatemanager.model.EstatePhoto
 
 object DataRecordHelper {
     /**
@@ -128,6 +129,13 @@ object DataRecordHelper {
     }
 
     fun getGsonFromEstateList(list: List<Estate>): String {
+        return Gson().toJson(list)
+    }
+    fun getEstatePhotoListFromGson(gsonStr: String): List<EstatePhoto> {
+        return Gson().fromJson(gsonStr, object : TypeToken<List<EstatePhoto>>() {}.type)
+    }
+
+    fun getGsonFromEstatePhotoList(list: List<EstatePhoto>): String {
         return Gson().toJson(list)
     }
 

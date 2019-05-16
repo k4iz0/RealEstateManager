@@ -66,7 +66,7 @@ class LoanSimViewModel : ViewModel() {
         duration: Int
     ): String {
         val capital = totalAmount - contribution
-        var result = 0.0
+        val result: Double
         //interest =  = ( K x T ) * d
         result = ((capital * rate) * duration) / 100
         return formatNumberFromCurrency(result)

@@ -81,6 +81,8 @@ dependencies {
     //MOCKITO
     implementation "org.mockito:mockito-core:2.27.0"
     testImplementation 'org.mockito:mockito-inline:2.21.0'
+    //ICEPICK
+    implementation 'frankiesardo:icepick:3.2.0'
 
     implementation 'com.google.android.material:material:1.0.0'
 

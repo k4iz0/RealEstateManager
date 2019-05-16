@@ -1,5 +1,5 @@
 <resources>
-	<dimen name="big_text_size">32dp</dimen>
+	<dimen name="big_text_size">32sp</dimen>
 	<dimen name="edit_text_width">150dp</dimen>
 	<dimen name="description_height">180dp</dimen>
 	<dimen name="text_size">22sp</dimen>

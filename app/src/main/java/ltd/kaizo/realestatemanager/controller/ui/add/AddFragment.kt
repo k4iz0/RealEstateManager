@@ -102,11 +102,11 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        adapter = PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photo, sourceCode ->
+        adapter = PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photoList, position,sourceCode ->
             when (sourceCode) {
-                RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photo)
-                RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photo)
-                RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photo)
+                RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photoList[position])
+                RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photoList[position])
+                RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photoList[position])
             }
         }
         fragment_add_picture_list_recycle_view.layoutManager =

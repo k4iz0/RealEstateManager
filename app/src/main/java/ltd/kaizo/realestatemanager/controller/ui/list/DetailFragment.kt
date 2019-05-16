@@ -3,13 +3,11 @@ package ltd.kaizo.realestatemanager.controller.ui.list
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
-import ltd.kaizo.realestatemanager.BuildConfig
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.adapter.PoiListAdapter
@@ -27,9 +24,9 @@ import ltd.kaizo.realestatemanager.databinding.FragmentDetailBinding
 import ltd.kaizo.realestatemanager.injection.Injection
 import ltd.kaizo.realestatemanager.model.EstatePhoto
 import ltd.kaizo.realestatemanager.utils.*
+import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getGsonFromEstatePhotoList
 import ltd.kaizo.realestatemanager.utils.DataRecordHelper.getListFromGson
 import ltd.kaizo.realestatemanager.utils.Utils.getPoiSourceList
-import java.io.File
 
 class DetailFragment : BaseFragment() {
     private lateinit var pictureListAdapter: PictureListAdapter
@@ -41,10 +38,6 @@ class DetailFragment : BaseFragment() {
     private lateinit var binding: FragmentDetailBinding
     private var sourceTag = 0
     private var estateId: Long = -1
-
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
 
     override val fragmentLayout: Int
         get() = R.layout.fragment_detail
@@ -95,7 +88,10 @@ class DetailFragment : BaseFragment() {
 
     private fun configurePictureListRecycleView() {
         pictureListAdapter =
-            PictureListAdapter(pictureList, RC_PICTURE_ITEM_DETAIL) { photo, _ -> onPictureItemClicked(photo) }
+            PictureListAdapter(
+                pictureList,
+                RC_PICTURE_ITEM_DETAIL
+            ) { photoList, _, _ -> onPictureItemClicked(photoList) }
         fragment_detail_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_detail_picture_list_recycle_view.adapter = pictureListAdapter
@@ -109,13 +105,19 @@ class DetailFragment : BaseFragment() {
         fragment_detail_poi_list_recycle_view.adapter = poiListAdapter
     }
 
-    private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
-        //launch default image viewer on device to show the picture
-        val intent = Intent(Intent.ACTION_VIEW, FileProvider.getUriForFile(parentActivity, BuildConfig.APPLICATION_ID + ".provider", File(estatePhoto.uri)))
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        startActivity(intent)
+    private fun onPictureItemClicked(estatePhotoList: List<EstatePhoto>) {
+        configureAndLaunchPictureDetailFragment(estatePhotoList)
     }
 
+    private fun configureAndLaunchPictureDetailFragment(estatePhotoList: List<EstatePhoto>) {
+        val args = Bundle()
+        args.putString(ESTATE_PHOTO_LIST, getGsonFromEstatePhotoList(estatePhotoList))
+        val pictureDetail = PictureDetailFragment()
+        pictureDetail.arguments = args
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, pictureDetail)
+            .commit()
+    }
 
     private fun configureObserver() {
         //get estate detail

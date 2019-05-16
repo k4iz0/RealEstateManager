@@ -80,7 +80,7 @@
     <string name="rate_in">rate in %</string>
     <string name="loan_term_in_years">loan term in years</string>
     <string name="calculate">calculate</string>
-    <string name="monthly_payments">Monthly Payments : </string>
+    <string name="monthly_payments">Monthly Payments :</string>
     <string name="total_interest_paid">"Total Investment : "</string>
     <string name="sale_date_error">error check your sale date</string>
     <string name="data_insert_error">error inserting data</string>
@@ -104,5 +104,8 @@
         <item>"banks"</item>
         <item>"sport"</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
