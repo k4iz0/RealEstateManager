@@ -20,7 +20,7 @@ import timber.log.Timber
 class PictureListAdapter(
     private val pictureList: List<EstatePhoto>,
     private val sourceId:Int,
-    private val clickListener: (EstatePhoto, Int) -> Unit
+    private val clickListener: (List<EstatePhoto>,Int, Int) -> Unit
 ) :
     RecyclerView.Adapter<PictureListAdapter.PictureListViewHolder>() {
 
@@ -38,15 +38,15 @@ class PictureListAdapter(
         val picture = pictureList[position]
 
         with(holder) {
-            cardView.setOnClickListener { clickListener(picture, RC_PICTURE_LISTENER_VIEW) }
+            cardView.setOnClickListener { clickListener(pictureList, position,RC_PICTURE_LISTENER_VIEW) }
             nameItem.text = picture.name
             Picasso.get().load(picture.uri).into(pictureItem)
             if (sourceId == RC_PICTURE_ITEM_DETAIL) {
                 heartBtn.visibility = View.INVISIBLE
                 removeBtn.visibility = View.INVISIBLE
             } else {
-                heartBtn.setOnClickListener { clickListener (picture, RC_PICTURE_LISTENER_FAVORITE) }
-                removeBtn.setOnClickListener { clickListener (picture, RC_PICTURE_LISTENER_REMOVE) }
+                heartBtn.setOnClickListener { clickListener (pictureList,position, RC_PICTURE_LISTENER_FAVORITE) }
+                removeBtn.setOnClickListener { clickListener (pictureList,position, RC_PICTURE_LISTENER_REMOVE) }
 
                 when (picture.mainPicture) {
                     true -> heartBtn.setBackgroundResource(R.drawable.ic_heart_full_blue)

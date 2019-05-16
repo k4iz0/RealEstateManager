@@ -107,7 +107,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback {
     }
 
     private fun configureAndShowDetailFragment(title: String) {
-        val detailFragment = DetailFragment.newInstance()
+        val detailFragment = DetailFragment()
         val args = Bundle()
         args.putLong(ESTATE_ID, title.toLong())
         args.putInt(ESTATE_SOURCE, ESTATE_SOURCE_MAP)

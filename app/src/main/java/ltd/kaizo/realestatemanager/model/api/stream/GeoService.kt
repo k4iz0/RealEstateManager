@@ -22,8 +22,6 @@ companion object {
 /*
  * The constant url.
  */
-    //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,
-//+Mountain+View,+CA&key=AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc
     private const val url = "https://maps.googleapis.com/maps/api/"
 /**
  * The constant interceptor.

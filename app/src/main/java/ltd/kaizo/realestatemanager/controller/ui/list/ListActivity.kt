@@ -62,7 +62,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun configureAndShowListFragment() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, ListFragment.newInstance())
+            .replace(R.id.fragment_container, ListFragment())
             .commit()
     }
 
@@ -73,7 +73,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             val id = if(listViewModel.estateId.value != null)listViewModel.estateId.value else -1
             args.putLong(ESTATE_ID, id!!)
             detailFragment.arguments = args
-            detailFragment = DetailFragment.newInstance()
+            detailFragment = DetailFragment()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_detail, detailFragment)
                 .commit()

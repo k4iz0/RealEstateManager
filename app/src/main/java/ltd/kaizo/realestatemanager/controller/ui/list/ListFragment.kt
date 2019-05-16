@@ -16,11 +16,7 @@ import ltd.kaizo.realestatemanager.utils.ESTATE_SOURCE_MAP
 import timber.log.Timber
 
 class ListFragment : BaseFragment() {
-    companion object {
-        fun newInstance() = ListFragment()
-    }
-
-    private lateinit var listViewModel: ListViewModel
+       private lateinit var listViewModel: ListViewModel
     private lateinit var adapter: ListAdapter
     private lateinit var estateList: MutableList<Estate>
     private lateinit var parentActivity: ListActivity
@@ -66,7 +62,7 @@ class ListFragment : BaseFragment() {
 
     private fun onEstateItemClicked(estate: Estate) {
         listViewModel.estateId.value = estate.id
-        val detailFragment = DetailFragment.newInstance()
+        val detailFragment = DetailFragment()
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             activity!!.supportFragmentManager
                 .beginTransaction()
