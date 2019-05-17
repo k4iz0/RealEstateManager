@@ -5,11 +5,11 @@
     <data>
         <variable name="estateViewModel" type="ltd.kaizo.realestatemanager.controller.ui.add.EstateViewModel"/>
     </data>
-    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/fragment_add_coordinator_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -335,5 +335,4 @@
                         app:layout_constraintTop_toBottomOf="@+id/fragment_add_postal_code_edittext"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </ScrollView>
 </layout>
