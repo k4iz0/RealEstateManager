@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_add.*
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.adapter.PictureListAdapter
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseFragment
+import ltd.kaizo.realestatemanager.controller.ui.list.PictureDetailFragment
 import ltd.kaizo.realestatemanager.databinding.FragmentAddBinding
 import ltd.kaizo.realestatemanager.model.Estate
 import ltd.kaizo.realestatemanager.model.EstatePhoto
@@ -101,13 +102,14 @@ class AddFragment : BaseFragment() {
     }
 
     private fun configureRecycleView() {
-        adapter = PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photoList, position,sourceCode ->
-            when (sourceCode) {
-                RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photoList[position])
-                RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photoList[position])
-                RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photoList[position])
+        adapter =
+            PictureListAdapter(estateViewModel.pictureList, RC_PICTURE_ITEM_EDIT) { photoList, position, sourceCode ->
+                when (sourceCode) {
+                    RC_PICTURE_LISTENER_VIEW -> onPictureItemClicked(photoList)
+                    RC_PICTURE_LISTENER_FAVORITE -> this.configureMainPictureButton(photoList[position])
+                    RC_PICTURE_LISTENER_REMOVE -> this.configureRemovePictureButton(photoList[position])
+                }
             }
-        }
         fragment_add_picture_list_recycle_view.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fragment_add_picture_list_recycle_view.adapter = adapter
@@ -119,9 +121,24 @@ class AddFragment : BaseFragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun onPictureItemClicked(estatePhoto: EstatePhoto) {
-        //launch default image viewer on device to show the picture
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(estatePhoto.uri)))
+    /**
+     * send the picture list to the detail picture fragment
+     * to be seen in full screen
+     * @param estatePhotoList
+     */
+    private fun onPictureItemClicked(estatePhotoList: List<EstatePhoto>) {
+       this.configureAndLaunchPictureDetailFragment(estatePhotoList)
+    }
+
+    private fun configureAndLaunchPictureDetailFragment(estatePhotoList: List<EstatePhoto>) {
+        val args = Bundle()
+        args.putString(ESTATE_PHOTO_LIST, DataRecordHelper.getGsonFromEstatePhotoList(estatePhotoList))
+        val pictureDetail = PictureDetailFragment()
+        pictureDetail.arguments = args
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.activity_estate_container, pictureDetail)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun configureDateInOnClickListener() {

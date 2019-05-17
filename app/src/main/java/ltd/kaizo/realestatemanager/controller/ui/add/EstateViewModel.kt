@@ -148,9 +148,10 @@ class EstateViewModel(private val estateDataSource: EstateRepository, private va
     private fun checkMainPicture(): Boolean {
         var valid = false
         for (picture in pictureListTmp) {
-            if (picture.mainPicture)
+            if (picture.mainPicture) {
                 valid = true
-            mainPicture = picture.uri
+                mainPicture = picture.uri
+            }
         }
         return valid
     }
