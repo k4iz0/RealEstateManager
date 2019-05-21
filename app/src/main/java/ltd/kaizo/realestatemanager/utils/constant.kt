@@ -1,6 +1,7 @@
 package ltd.kaizo.realestatemanager.utils
 
 import android.Manifest.permission.*
+import ltd.kaizo.realestatemanager.BuildConfig
 
 
 /****************************
@@ -54,7 +55,7 @@ const val RC_POI_ADD_ITEM = 9001
 /****************************
  *********   KEYS   ********
  *****************************/
-const val API_KEY = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
+const val API_KEY =  BuildConfig.ApiKey
 
 /****************************
  *********   STRING   ********

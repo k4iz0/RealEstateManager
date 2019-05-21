@@ -18,9 +18,15 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug{
+            buildConfigField 'String', "ApiKey", realEstateManager_google_maps_key
+            resValue 'string', "api_key", realEstateManager_google_maps_key
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", realEstateManager_google_maps_key
+            resValue 'string', "api_key", realEstateManager_google_maps_key
         }
     }
     dataBinding {
