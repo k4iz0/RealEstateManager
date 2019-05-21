@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
+import ltd.kaizo.realestatemanager.BuildConfig
 import ltd.kaizo.realestatemanager.R
 import ltd.kaizo.realestatemanager.controller.ui.add.AddPoiDialogFragment
 import java.util.regex.Pattern
@@ -114,12 +115,11 @@ object Utils {
         val zoom = 15
         val size = 250
         val type = "roadmap"
-        val apiKey = "AIzaSyCBcjFQJr7i9K22a9ulsTQ_WntkQHX35qc"
         return "https://maps.googleapis.com/maps/api/staticmap?center=${getLocation(
             address,
             postalCode,
             city
-        )}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$apiKey"
+        )}&zoom=$zoom&size=${size}x$size&maptype=$type&key=$API_KEY"
 
     }
 
