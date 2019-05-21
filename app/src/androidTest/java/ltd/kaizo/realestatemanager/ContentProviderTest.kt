@@ -59,11 +59,11 @@ class ContentProviderTest {
         )
         assertNotNull(cursor)
         assertEquals(1, cursor!!.count)
-        assertEquals(true, cursor.moveToFirst())
-        assertEquals(2499000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))
-        assertEquals("House", cursor.getInt(cursor.getColumnIndexOrThrow("type")))
-        assertEquals(300, cursor.getInt(cursor.getColumnIndexOrThrow("surface")))
-    }
+    assertEquals(true, cursor.moveToFirst())
+    assertEquals(2499000, cursor.getInt(cursor.getColumnIndexOrThrow("price")))
+    assertEquals("House", cursor.getInt(cursor.getColumnIndexOrThrow("type")))
+    assertEquals(300, cursor.getInt(cursor.getColumnIndexOrThrow("surface")))
+}
 
 
     private fun generateEstate(): ContentValues {

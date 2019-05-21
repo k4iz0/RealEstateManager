@@ -58,7 +58,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun configureViewModel() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
         this.listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
-    }
+}
 
     private fun configureAndShowListFragment() {
         supportFragmentManager.beginTransaction()
@@ -70,10 +70,10 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
      * show the detailFragment next to the list if the device is in landscape mode
      */
     private fun configureAndShowDetailFragment() {
-        var detailFragment = DetailFragment()
-        if (fragment_container_detail != null) {
+        if (fragment_container_detail != null && listViewModel.estateId.value != null) {
+            var detailFragment = DetailFragment()
             val args = Bundle()
-            val id = if(listViewModel.estateId.value != null)listViewModel.estateId.value else -1
+            val id = if (listViewModel.estateId.value != null) listViewModel.estateId.value else -1
             args.putLong(ESTATE_ID, id!!)
             detailFragment.arguments = args
             detailFragment = DetailFragment()
@@ -117,8 +117,8 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
                 true
             }
-             R.id.activity_main_drawer_loan -> {
-                    startActivity(Intent(this, LoanSimActivity::class.java))
+            R.id.activity_main_drawer_loan -> {
+                startActivity(Intent(this, LoanSimActivity::class.java))
                 true
             }
             R.id.activity_main_drawer_logout -> {
