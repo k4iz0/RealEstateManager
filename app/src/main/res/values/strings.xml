@@ -85,6 +85,7 @@
     <string name="sale_date_error">error check your sale date</string>
     <string name="data_insert_error">error inserting data</string>
     <string name="verify_data">verify your data</string>
+    <string name="all">All</string>
 
     <string-array name="typeArray">
         <item>"Apt"</item>
