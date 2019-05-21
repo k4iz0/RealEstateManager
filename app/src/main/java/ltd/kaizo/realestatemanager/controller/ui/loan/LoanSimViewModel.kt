@@ -16,11 +16,13 @@ class LoanSimViewModel : ViewModel() {
     val monthlyPayment = MutableLiveData<String>()
     val totalInvestment = MutableLiveData<String>()
 
-
+    /**
+     * method call when the calculate's button is clicked
+     */
     fun calculate() {
         if (checkFieldView()) {
             monthlyPayment.value = calculateMonthlyPayment(
-                totalAmount.value!!.toDouble(),
+                        totalAmount.value!!.toDouble(),
                 setContribution(contribution.value),
                 rate.value!!.toDouble(),
                 duration.value!!.toInt()

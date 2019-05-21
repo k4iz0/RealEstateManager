@@ -37,6 +37,9 @@ class SearchViewModel(private val estateDataSource: EstateRepository, private va
     val typeArray = MutableLiveData<Array<String>>()
     var pictureLimit = 0
 
+    /**
+     * search button's onClick method
+     */
     fun launchSearchRequest() {
         val sqliteQuery = SimpleSQLiteQuery(configureQuery(), argsList.toTypedArray())
         executor.execute {

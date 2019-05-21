@@ -9,7 +9,7 @@ object DateUtils {
     /**
      * Conversion de la date d'aujourd'hui en un format plus approprié
      * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
-     * @return
+     * @return formatted date of the day
      */
     val todayDate: String = SimpleDateFormat("dd/MM/yyyy").format(Date())
 
