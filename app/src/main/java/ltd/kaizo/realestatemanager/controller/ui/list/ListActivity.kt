@@ -58,7 +58,7 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun configureViewModel() {
         val viewModelFactory = Injection.provideViewModelFactory(this)
         this.listViewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
-}
+    }
 
     private fun configureAndShowListFragment() {
         supportFragmentManager.beginTransaction()
@@ -151,7 +151,9 @@ class ListActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         AuthUI.getInstance()
             .signOut(this)
             .addOnSuccessListener {
-                startActivity(Intent(this, LoginActivity::class.java))
+                val loginActivity = Intent(this, LoginActivity::class.java)
+                loginActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(loginActivity)
             }
     }
 
