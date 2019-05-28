@@ -9,9 +9,8 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
 import ltd.kaizo.realestatemanager.controller.ui.base.BaseActivity
 import ltd.kaizo.realestatemanager.model.UserHelper
+import timber.log.Timber
 import java.util.*
-
-
 
 
 class LoginActivity : BaseActivity() {
@@ -56,54 +55,59 @@ class LoginActivity : BaseActivity() {
         if (RC_SIGN_IN == requestCode) {
             if (resultCode == Activity.RESULT_OK) { // SUCCESS
                 if (this.getCurrentUser() != null) {
-                        UserHelper.createUser(
-                            getCurrentUser()!!.uid,
-                            getCurrentUser()?.displayName!!,
-                            getCurrentUser()?.photoUrl.toString(),
-                            getCurrentUser()?.email!!
-                        )
-                Snackbar.make(
-                    activity_login_coordinator_layout,
-                    getString(ltd.kaizo.realestatemanager.R.string.connection_succeed),
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                startListActivity()
-            } else { // ERRORS
-                when {
-                    response == null -> Snackbar.make(
+                    UserHelper.createUser(
+                        getCurrentUser()!!.uid,
+                        getCurrentUser()?.displayName!!,
+                        getCurrentUser()?.photoUrl.toString(),
+                        getCurrentUser()?.email!!
+                    )
+                    Snackbar.make(
                         activity_login_coordinator_layout,
-                        getString(ltd.kaizo.realestatemanager.R.string.error_authentication_canceled),
+                        getString(ltd.kaizo.realestatemanager.R.string.connection_succeed),
                         Snackbar.LENGTH_SHORT
                     ).show()
-                    response.error!!.equals(ErrorCodes.NO_NETWORK) -> Snackbar.make(
-                        activity_login_coordinator_layout,
-                        getString(ltd.kaizo.realestatemanager.R.string.error_no_internet),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    response.error!!.equals(ErrorCodes.UNKNOWN_ERROR) -> Snackbar.make(
-                        activity_login_coordinator_layout,
-                        getString(ltd.kaizo.realestatemanager.R.string.error_unknown_error),
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    startListActivity()
+                } else { // ERRORS
+                    when {
+                        response == null -> {
+                            Snackbar.make(
+                                activity_login_coordinator_layout,
+                                getString(ltd.kaizo.realestatemanager.R.string.error_authentication_canceled),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                        response.error!!.equals(ErrorCodes.NO_NETWORK) -> Snackbar.make(
+                            activity_login_coordinator_layout,
+                            getString(ltd.kaizo.realestatemanager.R.string.error_no_internet),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                        response.error!!.equals(ErrorCodes.UNKNOWN_ERROR) -> {
+                            Snackbar.make(
+                                activity_login_coordinator_layout,
+                                getString(ltd.kaizo.realestatemanager.R.string.error_unknown_error),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                    Timber.i("response code  = $response")
                 }
             }
         }
-    }}
+    }
 
     private fun startSignInActivity() {
-        startActivityForResult(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setTheme(ltd.kaizo.realestatemanager.R.style.LoginTheme)
-                .setAvailableProviders(
-                    Arrays.asList(
-                        AuthUI.IdpConfig.EmailBuilder().build(),
-                        AuthUI.IdpConfig.GoogleBuilder().build()
-                    )
+        val intent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setTheme(ltd.kaizo.realestatemanager.R.style.LoginTheme)
+            .setAvailableProviders(
+                Arrays.asList(
+                    AuthUI.IdpConfig.EmailBuilder().build(),
+                    AuthUI.IdpConfig.GoogleBuilder().build()
                 )
-                .setIsSmartLockEnabled(false, true)
-                .build(),
-            RC_SIGN_IN
-        )
+            )
+            .setIsSmartLockEnabled(false, true)
+            .build()
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivityForResult(intent, RC_SIGN_IN)
     }
 }
