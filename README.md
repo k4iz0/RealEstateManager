@@ -1,6 +1,6 @@
 # RealEstateManager
 
-An Android app to manage real estate
+An Android app to manage real estate\n
 you can add multiple estate, manage sales, add pictures, 
 include a fully search engine for your estate.
 
