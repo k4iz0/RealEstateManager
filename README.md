@@ -19,8 +19,7 @@ include a fully search engine for your estate.
 * [Android Studio](https://developer.android.com/studio/) 
 * [kotlin](https://kotlinlang.org/)
 * [retrofit](http://square.github.io/retrofit/)
-* [Glide](https://github.com/bumptech/glide)
-* [butterknife](https://github.com/JakeWharton/butterknife)
+* [Room](https://developer.android.com/topic/libraries/architecture/room)
 * [Androidjob](https://github.com/evernote/android-job)
 
 ## Versioning
