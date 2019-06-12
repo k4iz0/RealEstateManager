@@ -34,7 +34,6 @@ class SearchActivity : BaseActivity() {
                     showSnackBar(fragment_search_coordinator_layout, configureMessage(message,this))
                     searchViewModel.message.value = ""
                 }
-
             })
     }
     private fun configureToolbar() {

@@ -25,7 +25,6 @@ class SearchViewModelTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         this.searchViewModel = SearchViewModel(estateRepository, executor)
-
     }
 
     @Test
@@ -71,6 +70,5 @@ class SearchViewModelTest {
         assertEquals("%brooklyn%", searchViewModel.argsList[6])
         assertEquals("%brooklyn%", searchViewModel.argsList[7])
         assertEquals("%brooklyn%", searchViewModel.argsList[8])
-
     }
 }
