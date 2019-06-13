@@ -1,0 +1,10 @@
+#Tue May 21 17:11:15 CEST 2019
+path.2=classes3.dex
+path.1=classes2.dex
+path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=C\:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
+base.1=C\:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
+base.0=C\:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout-sw600dp-v13\\activity_loan_sim.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout-sw600dp\\activity_loan_sim.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout-sw600dp-v13\\fragment_add.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout-sw600dp\\fragment_add.xml"
+    }
+]

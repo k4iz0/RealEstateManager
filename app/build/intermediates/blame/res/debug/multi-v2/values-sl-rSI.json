@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sl-rSI\\values-sl-rSI.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kaizo\\.gradle\\caches\\transforms-2\\files-2.1\\75b5e8699551ed378e3a4872d213974e\\res\\values-sl-rSI\\values-sl-rSI.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        }
+    ]
+}

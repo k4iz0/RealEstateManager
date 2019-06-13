@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_add.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\fragment_add.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_search.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\fragment_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_add_picture_dialog.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\fragment_add_picture_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_add_poi_dialog.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\fragment_add_poi_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\activity_loan_sim.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\activity_loan_sim.xml"
+    },
+    {
+        "merged": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_detail.xml",
+        "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\layout\\fragment_detail.xml"
+    }
+]

@@ -1,0 +1,4 @@
+#Wed May 22 12:05:56 CEST 2019
+base.0=C\:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\5
+path.0=classes.dex
+renamed.0=classes.dex

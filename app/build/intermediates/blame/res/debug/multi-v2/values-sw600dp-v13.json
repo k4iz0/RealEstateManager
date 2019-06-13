@@ -1,0 +1,55 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Kaizo\\.gradle\\caches\\transforms-2\\files-2.1\\45113560e46e0e8388f303ff005b5bfe\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,115,185,256,328,386,444,553,617,680",
+                        "endLines": "2,3,4,5,6,7,9,10,11,15",
+                        "endColumns": "59,69,70,71,57,57,10,63,62,10",
+                        "endOffsets": "110,180,251,323,381,439,548,612,675,847"
+                    },
+                    "to": {
+                        "startLines": "13,14,15,16,17,18,19,21,29,30",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "755,815,885,956,1028,1086,1144,1253,1634,1697",
+                        "endLines": "13,14,15,16,17,18,20,21,29,33",
+                        "endColumns": "59,69,70,71,57,57,10,63,62,10",
+                        "endOffsets": "810,880,951,1023,1081,1139,1248,1312,1692,1864"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kaizo\\AndroidStudioProjects\\RealEstateManager\\app\\src\\main\\res\\values-sw600dp\\dimens.xml",
+                    "from": {
+                        "startLines": "1,5,3,2,8,7,6,9,10,4",
+                        "startColumns": "1,1,1,1,1,1,1,1,4,1",
+                        "startOffsets": "14,191,103,57,330,280,237,370,420,152",
+                        "endColumns": "41,44,47,44,38,48,41,45,39,37",
+                        "endOffsets": "54,234,149,100,367,327,277,414,455,188"
+                    },
+                    "to": {
+                        "startLines": "10,11,12,22,23,24,25,26,27,28",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "611,656,704,1317,1365,1407,1459,1504,1553,1593",
+                        "endColumns": "44,47,50,47,41,51,44,48,39,40",
+                        "endOffsets": "651,699,750,1360,1402,1454,1499,1548,1588,1629"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Kaizo\\.gradle\\caches\\transforms-2\\files-2.1\\d983667c3255c4d73432f3351ec9cd65\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
+                    }
+                }
+            ]
+        }
+    ]
+}
