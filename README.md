@@ -13,6 +13,7 @@ include a fully search engine for your estate.
 
 * The latest SDK
 * Android Kiktkat 4.4 (API 19) Minimum
+* A Google Map Api Key for staticMap (to put in your graddle properties files)
 
 ## Built With
 
